@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/student_reg_image"
+        android:layout_width="168dp"
+        android:layout_height="96dp"
+        app:srcCompat="@drawable/choose1" />
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="10dp"
+        android:text="Welcome to Plan B!"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/illustarte"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="please create your student account"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/preferred_name"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="Enter your preferred name"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/school_name"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="Enter your school email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="Enter your school email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/phone_number"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="Enter your phone number"
+        android:inputType="textPassword|phone"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/register_student"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#B5DFAA"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/loginstu"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Already have an account? "
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="47dp"
+            tools:layout_editor_absoluteY="25dp" />
+
+        <TextView
+            android:id="@+id/loginstu_link2"
+            android:layout_width="86dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/login"
+            android:textColor="#B5DFAA"
+            android:textSize="18sp"
+
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="257dp"
+            tools:layout_editor_absoluteY="25dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
