@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="379dp"
+        android:layout_height="191dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="220dp"
+        android:src="@drawable/login" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/logIn"-->
+<!--        android:text="Log in"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textColor="#000000"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_gravity="center|top"-->
+<!--        />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/illustarte"-->
+<!--        android:text="Sign In to continue"-->
+<!--        android:textSize="18sp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_gravity="center"/>-->
+
+    <EditText
+        android:id="@+id/phone_textInput"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:inputType="phone"
+        android:gravity="left|center_vertical"
+        android:textSize="16sp"
+        android:hint="Username"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        />
+
+    <EditText
+        android:id="@+id/password_textInput"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        android:hint="Password"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="LOGIN"
+        android:textSize="22sp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@color/background"
+        android:textColor="#FFFFFF"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PlanB_frontend</string>
+    <string name="welcome">Welcome to PlanB!</string>
+    <string name="apply_now">Apply now!</string>
+    <string name="welcome_to_plan_b">Welcome to Plan B!</string>
+    <string name="enter_your_preferred_name">Enter your preferred name</string>
+    <string name="login"><u>LOGIN IN</u></string>
+</resources>
