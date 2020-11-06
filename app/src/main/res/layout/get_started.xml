@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="141dp"
         android:ems="10"
         android:includeFontPadding="false"
         android:inputType="textPersonName" />
@@ -19,7 +19,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="379dp"
-        android:layout_height="191dp"
+        android:layout_height="212dp"
         android:layout_gravity="center"
         android:src="@drawable/getstarted" />
 
@@ -34,13 +34,16 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:fontFamily="@font/poppins_semibold"
         android:gravity="center_horizontal"
         android:text="Do you have problems?"
+        android:textColor="#000000"
         android:textSize="25sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
         android:gravity="center_horizontal"
         android:text="Can’t find a tutor on campus?"
         android:textSize="18dp" />
@@ -50,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Can’t be a tutor on campus? "
         android:textSize="18dp" />
 
@@ -64,7 +68,9 @@
         android:layout_height="77dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="#A8C6A0"
+        android:fontFamily="@font/poppins_bold"
         android:text="Get Started"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="23sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="22sp" />
 </LinearLayout>

@@ -11,9 +11,15 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="160dp"
+        android:layout_height="683dp"
         android:layout_gravity="center"
         android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:text="TextView" />
 
 </LinearLayout>

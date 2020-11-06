@@ -34,7 +34,7 @@ public class StudentRegisterActivity extends AppCompatActivity{
         mBtnStuRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.example.planb_frontend.StudentRegisterActivity.this, StudentPageActivity.class);
+                Intent intent = new Intent(com.example.planb_frontend.StudentRegisterActivity.this, LoginActivity.class);
                 String preName = mEtPreferredName.getText().toString();
                 String schoolEmail = mEtSchoolEmail.getText().toString();
                 String password = mEtPassword.getText().toString();

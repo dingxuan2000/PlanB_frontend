@@ -6,10 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".StudentPageActivity">
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="427dp"
-        android:layout_weight="1"
-        android:text="TextView" />
 </LinearLayout>

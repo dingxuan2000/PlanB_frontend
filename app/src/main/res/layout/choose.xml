@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="113dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="Want to be a"
+        android:textColor="#EB232323"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="91dp" />
+
+    <ImageButton
+        android:id="@+id/studentBtn"
+        android:layout_width="280dp"
+        android:layout_height="98dp"
+        android:layout_gravity="center|center_vertical"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/choosestudent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="81dp" />
+
+    <ImageButton
+        android:id="@+id/tutorBtn"
+        android:layout_width="280dp"
+        android:layout_height="98dp"
+        android:layout_gravity="center"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/choosetutor" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="168dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="248dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="right"
+            android:text="Already have an account?" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="right"
+            android:text="LOGIN IN"
+            android:textColor="#8BC34A" />
+    </LinearLayout>
+
+</LinearLayout>

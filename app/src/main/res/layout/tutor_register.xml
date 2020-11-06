@@ -15,40 +15,43 @@
     <TextView
         android:id="@+id/Description"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center|top"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_bold"
         android:text="@string/welcome_to_plan_b"
-        android:textColor="#000000"
-        android:textSize="24sp" />
+        android:textColor="#CC000000"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/illustarte"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Want to be a tutor?"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/illustarte2"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="@font/poppins_semibold"
         android:text="@string/apply_now"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/preferred_name"
         android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:autofillHints=""
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
         android:hint="@string/enter_your_preferred_name"
-        android:inputType="textPersonName|phone"
+        android:inputType="textPersonName|textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
@@ -56,9 +59,9 @@
     <EditText
         android:id="@+id/school_name"
         android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
         android:hint="Enter your school email"
@@ -70,9 +73,9 @@
     <EditText
         android:id="@+id/password"
         android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
         android:hint="Enter your school email"
@@ -84,9 +87,9 @@
     <EditText
         android:id="@+id/phone_number"
         android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
         android:hint="Enter your phone number"
@@ -98,57 +101,58 @@
     <Button
         android:id="@+id/register_student"
         android:layout_width="250dp"
-        android:layout_height="55dp"
+        android:layout_height="25dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:background="#B5DFAA"
+        android:background="#A8C6A0"
         android:gravity="center_horizontal|center_vertical"
         android:text="submit your unoffical transcript"
         android:textColor="#FFFFFF"
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/register_tutor"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@color/background"
+        android:layout_marginTop="70dp"
+        android:background="#A8C6A0"
         android:gravity="center_horizontal|center_vertical"
         android:text="Register"
         android:textColor="#FFFFFF"
         android:textSize="22sp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/logintutor"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="center"
             android:text="Already have an account? "
-            android:textSize="18sp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="47dp"
-            tools:layout_editor_absoluteY="25dp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/logintutor_link"
-            android:layout_width="86dp"
+            android:layout_width="68dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="center"
             android:text="@string/login"
-            android:textColor="#B5DFAA"
-            android:textSize="18sp"
+            android:textColor="#A8C6A0"
+            android:textSize="13sp"
 
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="257dp"
-            tools:layout_editor_absoluteY="25dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
