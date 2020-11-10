@@ -34,14 +34,15 @@
         android:src="@drawable/login" />
 
     <EditText
-        android:id="@+id/phone_textInput"
+        android:id="@+id/username_textInput"
+        android:hint="Username"
+        android:drawableLeft="@drawable/person_icon"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
-        android:hint="Username"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
@@ -49,6 +50,7 @@
 
     <EditText
         android:id="@+id/password_textInput"
+        android:drawableLeft="@drawable/lock_icon"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
