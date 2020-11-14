@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class StudentRegisterActivity extends AppCompatActivity{
 
+
+
     //声明控件
     private Button mBtnStuRegister;
     private Button mBtnStuLogin;
