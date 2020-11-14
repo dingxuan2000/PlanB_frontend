@@ -8,19 +8,25 @@
     android:orientation="vertical"
     >
 
-    <TextView
-        android:id="@+id/textView14"
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="636dp"
-        android:layout_weight="1"
-        android:text="" />
+        android:layout_height="684dp">
+
+        <TextView
+            android:id="@+id/text_view_result"
+            android:layout_width="wrap_content"
+            android:layout_height="636dp"
+            android:layout_weight="1"
+            android:text="" />
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center|bottom">
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
 
 
         <ImageView
@@ -59,4 +65,5 @@
             app:srcCompat="@drawable/studentprofilebtn" />
 
     </LinearLayout>
+
 </LinearLayout>

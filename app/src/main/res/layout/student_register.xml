@@ -10,7 +10,8 @@
         android:id="@+id/student_reg_image"
         android:layout_width="168dp"
         android:layout_height="96dp"
-        app:srcCompat="@drawable/choose1" />
+        app:srcCompat="@drawable/choose1"
+        android:contentDescription="@string/stu_reg_img" />
 
     <TextView
         android:id="@+id/Description"
@@ -19,7 +20,7 @@
         android:layout_gravity="center|top"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Welcome to Plan B!"
+        android:text="@string/welcome_to_plan_b"
         android:textColor="#000000"
         android:textSize="23sp" />
 
@@ -29,75 +30,103 @@
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:fontFamily="@font/poppins_semibold"
-        android:text="please create your student account"
+        android:text="@string/please_create_your_student_account"
         android:textColor="#9E000000"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/preferred_name"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:id="@+id/stu_email"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
-        android:hint="Enter your preferred name"
+        android:hint="@string/enter_your_school_email"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/school_name"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:id="@+id/stu_password"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
-        android:hint="Enter your school email"
+        android:hint="@string/enter_your_password"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/stu_prefer_name"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="@string/enter_your_preferred_name"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/password"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:id="@+id/stu_major"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
-        android:hint="Enter your password"
+        android:hint="@string/enter_your_major"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/phone_number"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:id="@+id/stu_grade"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
-        android:hint="Enter your phone number"
+        android:hint="@string/enter_your_grade_ex_senior"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/stu_phone_number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="@string/enter_your_phone_number"
         android:inputType="textPassword|phone"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/register_student"
+        android:id="@+id/stu_register"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:background="#A8C6A0"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Register"
+        android:text="@string/register"
         android:textColor="#FFFFFF"
         android:textSize="22sp" />
 
@@ -107,25 +136,26 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/loginstu"
+            android:id="@+id/stu_login_instruction"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="Already have an account? "
+            android:text="@string/already_have_an_account"
             android:textColor="#666666"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/loginstu_link2"
-            android:layout_width="86dp"
+        <Button
+            android:id="@+id/student_login_link"
+            android:layout_width="68dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:gravity="center"
+            android:shadowColor="#FFFFFF"
             android:text="@string/login"
-            android:textColor="#A8C6A0"
-            android:textSize="16sp"
+            android:textColor="#A8C6A0" />
 
-            android:textStyle="bold" />
     </LinearLayout>
 
 

@@ -5,4 +5,19 @@
     <string name="welcome_to_plan_b">Welcome to Plan B!</string>
     <string name="enter_your_preferred_name">Enter your preferred name</string>
     <string name="login"><u>LOGIN IN</u></string>
+    <string name="enter_your_major">Enter your major</string>
+    <string name="enter_your_grade_ex_senior">Enter your grade (ex.senior)</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="enter_your_school_email">Enter your school email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="please_create_your_student_account">please create your student account</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="submit_your_unoffical_transcript">submit your unoffical transcript</string>
+    <string name="tutor_ranking">Tutor Ranking</string>
+    <string name="stu_reg_img">stu_reg_img</string>
+    <string name="want_to_be_a_tutor">Want to be a tutor?</string>
+    <string name="tutor_reg_img">tutor_reg_img</string>
 </resources>

@@ -12,7 +12,7 @@
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/arrow" />
+        app:srcCompat="@drawable/arrowback" />
 
     <ImageView
         android:id="@+id/ProfilePhoto"

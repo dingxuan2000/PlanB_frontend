@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button mBtnLogin;
     private EditText mEtUser;
     private EditText mEtPassword;
-
+    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,25 +29,34 @@ public class LoginActivity extends AppCompatActivity {
         mEtPassword = findViewById(R.id.password_textInput);
 
 
-        //实现直接跳转
+        //Intent intent = getIntent();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            email = extras.getString("email");
+            password = extras.getString("password");
+            mEtUser.setText(email, TextView.BufferType.EDITABLE);
+            mEtPassword.setText(password, TextView.BufferType.EDITABLE);
+        }
+
+
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //需要获取输入的用户名和密码
-                String username = mEtUser.getText().toString();
-                String password = mEtPassword.getText().toString();
-                Intent intent = null;
+                Intent intent_n = null;
+                email = mEtUser.getText().toString();
+                password = mEtPassword.getText().toString();
 
-                if(username.equals("lyh") && password.equals("123456")){
+                if(email.equals("asdf") && password.equals("123456")){
                     //如果正确，进行跳转
-                    intent = new Intent(LoginActivity.this, StudentPageActivity.class);
-                    startActivity(intent);
+                    intent_n = new Intent(LoginActivity.this, StudentPageActivity.class);
+                    startActivity(intent_n);
                 }else{
                     //如果不正确，可能也要跳转，所以intent定义在外面，
                     //或弹出登录失败toast应用！！(需要学习)
                 }
             }
         });
+
     }
 }
 

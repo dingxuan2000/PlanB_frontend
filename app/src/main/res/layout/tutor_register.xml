@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/tutor_reg_image"
-        android:layout_width="168dp"
-        android:layout_height="96dp"
-        app:srcCompat="@drawable/choose2" />
+        android:layout_width="126dp"
+        android:layout_height="76dp"
+        app:srcCompat="@drawable/choose2"
+        android:contentDescription="@string/tutor_reg_img" />
 
     <TextView
         android:id="@+id/Description"
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Want to be a tutor?"
+        android:text="@string/want_to_be_a_tutor"
         android:textSize="13sp" />
 
     <TextView
@@ -42,80 +43,95 @@
         android:textSize="13sp" />
 
     <EditText
-        android:id="@+id/preferred_name"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:id="@+id/tutor_email"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:autofillHints=""
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="@string/enter_your_email_address"
+        android:inputType="textPassword|textEmailAddress"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/tutor_password"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="@string/enter_your_password"
+        android:inputType="textPassword|textEmailAddress"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/tutor_prefer_name"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
         android:hint="@string/enter_your_preferred_name"
-        android:inputType="textPersonName|textEmailAddress"
-        android:maxLines="1"
-        android:padding="5dp"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/school_name"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/shape"
-        android:gravity="left|center_vertical"
-        android:hint="Enter your school email"
         android:inputType="textPassword|textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/password"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:id="@+id/tutor_major"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
-        android:hint="Enter your school email"
+        android:hint="@string/enter_your_major"
         android:inputType="textPassword|textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/phone_number"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:id="@+id/tutor_grade"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
-        android:hint="Enter your phone number"
+        android:hint="@string/enter_your_grade_ex_senior"
+        android:inputType="textPassword|textEmailAddress"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/tutor_phone_number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape"
+        android:gravity="left|center_vertical"
+        android:hint="@string/enter_your_phone_number"
         android:inputType="phone"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/register_student"
-        android:layout_width="250dp"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="#A8C6A0"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="submit your unoffical transcript"
-        android:textColor="#FFFFFF"
-        android:textSize="10sp" />
-
-    <Button
-        android:id="@+id/register_tutor"
+        android:id="@+id/tutor_register"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:background="#A8C6A0"
         android:gravity="center_horizontal|center_vertical"
         android:text="Register"
@@ -128,31 +144,25 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/logintutor"
+            android:id="@+id/tutor_login_instructor"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="Already have an account? "
+            android:text="@string/already_have_an_account"
             android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/logintutor_link"
+        <Button
+            android:id="@+id/tutor_login_link"
             android:layout_width="68dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:shadowColor="#FFFFFF"
             android:text="@string/login"
             android:textColor="#A8C6A0"
-            android:textSize="13sp"
-
-            android:textStyle="bold" />
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
