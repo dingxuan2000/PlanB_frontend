@@ -3,27 +3,53 @@ package com.example.planb_frontend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class StudentRegisterActivity extends AppCompatActivity{
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 
+public class StudentRegisterActivity extends AppCompatActivity {
+
+    public static final String PREFERRED_NAME_KEY = "preferred_name";
+    public static final String MAJOR_KEY = "major";
+    public static final String CLASS_STANDING_KEY = "class_standing";
+    public static final String PHONE_NUMBER_KEY = "phone_number";
+    public static final String USERS_TABLE_KEY = "users";
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
 
     //声明控件
     private Button mBtnStuRegister;
-    private Button mBtnStuLogin;
+    private TextView mBtnStuLogin;
     private EditText mEtPassword;
     private EditText mEtSchoolEmail;
     private EditText mEtPreferredName;
-    private EditText mEtMajor;
+    private Spinner mEtMajor;
     private EditText mEtGrade;
     private EditText mEtPhoneNum;
+
+    private String major;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,102 +65,91 @@ public class StudentRegisterActivity extends AppCompatActivity{
         mEtPhoneNum = findViewById(R.id.stu_phone_number);
         mBtnStuRegister = findViewById(R.id.stu_register);
         mBtnStuLogin = findViewById(R.id.student_login_link);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.majors, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mEtMajor.setAdapter(adapter);
+        mEtMajor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                major = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mEtMajor.setPrompt("Please enter major");
+            }
+        });
+
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
 
-        mBtnStuRegister.setOnClickListener(new View.OnClickListener(){
+        mBtnStuRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_r = new Intent(StudentRegisterActivity.this, LoginActivity.class);
                 String password = mEtPassword.getText().toString();
                 String schoolEmail = mEtSchoolEmail.getText().toString();
                 String preferName = mEtPreferredName.getText().toString();
-                String major = mEtMajor.getText().toString();
+                //String major = mEtMajor.getText().toString();
                 String grade = mEtGrade.getText().toString();
                 String phoneNum = mEtPhoneNum.getText().toString();
-                Toast toast = null;
 
-                if(TextUtils.isEmpty(schoolEmail)){
-                    toast = Toast.makeText(StudentRegisterActivity.this,
-                            "Please enter school email", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
+                if (TextUtils.isEmpty(schoolEmail)) {
+                    mEtSchoolEmail.setError("Please enter school email");
+                } else if (TextUtils.isEmpty(password)) {
+                    mEtPassword.setError("Please enter password");
+                } else if (TextUtils.isEmpty(preferName)) {
+                    mEtPreferredName.setError("Please enter preferred name");
                 }
-                else if(TextUtils.isEmpty(password)){
-                    toast = Toast.makeText(StudentRegisterActivity.this,
-                            "Please enter password", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(preferName)){
-                    toast = Toast.makeText(StudentRegisterActivity.this,
-                            "Please enter preferred name", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(major)){
-                    toast = Toast.makeText(StudentRegisterActivity.this,
-                            "Please enter major", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(grade)){
-                    toast = Toast.makeText(StudentRegisterActivity.this,
-                            "Please enter grade", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(phoneNum)){
-                    toast = Toast.makeText(StudentRegisterActivity.this,
-                            "Please enter phone number", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else{
+//                else if(TextUtils.isEmpty(major)){
+//                    mEtMajor.setError("Please enter major");
+//                }
+                else if (TextUtils.isEmpty(grade)) {
+                    mEtGrade.setError("Please enter grade");
+                } else if (TextUtils.isEmpty(phoneNum)) {
+                    mEtPhoneNum.setError("Please enter phone number");
+                } else {
                     //TODO update to firebase
+                    fAuth.createUserWithEmailAndPassword(schoolEmail, password).addOnCompleteListener(
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        //get user id just generated
+                                        String userId = fAuth.getCurrentUser().getUid();
+                                        DocumentReference documentReference = fStore.collection(USERS_TABLE_KEY).document(userId);
+                                        Map<String, Object> user = new HashMap<>();
+                                        user.put(PREFERRED_NAME_KEY, preferName);
+                                        user.put(MAJOR_KEY, major);
+                                        user.put(CLASS_STANDING_KEY, grade);
+                                        user.put(PHONE_NUMBER_KEY, phoneNum);
+                                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                    );
 
-                    intent_r.putExtra("email",schoolEmail);
-                    intent_r.putExtra("password",password);
-                    startActivity(intent_r);
                 }
             }
         });
-        mBtnStuLogin.setOnClickListener(new View.OnClickListener(){
+        mBtnStuLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent_l = new Intent(StudentRegisterActivity.this, LoginActivity.class);
-                startActivity(intent_l);
+            public void onClick(View view) {
+                if (fAuth.getCurrentUser() != null) {
+                    Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
-
-
-//    private void onClick(View v){
-//        String preName = mEtPreferredName.getText().toString();
-//        String schoolEmail = mEtSchoolEmail.getText().toString();
-//        String password = mEtPassword.getText().toString();
-//        String phoneNum = mEtPhoneNum.getText().toString();
-//        Intent intent = null;
-//
-//        if(TextUtils.isEmpty(preName)){
-//            Toast.makeText(com.example.planb_frontend.StudentRegisterActivity.this,
-//                    "Please enter preferred name", Toast.LENGTH_LONG).show();
-//        }
-//        else if(TextUtils.isEmpty(schoolEmail)){
-//            Toast.makeText(com.example.planb_frontend.StudentRegisterActivity.this,
-//                    "Please enter school email", Toast.LENGTH_LONG).show();
-//        }
-//        else if(TextUtils.isEmpty(password)){
-//            Toast.makeText(com.example.planb_frontend.StudentRegisterActivity.this,
-//                    "Please enter password", Toast.LENGTH_LONG).show();
-//        }
-//        else if(TextUtils.isEmpty(phoneNum)){
-//            Toast.makeText(com.example.planb_frontend.StudentRegisterActivity.this,
-//                    "Please enter phone number", Toast.LENGTH_LONG).show();
-//        }
-//        else{
-//            intent = new Intent(com.example.planb_frontend.StudentRegisterActivity.this, StudentPageActivity.class);
-//            startActivity(intent);
-//        }
-//
-//    }
 }
