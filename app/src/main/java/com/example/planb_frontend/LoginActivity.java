@@ -6,8 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -17,16 +24,18 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEtUser;
     private EditText mEtPassword;
     private String email, password;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_login);
+        setContentView(R.layout.login);
 
         //找到控件
         mBtnLogin = findViewById(R.id.btn_login);
         mEtUser = findViewById(R.id.username_textInput);
         mEtPassword = findViewById(R.id.password_textInput);
+        fAuth = FirebaseAuth.getInstance();
 
 
         //Intent intent = getIntent();
@@ -46,14 +55,18 @@ public class LoginActivity extends AppCompatActivity {
                 email = mEtUser.getText().toString();
                 password = mEtPassword.getText().toString();
 
-                if(email.equals("asdf") && password.equals("123456")){
-                    //如果正确，进行跳转
-                    intent_n = new Intent(LoginActivity.this, StudentPageActivity.class);
-                    startActivity(intent_n);
-                }else{
-                    //如果不正确，可能也要跳转，所以intent定义在外面，
-                    //或弹出登录失败toast应用！！(需要学习)
-                }
+                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
+                        new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                    startActivity(intent);
+                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                );
             }
         });
 

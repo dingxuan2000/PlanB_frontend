@@ -9,7 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TutorRegisterActivity extends AppCompatActivity{
 
@@ -22,6 +34,15 @@ public class TutorRegisterActivity extends AppCompatActivity{
     private EditText mEtMajor;
     private EditText mEtGrade;
     private EditText mEtPhoneNum;
+
+    public static final String PREFERRED_NAME_KEY = "preferred_name";
+    public static final String MAJOR_KEY = "major";
+    public static final String CLASS_STANDING_KEY = "class_standing";
+    public static final String PHONE_NUMBER_KEY = "phone_number";
+    public static final String USERS_TABLE_KEY = "users";
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +63,16 @@ public class TutorRegisterActivity extends AppCompatActivity{
         mBtnTutorRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent_r = new Intent(TutorRegisterActivity.this, LoginActivity.class);
+                //Intent intent_r = new Intent(TutorRegisterActivity.this, LoginActivity.class);
                 String password = mEtPassword.getText().toString();
                 String schoolEmail = mEtSchoolEmail.getText().toString();
                 String preferName = mEtPreferredName.getText().toString();
                 String major = mEtMajor.getText().toString();
                 String grade = mEtGrade.getText().toString();
                 String phoneNum = mEtPhoneNum.getText().toString();
+
+                fAuth = FirebaseAuth.getInstance();
+                fStore = FirebaseFirestore.getInstance();
 
                 Toast toast = null;
 
@@ -91,9 +115,34 @@ public class TutorRegisterActivity extends AppCompatActivity{
                 else{
                     //TODO update to firebase
 
-                    intent_r.putExtra("email",schoolEmail);
-                    intent_r.putExtra("password",password);
-                    startActivity(intent_r);
+                    fAuth.createUserWithEmailAndPassword(schoolEmail, password).addOnCompleteListener(
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        //get user id just generated
+                                        String userId = fAuth.getCurrentUser().getUid();
+                                        DocumentReference documentReference = fStore.collection(USERS_TABLE_KEY).document(userId);
+                                        Map<String, Object> user = new HashMap<>();
+                                        user.put(PREFERRED_NAME_KEY, preferName);
+                                        user.put(MAJOR_KEY, major);
+                                        user.put(CLASS_STANDING_KEY, grade);
+                                        user.put(PHONE_NUMBER_KEY, phoneNum);
+                                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                    );
+
                 }
             }
         });
