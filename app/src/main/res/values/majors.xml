@@ -98,136 +98,125 @@
 
         <item>Jewish Studies</item>
 
-<!--        Latin American Studies-->
-<!--        Latin American Studies-->
-<!--        Latin American Studies with a Concentration in Mexico-->
-<!--        Latin American Studies with a Concentration in Migration and Border Studies-->
 
-<!--        Linguistics-->
-<!--        Linguistics-->
-<!--        Linguistics (Specialization in Cognition and Language)-->
-<!--        Linguistics (Specialization in Language and Society)-->
-<!--        Linguistics: Language Studies (Specialization in Individual Language)-->
-<!--        Linguistics (Specialization in Speech and Language Sciences)-->
-
-<!--        Literature-->
-<!--        Literatures in English-->
-<!--        Spanish Literature-->
-<!--        Literature/Writing-->
-<!--        World Literature and Culture-->
+        <item>Latin American Studies</item>
+        <item>Latin American Studies with a Concentration in Mexico</item>
+        <item>Latin American Studies with a Concentration in Migration and Border Studies</item>
 
 
-<!--        Mathematics-->
-<!--        Mathematics (Applied)-->
-<!--        Mathematics-->
-<!--        Mathematics and Economics - Joint Major-->
-<!--        Mathematics - Applied Science-->
-<!--        Mathematics - Computer Science-->
-<!--        Mathematics - Secondary Education-->
-<!--        Mathematics - Scientific Computation-->
-<!--        Probability and Statistics-->
+        <item>Linguistics (Specialization in Cognition and Language)</item>
+        <item>Linguistics (Specialization in Language and Society)</item>
+        <item>Linguistics: Language Studies (Specialization in Individual Language)</item>
+        <item>Linguistics (Specialization in Speech and Language Sciences)</item>
 
-<!--        Mechanical and Aerospace Engineering (MAE)-->
-<!--        Aerospace Engineering-->
-<!--        Environmental Engineering-->
-<!--        Mechanical Engineering-->
-<!--        Mechanical Engineering with a Specialization in Controls and Robotics-->
-<!--        Mechanical Engineering with a Specialization in Fluid Mechanics and Thermal Systems-->
-<!--        Mechanical Engineering with a Specialization in Materials Science and Engineering-->
-<!--        Mechanical Engineering with a Specialization in Mechanics of Materials-->
-<!--        Mechanical Engineering with a Specialization in Renewable Energy and Environmental Flows-->
+        <item>Literatures in English</item>
+        <item>Spanish Literature</item>
+        <item>Literature/Writing</item>
+        <item>World Literature and Culture</item>
 
-<!--        Music-->
-<!--        Music-->
-<!--        Interdisciplinary Computing and the Arts-->
-<!--        Music Humanities-->
+        <item>Mathematics (Applied)</item>
+        <item>Mathematics</item>
+        <item>Mathematics and Economics - Joint Major</item>
+        <item>Mathematics - Applied Science</item>
+        <item>Mathematics - Computer Science</item>
+        <item>Mathematics - Secondary Education</item>
+        <item>Mathematics - Scientific Computation</item>
+        <item>Probability and Statistics</item>
 
-<!--        NanoEngineering-->
-<!--        Chemical Engineering-->
-<!--        NanoEngineering-->
+        <item>Mechanical and Aerospace Engineering (MAE)</item>
+        <item>Aerospace Engineering</item>
+        <item>Environmental Engineering</item>
+        <item>Mechanical Engineering</item>
+        <item>Mechanical Engineering with a Specialization in Controls and Robotics</item>
+        <item>Mechanical Engineering with a Specialization in Fluid Mechanics and Thermal Systems</item>
+        <item>Mechanical Engineering with a Specialization in Materials Science and Engineering</item>
+        <item>Mechanical Engineering with a Specialization in Mechanics of Materials</item>
+        <item>Mechanical Engineering with a Specialization in Renewable Energy and Environmental Flows</item>
 
+        <item>Music</item>
+        <item>Interdisciplinary Computing and the Arts</item>
+        <item>Music Humanities</item>
 
-<!--        Philosophy-->
-<!--        Philosophy-->
+        <item>NanoEngineering</item>
+        <item>Chemical Engineering</item>
+        <item>NanoEngineering</item>
 
-<!--        Physics-->
-<!--        General Physics-->
-<!--        General Physics/ Secondary Education-->
-<!--        Physics-->
-<!--        Physics with Specialization in Astrophysics-->
-<!--        Physics - Biophysics-->
-<!--        Physics with Specialization in Computational Physics-->
-<!--        Physics with Specialization in Earth Sciences-->
-<!--        Physics with Specialization in Materials Physics-->
+        <item>Philosophy</item>
 
-<!--        Political Science-->
-<!--        Political Science-->
-<!--        Political Science/American Politics-->
-<!--        Political Science/Comparative Politics-->
-<!--        Political Science/Data Analytics-->
-<!--        Political Science/International Affairs (B.A./MIA only)‡-->
-<!--        Political Science/International Relations-->
-<!--        Political Science/Political Theory-->
-<!--        Political Science/Public Law-->
-<!--        Political Science/Public Policy-->
-<!--        Political Science/Race, Ethnicity, and Politics-->
+        <item>Physics</item>
+        <item>General Physics</item>
+        <item>General Physics/ Secondary Education</item>
+        <item>Physics</item>
+        <item>Physics with Specialization in Astrophysics</item>
+        <item>Physics - Biophysics</item>
+        <item>Physics with Specialization in Computational Physics</item>
+        <item>Physics with Specialization in Earth Sciences</item>
+        <item>Physics with Specialization in Materials Physics</item>
 
-<!--        Psychology-->
-<!--        Psychology-->
-<!--        Psychology with a Specialization in Clinical Psychology-->
-<!--        Psychology with a Specialization in Cognitive Psychology-->
-<!--        Psychology with a Specialization in Developmental Psychology-->
-<!--        Psychology with a Specialization in Human Health-->
-<!--        Psychology with a Specialization in Sensation and Perception-->
-<!--        Psychology with a Specialization in Social Psychology-->
-<!--        Cognitive and Behavioral Neuroscience-->
-<!--        Business Psychology-->
+        <item>Political Science</item>
+        <item>Political Science/American Politics</item>
+        <item>Political Science/Comparative Politics</item>
+        <item>Political Science/Data Analytics</item>
+        <item>Political Science/International Affairs (B.A./MIA only)‡</item>
+        <item>Political Science/International Relations</item>
+        <item>Political Science/Political Theory</item>
+        <item>Political Science/Public Law</item>
+        <item>Political Science/Public Policy</item>
+        <item>Political Science/Race, Ethnicity, and Politics</item>
 
-<!--        Public Health (See Family and Preventative Medicine)-->
+        <item>Psychology</item>
+        <item>Psychology with a Specialization in Clinical Psychology</item>
+        <item>Psychology with a Specialization in Cognitive Psychology</item>
+        <item>Psychology with a Specialization in Developmental Psychology</item>
+        <item>Psychology with a Specialization in Human Health</item>
+        <item>Psychology with a Specialization in Sensation and Perception</item>
+        <item>Psychology with a Specialization in Social Psychology</item>
+        <item>Cognitive and Behavioral Neuroscience</item>
+        <item>Business Psychology</item>
 
-
-<!--        Religion, Program for the Study Of-->
-<!--        Study of Religion-->
-
-<!--        Russian and Soviet Studies-->
-<!--        Russian, East European & Eurasian Studies-->
-
-<!--        Scripps Institution of Oceanography-->
-<!--        Earth Sciences-->
-<!--        Marine Biology-->
-<!--        Oceanic and Atmospheric Sciences-->
-
-<!--        Sociology-->
-<!--        Sociology - International Studies-->
-<!--        Sociology - American Studies-->
-<!--        Sociology - Science and Medicine-->
-<!--        Sociology - Economy and Society-->
-<!--        Sociology - Culture and Communication-->
-<!--        Sociology - Social Inequality-->
-<!--        Sociology - Law and Society-->
-
-<!--        Structural Engineering (SE)-->
-<!--        Structural Engineering-->
-
-<!--        Theatre and Dance-->
-<!--        Dance-->
-<!--        Theatre-->
+        <item>Public Health (See Family and Preventative Medicine)</item>
 
 
-<!--        Undeclared-->
-<!--        Undeclared - Humanities/Arts-->
-<!--        Undeclared - Physical Sciences-->
-<!--        Undeclared - Social Sciences-->
+        <item>Religion, Program for the Study Of</item>
+        <item>Study of Religion</item>
 
-<!--        Urban Studies and Planning-->
-<!--        Urban Studies and Planning-->
-<!--        Real Estate and Development-->
+        <item>Russian and Soviet Studies</item>
+        <item>Russian, East European &amp; Eurasian Studies</item>
 
-<!--        Visual Arts-->
-<!--        Art History/ Criticism-->
-<!--        Interdisciplinary Computing and the Arts-->
-<!--        Media-->
-<!--        Speculative Design-->
-<!--        Studio-->
+        <item>Scripps Institution of Oceanography</item>
+        <item>Earth Sciences</item>
+        <item>Marine Biology</item>
+        <item>Oceanic and Atmospheric Sciences</item>
+
+        <item>Sociology</item>
+        <item>Sociology - International Studies</item>
+        <item>Sociology - American Studies</item>
+        <item>Sociology - Science and Medicine</item>
+        <item>Sociology - Economy and Society</item>
+        <item>Sociology - Culture and Communication</item>
+        <item>Sociology - Social Inequality</item>
+        <item>Sociology - Law and Society</item>
+
+        <item>Structural Engineering (SE)</item>
+        <item>Structural Engineering</item>
+
+        <item>Theatre and Dance</item>
+        <item>Dance</item>
+        <item>Theatre</item>
+
+        <item>Undeclared - Humanities/Arts</item>
+        <item>Undeclared - Physical Sciences</item>
+        <item>Undeclared - Social Sciences</item>
+
+        <item>Urban Studies and Planning</item>
+        <item>Urban Studies and Planning</item>
+        <item>Real Estate and Development</item>
+
+        <item>Visual Arts</item>
+        <item>Art History/ Criticism</item>
+        <item>Interdisciplinary Computing and the Arts</item>
+        <item>Media</item>
+        <item>Speculative Design</item>
+        <item>Studio</item>
     </string-array>
 </resources>

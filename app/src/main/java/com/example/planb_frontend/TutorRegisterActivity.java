@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,9 +34,11 @@ public class TutorRegisterActivity extends AppCompatActivity{
     private EditText mEtPassword;
     private EditText mEtSchoolEmail;
     private EditText mEtPreferredName;
-    private EditText mEtMajor;
+    private Spinner mEtMajor;
     private EditText mEtGrade;
     private EditText mEtPhoneNum;
+
+    private String major;
 
     public static final String PREFERRED_NAME_KEY = "preferred_name";
     public static final String MAJOR_KEY = "major";
@@ -60,6 +65,21 @@ public class TutorRegisterActivity extends AppCompatActivity{
         mBtnTutorRegister = findViewById(R.id.tutor_register);
         mBtnTutorLogin = findViewById(R.id.tutor_login_link);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.majors, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mEtMajor.setAdapter(adapter);
+        mEtMajor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                major = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mEtMajor.setPrompt("Please enter major");
+            }
+        });
+
         mBtnTutorRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -67,52 +87,30 @@ public class TutorRegisterActivity extends AppCompatActivity{
                 String password = mEtPassword.getText().toString();
                 String schoolEmail = mEtSchoolEmail.getText().toString();
                 String preferName = mEtPreferredName.getText().toString();
-                String major = mEtMajor.getText().toString();
+                //String major = mEtMajor.getText().toString();
                 String grade = mEtGrade.getText().toString();
                 String phoneNum = mEtPhoneNum.getText().toString();
+
 
                 fAuth = FirebaseAuth.getInstance();
                 fStore = FirebaseFirestore.getInstance();
 
-                Toast toast = null;
 
-                if(TextUtils.isEmpty(schoolEmail)){
-                    toast = Toast.makeText(TutorRegisterActivity.this,
-                            "Please enter school email", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
+                if (TextUtils.isEmpty(schoolEmail)) {
+                    mEtSchoolEmail.setError("Please enter school email");
+                } else if (TextUtils.isEmpty(password)) {
+                    mEtPassword.setError("Please enter password");
+                } else if (TextUtils.isEmpty(preferName)) {
+                    mEtPreferredName.setError("Please enter preferred name");
                 }
-                else if(TextUtils.isEmpty(password)){
-                    toast = Toast.makeText(TutorRegisterActivity.this,
-                            "Please enter password", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(preferName)){
-                    toast = Toast.makeText(TutorRegisterActivity.this,
-                            "Please enter preferred name", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(major)){
-                    toast = Toast.makeText(TutorRegisterActivity.this,
-                            "Please enter major", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(grade)){
-                    toast = Toast.makeText(TutorRegisterActivity.this,
-                            "Please enter grade", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(phoneNum)){
-                    toast = Toast.makeText(TutorRegisterActivity.this,
-                            "Please enter phone number", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
-                    toast.show();
-                }
-                else{
+//                else if(TextUtils.isEmpty(major)){
+//                    mEtMajor.setError("Please enter major");
+//                }
+                else if (TextUtils.isEmpty(grade)) {
+                    mEtGrade.setError("Please enter grade");
+                } else if (TextUtils.isEmpty(phoneNum)) {
+                    mEtPhoneNum.setError("Please enter phone number");
+                } else{
                     //TODO update to firebase
 
                     fAuth.createUserWithEmailAndPassword(schoolEmail, password).addOnCompleteListener(
