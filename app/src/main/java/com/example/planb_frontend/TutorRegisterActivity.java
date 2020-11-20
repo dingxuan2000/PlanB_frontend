@@ -23,6 +23,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import planb_backend.User;
+
+import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
+
 public class TutorRegisterActivity extends AppCompatActivity{
 
     //声明控件
@@ -39,10 +43,11 @@ public class TutorRegisterActivity extends AppCompatActivity{
     public static final String MAJOR_KEY = "major";
     public static final String CLASS_STANDING_KEY = "class_standing";
     public static final String PHONE_NUMBER_KEY = "phone_number";
-    public static final String USERS_TABLE_KEY = "users";
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+
+    private User newUser;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +139,14 @@ public class TutorRegisterActivity extends AppCompatActivity{
                                                 Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                                             }
                                         });
+                                        newUser = new User();
+                                        newUser.setEmail(schoolEmail);
+                                        newUser.setClass_standing(grade);
+                                        newUser.setMajor(major);
+                                        newUser.setPhone_number(phoneNum);
+                                        newUser.setPreferred_name(preferName);
                                         Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY,newUser);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();

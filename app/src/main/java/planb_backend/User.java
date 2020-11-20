@@ -3,9 +3,7 @@ package planb_backend;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    public static final long serialVersionUID = 1L;
-
-    private String password;
+    private static final long serialVersionUID = 1L;
 
     private String email;
 
@@ -17,25 +15,15 @@ public class User implements Serializable {
 
     private String phone_number;
 
-    public User(String password, String email, String preferred_name, String major, String class_standing, String phone_number) {
-        this.password = password;
+    public User() {
+    }
+
+    public User(String email, String preferred_name, String major, String class_standing, String phone_number) {
         this.email = email;
         this.preferred_name = preferred_name;
         this.major = major;
         this.class_standing = class_standing;
         this.phone_number = phone_number;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -76,5 +64,16 @@ public class User implements Serializable {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", preferred_name='" + preferred_name + '\'' +
+                ", major='" + major + '\'' +
+                ", class_standing='" + class_standing + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                '}';
     }
 }

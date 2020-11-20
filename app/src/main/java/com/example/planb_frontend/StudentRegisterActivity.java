@@ -28,6 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import planb_backend.User;
+
 public class StudentRegisterActivity extends AppCompatActivity {
 
     public static final String PREFERRED_NAME_KEY = "preferred_name";
@@ -35,6 +37,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public static final String CLASS_STANDING_KEY = "class_standing";
     public static final String PHONE_NUMBER_KEY = "phone_number";
     public static final String USERS_TABLE_KEY = "users";
+    public static final String GET_USER_KEY = "get user";
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -50,6 +53,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
     private EditText mEtPhoneNum;
 
     private String major;
+
+    private User newUser;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +134,14 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                                             }
                                         });
+                                        newUser = new User();
+                                        newUser.setEmail(schoolEmail);
+                                        newUser.setClass_standing(grade);
+                                        newUser.setMajor(major);
+                                        newUser.setPhone_number(phoneNum);
+                                        newUser.setPreferred_name(preferName);
                                         Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                                        intent.putExtra(GET_USER_KEY,newUser);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
