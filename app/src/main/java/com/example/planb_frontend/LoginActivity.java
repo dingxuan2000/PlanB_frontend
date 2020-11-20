@@ -61,19 +61,29 @@ public class LoginActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         user = documentSnapshot.toObject(User.class);
                         user.setEmail(fAuth.getCurrentUser().getEmail());
-                        Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+                        user.setId(userId);
+                        if (user.getType().equals("tutor")) {
+                            Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
                     }
                 }
             });
-            Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
-            intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
-            startActivity(intent);
-            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+
             finish();
-        }
-        else {
+        } else {
             mBtnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -92,15 +102,20 @@ public class LoginActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 if (documentSnapshot.exists()) {
-                                                     user = documentSnapshot.toObject(User.class);
+                                                    user = documentSnapshot.toObject(User.class);
                                                     Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                                                 } else {
                                                     Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
                                                 }
                                             }
                                         });
-                                        Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
-                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
+                                        Intent intent = null;
+                                        if (user.getType().equals("tutor")) {
+                                            intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                        } else {
+                                            intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                                        }
+                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
                                         startActivity(intent);
                                         Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                     }

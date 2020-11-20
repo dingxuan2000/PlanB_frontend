@@ -26,6 +26,8 @@ import java.util.Map;
 import planb_backend.User;
 
 import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
+import static com.example.planb_frontend.StudentRegisterActivity.USER_ID_KEY;
+import static com.example.planb_frontend.StudentRegisterActivity.USER_TYPE_KEY;
 
 public class TutorRegisterActivity extends AppCompatActivity{
 
@@ -133,6 +135,8 @@ public class TutorRegisterActivity extends AppCompatActivity{
                                         user.put(MAJOR_KEY, major);
                                         user.put(CLASS_STANDING_KEY, grade);
                                         user.put(PHONE_NUMBER_KEY, phoneNum);
+                                        user.put(USER_TYPE_KEY,"tutor");
+                                        user.put(USER_ID_KEY,userId);
                                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -145,6 +149,8 @@ public class TutorRegisterActivity extends AppCompatActivity{
                                         newUser.setMajor(major);
                                         newUser.setPhone_number(phoneNum);
                                         newUser.setPreferred_name(preferName);
+                                        newUser.setType("tutor");
+                                        newUser.setId(userId);
                                         Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
                                         intent.putExtra(StudentRegisterActivity.GET_USER_KEY,newUser);
                                         startActivity(intent);

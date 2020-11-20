@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +40,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public static final String PHONE_NUMBER_KEY = "phone_number";
     public static final String USERS_TABLE_KEY = "users";
     public static final String GET_USER_KEY = "get user";
+    public static final String USER_TYPE_KEY = "type";
+    public static final String USER_ID_KEY = "user id";
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -99,6 +103,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 String grade = mEtGrade.getText().toString();
                 String phoneNum = mEtPhoneNum.getText().toString();
 
+
                 if (TextUtils.isEmpty(schoolEmail)) {
                     mEtSchoolEmail.setError("Please enter school email");
                 } else if (TextUtils.isEmpty(password)) {
@@ -128,6 +133,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                         user.put(MAJOR_KEY, major);
                                         user.put(CLASS_STANDING_KEY, grade);
                                         user.put(PHONE_NUMBER_KEY, phoneNum);
+                                        user.put(USER_TYPE_KEY,"student");
+                                        user.put(USER_ID_KEY,userId);
                                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -140,6 +147,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                         newUser.setMajor(major);
                                         newUser.setPhone_number(phoneNum);
                                         newUser.setPreferred_name(preferName);
+                                        newUser.setType("student");
+                                        newUser.setId(userId);
                                         Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
                                         intent.putExtra(GET_USER_KEY,newUser);
                                         startActivity(intent);

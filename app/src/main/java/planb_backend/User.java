@@ -15,15 +15,37 @@ public class User implements Serializable {
 
     private String phone_number;
 
+    private String id;
+
+    private String type;
+
     public User() {
     }
 
-    public User(String email, String preferred_name, String major, String class_standing, String phone_number) {
+    public User(String email, String preferred_name, String major, String class_standing, String phone_number, String id, String type) {
         this.email = email;
         this.preferred_name = preferred_name;
         this.major = major;
         this.class_standing = class_standing;
         this.phone_number = phone_number;
+        this.id = id;
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getEmail() {
@@ -74,6 +96,8 @@ public class User implements Serializable {
                 ", major='" + major + '\'' +
                 ", class_standing='" + class_standing + '\'' +
                 ", phone_number='" + phone_number + '\'' +
+                ", id='" + id + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
