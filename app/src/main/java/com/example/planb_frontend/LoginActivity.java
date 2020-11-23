@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.net.URLEncoder;
 
-import planb_backend.User;
+import com.example.planb_backend.User;
 
 import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
 
@@ -40,10 +40,16 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore fStore;
     User user;
 
+    private TextView resetPassword;
+    private TextView signup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        resetPassword = findViewById(R.id.reset_password);
+
 
         //找到控件
         mBtnLogin = findViewById(R.id.btn_login);
@@ -51,6 +57,15 @@ public class LoginActivity extends AppCompatActivity {
         mEtPassword = findViewById(R.id.password_textInput);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+
+        signup = findViewById(R.id.create);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, getStartedActivity.class);
+                startActivity(intent);
+            }
+        });
 
         if (fAuth.getCurrentUser() != null) {
             String userId = fAuth.getCurrentUser().getUid();

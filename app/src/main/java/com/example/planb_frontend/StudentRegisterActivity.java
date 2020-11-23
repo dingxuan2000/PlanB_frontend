@@ -30,7 +30,7 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import planb_backend.User;
+import com.example.planb_backend.User;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
@@ -153,6 +153,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                         intent.putExtra(GET_USER_KEY,newUser);
                                         startActivity(intent);
                                     } else {
+                                        Log.e("tag", task.getException().toString());
                                         Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
                                     }
                                 }

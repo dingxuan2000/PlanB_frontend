@@ -4,33 +4,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class StudentPageActivity extends AppCompatActivity {
 
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView profileB;
+    private ImageView submit_ticketB;
 
-    private TextView textViewResult;
-
+    //create custom adapter
+    ListView tutor_rank;
+    String[] tutor_name = {"caiwei zhao","zanyuan yang","zihao chen"};
+    String[] tutor_major = {"cs","cs","cs"};
+    String[] tutor_grade = {"senior","senior","senior"};
+    Integer[] tutor_imgid = {R.drawable.tutor_img1,R.drawable.tutor_img2,R.drawable.tutor_img3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_student);
 
-        connectionB = findViewById(R.id.tutor_connection_btn);
+        tutor_rank = findViewById(R.id.tutor_listview);
+        studentCustomListView clv = new studentCustomListView(this,tutor_name,tutor_major,tutor_grade,tutor_imgid);
+        tutor_rank.setAdapter(clv);
+
+        connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,42 +58,14 @@ public class StudentPageActivity extends AppCompatActivity {
             }
         });
 
-//        textViewResult = findViewById(R.id.text_view_result);
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://localhost:8080/")  //192.168.1.147
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-//
-//        Call<List<Post>> call = jsonPlaceHolderApi.getPosts();
-//
-//        call.enqueue(new Callback<List<Post>>() {
-//            @Override
-//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response){
-//
-//                if(!response.isSuccessful()){
-//                    textViewResult.setText("Code: +" + response.code());
-//                    return;
-//                }
-//
-//                List<Post> posts = response.body();
-//
-//                for(Post post : posts){
-//                    String content="";
-//                    content += "password" + post.getPassword() + "\n";
-//                    content += "username" + post.getPassword() + "\n";
-//
-//                    textViewResult.append(content);
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Post>> call, Throwable t){
-//                textViewResult.setText(t.getMessage());
-//            }
-//        } );
+        submit_ticketB = findViewById(R.id.student_submit_ticket);
+        submit_ticketB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

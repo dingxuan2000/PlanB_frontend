@@ -9,18 +9,43 @@
     >
 
     <TextView
-        android:id="@+id/textView14"
-        android:layout_width="match_parent"
-        android:layout_height="636dp"
-        android:layout_weight="1"
-        android:text="" />
+        android:id="@+id/search"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/history"
+        android:fontFamily="@font/poppins_bold"
+        android:padding="5dp"
+        android:text="           History"
+        android:textColor="#000000"
+        android:textSize="32sp" />
+
+    <TextView
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#000000" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="566dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:gravity="center|bottom">
+        android:gravity="center|bottom"
+        android:layout_marginTop="15dp">
 
 
         <ImageView
@@ -28,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/homebar" />
+            app:srcCompat="@drawable/homebar1" />
 
         <ImageView
             android:id="@+id/tutor_connection_btn"
@@ -42,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/historybar1" />
+            app:srcCompat="@drawable/historybar" />
 
         <ImageView
             android:id="@+id/tutor_profile_btn"

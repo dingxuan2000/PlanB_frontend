@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import planb_backend.User;
+import com.example.planb_backend.User;
 
 import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
 import static com.example.planb_frontend.StudentRegisterActivity.USER_ID_KEY;

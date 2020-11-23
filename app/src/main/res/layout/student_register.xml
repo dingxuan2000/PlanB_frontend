@@ -165,7 +165,7 @@
             android:background="@android:color/transparent"
             android:gravity="center"
             android:shadowColor="#FFFFFF"
-            android:text="Already Have an Account? Click me!"
+            android:text="@string/login"
             android:textColor="#A8C6A0" />
 
     </LinearLayout>
