@@ -15,8 +15,9 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/button"
-        android:queryHint="Search the course" />
+        android:background="@drawable/shape1"
+        android:queryHint="Search the course"
+        android:iconifiedByDefault="true"/>
 
 
     <ListView
@@ -36,7 +37,9 @@
             android:layout_height="25dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="20dp"
-            android:background="@color/button" />
+
+            android:background="@color/button"
+            />
 
         <Spinner
             android:id="@+id/tutor_way"

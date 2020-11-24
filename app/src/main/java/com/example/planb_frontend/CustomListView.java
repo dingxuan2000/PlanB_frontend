@@ -14,16 +14,21 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class CustomListView extends ArrayAdapter<String> {
 
-    private String[] names;
-    private String[] time;
-    private String[] major;
-    private String[] course;
-    private Integer[] tutor_imgid;
+    //private String[] names;
+    private ArrayList<String> names;
+    private ArrayList<String> time;
+    private ArrayList<String> major;
+    private ArrayList<String> course;
+    //    private String[] time;
+//    private String[] major;
+//    private String[] course;
     private Activity context;
 
-    public CustomListView(Activity context, String[] names, String[] time, String[] major, String[] course, Integer[] tutor_imgid){
+    public CustomListView(Activity context, ArrayList<String> names, ArrayList<String> time, ArrayList<String> major, ArrayList<String> course){
         super(context, R.layout.listview_layout, names);
 
         this.context=context;
@@ -31,7 +36,6 @@ public class CustomListView extends ArrayAdapter<String> {
         this.time=time;
         this.major=major;
         this.course=course;
-        this.tutor_imgid=tutor_imgid;
 
     }
 
@@ -51,11 +55,11 @@ public class CustomListView extends ArrayAdapter<String> {
             viewHolder = (ViewHolder) r.getTag();
         }
 
-        viewHolder.tvw1.setText(names[position]);
-        viewHolder.tvw2.setText(time[position]);
-        viewHolder.tvw3.setText(major[position]);
-        viewHolder.tvw4.setText(course[position]);
-        viewHolder.tvw5.setImageResource(tutor_imgid[position]);
+        //viewHolder.tvw1.setText(names[position]);
+        viewHolder.tvw1.setText(names.get(position));
+        viewHolder.tvw2.setText(time.get(position));
+        viewHolder.tvw3.setText(major.get(position));
+        viewHolder.tvw4.setText(course.get(position));
 
         return r;
 
@@ -69,13 +73,11 @@ public class CustomListView extends ArrayAdapter<String> {
         TextView tvw2;
         TextView tvw3;
         TextView tvw4;
-        ImageView tvw5;
         ViewHolder(View v){
             tvw1 = (TextView)v.findViewById(R.id.names);
             tvw2 = (TextView)v.findViewById(R.id.time);
             tvw3 = (TextView)v.findViewById(R.id.major);
             tvw4 = (TextView)v.findViewById(R.id.course);
-            tvw5 = (ImageView)v.findViewById(R.id.tutor_img);
         }
     }
 }
