@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,10 +14,20 @@ public class StudentHistoryActivity extends AppCompatActivity {
     private ImageView connectionB;
     private ImageView profileB;
 
+    ListView lst;
+    String[] names={"Caiwei Zhao", "Xuan Ding"};
+    String[] time={"2020-05-26 09:10:00", "2020-05-29 09:30:00"};
+    String[] course={"cse110", "maht183"};
+    Integer[] tutor_imgid = {R.drawable.student3,R.drawable.student4};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_student);
+
+        lst=(ListView)findViewById(R.id.listview);
+        StudentHistoryCustomListView customListView=new StudentHistoryCustomListView(this, names, time, course, tutor_imgid);
+        lst.setAdapter(customListView);
 
         mainB = findViewById(R.id.student_main_btn);
         mainB.setOnClickListener(new View.OnClickListener() {

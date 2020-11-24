@@ -1,4 +1,4 @@
-package planb_backend;
+package com.example.planb_backend;
 
 import java.io.Serializable;
 

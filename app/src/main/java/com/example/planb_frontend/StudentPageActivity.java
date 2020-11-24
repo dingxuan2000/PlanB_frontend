@@ -2,35 +2,82 @@ package com.example.planb_frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.ArrayList;
 
 public class StudentPageActivity extends AppCompatActivity {
 
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView profileB;
+    private ImageView submit_ticketB;
 
-    private TextView textViewResult;
-
+    //create custom adapter
+    ListView tutor_rank;
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    ArrayList<String> tutor_name = new ArrayList<String>();
+    ArrayList<String> tutor_major = new ArrayList<String>();
+    ArrayList<String> tutor_grade = new ArrayList<String>();
+//    String[] tutor_name = {"caiwei zhao","zanyuan yang","zihao chen"};
+//    String[] tutor_major = {"cs","cs","cs"};
+//    String[] tutor_grade = {"senior","senior","senior"};
+//    Integer[] tutor_imgid = {R.drawable.tutor_img1,R.drawable.tutor_img2,R.drawable.tutor_img3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
+        fStore.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot doc : task.getResult()){
+                        DocumentReference docref = fStore.collection("users").document(doc.getId());
+                        docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot docc = task.getResult();
+                                    if (docc.exists()){
+                                        tutor_name.add(docc.getString("preferred_name"));
+                                        tutor_major.add(docc.getString("major"));
+                                        //tutor_grade.add(doc.get("course_code").toString());
+                                        tutor_grade.add(docc.getString("class_standing"));
+                                        tutor_rank.setAdapter(StudentcustomListView);
+                                        //Log.d("Document",docc.getString("preferred_name")+" "+doc.get("course_code").toString());
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_student);
 
-        connectionB = findViewById(R.id.tutor_connection_btn);
+        tutor_rank = findViewById(R.id.tutor_listview);
+        tutor_rank.setAdapter(StudentcustomListView);
+
+        connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,42 +104,14 @@ public class StudentPageActivity extends AppCompatActivity {
             }
         });
 
-//        textViewResult = findViewById(R.id.text_view_result);
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://localhost:8080/")  //192.168.1.147
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-//
-//        Call<List<Post>> call = jsonPlaceHolderApi.getPosts();
-//
-//        call.enqueue(new Callback<List<Post>>() {
-//            @Override
-//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response){
-//
-//                if(!response.isSuccessful()){
-//                    textViewResult.setText("Code: +" + response.code());
-//                    return;
-//                }
-//
-//                List<Post> posts = response.body();
-//
-//                for(Post post : posts){
-//                    String content="";
-//                    content += "password" + post.getPassword() + "\n";
-//                    content += "username" + post.getPassword() + "\n";
-//
-//                    textViewResult.append(content);
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Post>> call, Throwable t){
-//                textViewResult.setText(t.getMessage());
-//            }
-//        } );
+        submit_ticketB = findViewById(R.id.student_submit_ticket);
+        submit_ticketB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

@@ -11,6 +11,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView mainB;
+    private ImageView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,15 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentProfileActivity.this, StudentPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentProfileActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
