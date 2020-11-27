@@ -96,10 +96,10 @@
 
         <Spinner
             android:id="@+id/stu_major"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dialog" />
     </LinearLayout>
 
     <LinearLayout
@@ -122,10 +122,11 @@
 
         <Spinner
             android:id="@+id/stu_grade"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:paddingRight="10dp"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dialog" />
     </LinearLayout>
 
 
