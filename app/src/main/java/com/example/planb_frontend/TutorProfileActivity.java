@@ -19,7 +19,7 @@ public class TutorProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_tutor);
 
-        connectionB = findViewById(R.id.tutor_connection_btn);
+        connectionB = findViewById(R.id.tutor_main_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

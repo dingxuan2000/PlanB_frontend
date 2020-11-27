@@ -74,7 +74,6 @@ public class StudentPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_student);
 
-
         tutor_rank = findViewById(R.id.tutor_listview);
         tutor_rank.setAdapter(StudentcustomListView);
 
@@ -109,30 +108,10 @@ public class StudentPageActivity extends AppCompatActivity {
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentPageActivity.this, StudentSubmitTicketActivity.class);
+                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
                 startActivity(intent);
             }
         });
-
-//        submit_ticketB = findViewById(R.id.student_submit_ticket);
-//        submit_ticketB.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent preIntent = getIntent();
-////                //intent.getStringExtra(StudentRegisterActivity.GET_USER_KEY);
-////                System.out.println("intent:" + intent); //intent:Intent { cmp=com.example.planb_frontend/.StudentPageActivity }
-////                newUser = (User)intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-////                String userId = newUser.getId();
-////                //test: userId还是: null？？？
-////                System.out.println("userId:" + userId);
-//
-//                Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-//                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                startActivity(intent);
-//            }
-//        });
-
-
 
     }
 }
