@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="187dp"
+        android:layout_height="132dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/welcome" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            android:id="@+id/hey"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Hey"
+            android:textColor="#000000"
+            android:textSize="23sp"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Zanyuan"
+            android:textColor="#000000"
+            android:textSize="23sp"/>
+
+        <TextView
+            android:id="@+id/common"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_bold"
+            android:text=","
+            android:textColor="#000000"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/or"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Welcome Back!"
+        android:textColor="#000000"
+        android:textSize="23sp" />
+
+
+    <ImageView
+        android:id="@+id/welcome1"
+        android:layout_width="403dp"
+        android:layout_height="357dp"
+
+        android:layout_marginTop="88dp"
+        android:src="@drawable/welcome1" />
+
+
+</LinearLayout>
