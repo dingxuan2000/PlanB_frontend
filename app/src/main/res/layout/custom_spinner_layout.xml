@@ -1,35 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:id="@+id/customSpinnerItemLayout"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:background="@drawable/background">
-
-        <TextView
-            android:id="@+id/tvSpinnerLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="textview"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="10dp"
-
-            />
-    </LinearLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/customSpinnerIcon"
-        android:layout_alignParentEnd="true"
-        android:padding="10dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_down"/>
-
-</RelativeLayout>
+    android:layout_height="45dp"
+    style="?attr/spinnerDropDownItemStyle"
+    android:id="@+id/text1"
+    android:singleLine="true"
+    android:ellipsize="marquee"
+    android:textColor="@color/green"
+    android:background="#E8E5E5"
+    android:backgroundTint="#E8E5E5"
+    />

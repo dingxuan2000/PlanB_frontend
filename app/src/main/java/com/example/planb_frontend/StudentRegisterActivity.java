@@ -56,6 +56,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
     private Spinner mEtGrade;
     private EditText mEtPhoneNum;
 
+    private Button login;
+
     private String major;
     private String grade;
 
@@ -65,6 +67,15 @@ public class StudentRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_register);
+
+        login = findViewById(R.id.student_login_link);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentRegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //找到控件
         mEtPassword = findViewById(R.id.stu_password);
@@ -89,6 +100,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 mEtMajor.setPrompt("Please enter major");
             }
         });
+
+//        ArrayAdapter<CharSequence> adapter_grade = ArrayAdapter.createFromResource(this, R.array.class_standing, R.layout.style_spinner1);
+//        adapter.setDropDownViewResource(R.layout.custom_spinner_layout);
 
         ArrayAdapter<CharSequence> adapter_grade = ArrayAdapter.createFromResource(this, R.array.class_standing, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -181,15 +195,15 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        mBtnStuLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (fAuth.getCurrentUser() != null) {
-                    Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
+//        mBtnStuLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (fAuth.getCurrentUser() != null) {
+//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//            }
+//        });
     }
 }

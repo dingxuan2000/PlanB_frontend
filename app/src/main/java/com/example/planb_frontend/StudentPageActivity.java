@@ -3,9 +3,12 @@ package com.example.planb_frontend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +29,7 @@ public class StudentPageActivity extends AppCompatActivity {
     private ImageView historyB;
     private ImageView profileB;
     private ImageView submit_ticketB;
+    private SearchView searchView;
 
     //create custom adapter
     ListView tutor_rank;
@@ -33,10 +37,6 @@ public class StudentPageActivity extends AppCompatActivity {
     ArrayList<String> tutor_name = new ArrayList<String>();
     ArrayList<String> tutor_major = new ArrayList<String>();
     ArrayList<String> tutor_grade = new ArrayList<String>();
-//    String[] tutor_name = {"caiwei zhao","zanyuan yang","zihao chen"};
-//    String[] tutor_major = {"cs","cs","cs"};
-//    String[] tutor_grade = {"senior","senior","senior"};
-//    Integer[] tutor_imgid = {R.drawable.tutor_img1,R.drawable.tutor_img2,R.drawable.tutor_img3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +74,26 @@ public class StudentPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_student);
 
+
         tutor_rank = findViewById(R.id.tutor_listview);
         tutor_rank.setAdapter(StudentcustomListView);
+
+        //search view
+//        searchView = findViewById(R.id.search_bar);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+//            @Override
+//            public boolean onQueryTextSubmit(String text){
+//                StudentcustomListView.getFilter().filter(text);
+//                tutor_rank.setAdapter(StudentcustomListView);
+//                return true;
+//            }
+//            @Override
+//            public boolean onQueryTextChange(String newText){
+//                StudentcustomListView.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
+
 
         connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +126,31 @@ public class StudentPageActivity extends AppCompatActivity {
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+                Intent intent = new Intent(StudentPageActivity.this, StudentSubmitTicketActivity.class);
                 startActivity(intent);
             }
         });
 
+//        submit_ticketB = findViewById(R.id.student_submit_ticket);
+//        submit_ticketB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent preIntent = getIntent();
+////                //intent.getStringExtra(StudentRegisterActivity.GET_USER_KEY);
+////                System.out.println("intent:" + intent); //intent:Intent { cmp=com.example.planb_frontend/.StudentPageActivity }
+////                newUser = (User)intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+////                String userId = newUser.getId();
+////                //test: userId还是: null？？？
+////                System.out.println("userId:" + userId);
+//
+//                Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                startActivity(intent);
+//            }
+//        });
+
+
+
     }
+
 }
