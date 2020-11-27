@@ -65,7 +65,7 @@
         android:background="@drawable/shape"
         android:gravity="left|center_vertical"
         android:hint="@string/enter_your_password"
-        android:inputType="textPassword"
+        android:inputType="textPassword|textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
@@ -104,10 +104,10 @@
 
         <Spinner
             android:id="@+id/tutor_major"
-            android:layout_width="160dp"
-            android:layout_height="45dp"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dialog" />
+            android:spinnerMode="dropdown" />
     </LinearLayout>
 
     <LinearLayout
@@ -130,10 +130,10 @@
 
         <Spinner
             android:id="@+id/tutor_grade"
-            android:layout_width="160dp"
-            android:layout_height="45dp"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dialog" />
+            android:spinnerMode="dropdown" />
     </LinearLayout>
 
     <EditText
