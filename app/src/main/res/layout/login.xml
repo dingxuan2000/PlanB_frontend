@@ -6,24 +6,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-        <TextView
-        android:id="@+id/logIn"
-        android:text="Log in"
-        android:textSize="30sp"
-        android:textColor="#000000"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center|top"
-        />
+    <!--    <TextView-->
+<!--        android:id="@+id/logIn"-->
+<!--        android:text="Log in"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textColor="#000000"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_gravity="center|top"-->
+<!--        />-->
 
-    <TextView
-        android:id="@+id/illustarte"
-        android:text="Sign In to continue"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_gravity="center"/>
+<!--    <TextView-->
+<!--        android:id="@+id/illustarte"-->
+<!--        android:text="Sign In to continue"-->
+<!--        android:textSize="18sp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_gravity="center"/>-->
 
     <ImageView
         android:id="@+id/imageView2"
@@ -67,12 +67,69 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="40dp"
         android:background="#A8C6A0"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center_horizontal|center_vertical"
         android:text="LOGIN"
         android:textColor="#FFFFFF"
         android:textSize="22sp" />
+    <TextView
+        android:id="@+id/reset_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Forgot Password?"
+        android:textColor="#7C7C7C"
+        android:textSize="12sp"
+        android:gravity="center_horizontal|center_vertical"/>
+
+    <TextView
+        android:id="@+id/or"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="OR"
+        android:textColor="#7C7C7C"
+        android:textSize="12sp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="70dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Don't have an account?"
+            android:textColor="#7C7C7C"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Sign up here"
+            android:textColor="#D2587E59" />
+
+
+    </LinearLayout>
+
+
+
+
+
 
 
 </LinearLayout>

@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.planb_backend.task.HttpRequestTask;
+
 public class getStartedActivity extends AppCompatActivity {
 
     private Button getStartedBtn;
@@ -19,6 +21,9 @@ public class getStartedActivity extends AppCompatActivity {
         getStartedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                new HttpRequestTask().execute();
+
                 Intent intent = new Intent(getStartedActivity.this, ChooseActivity.class);
                 startActivity(intent);
             }

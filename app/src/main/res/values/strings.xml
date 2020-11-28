@@ -4,7 +4,7 @@
     <string name="apply_now">Apply now!</string>
     <string name="welcome_to_plan_b">Welcome to Plan B!</string>
     <string name="enter_your_preferred_name">Enter your preferred name</string>
-    <string name="login"><u>LOGIN IN</u></string>
+    <string name="login"><u>LOGIN</u></string>
     <string name="enter_your_major">Enter your major</string>
     <string name="enter_your_grade_ex_senior">Enter your grade (ex.senior)</string>
     <string name="enter_your_phone_number">Enter your phone number</string>
@@ -20,4 +20,6 @@
     <string name="stu_reg_img">stu_reg_img</string>
     <string name="want_to_be_a_tutor">Want to be a tutor?</string>
     <string name="tutor_reg_img">tutor_reg_img</string>
+    <string name="channel_name">Plan-B Notification Channel</string>
+    <string name="channel_description">Plan-B Notification Channel</string>
 </resources>

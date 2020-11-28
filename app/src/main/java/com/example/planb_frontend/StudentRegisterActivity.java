@@ -3,6 +3,7 @@ package com.example.planb_frontend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,10 +50,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
     private EditText mEtSchoolEmail;
     private EditText mEtPreferredName;
     private Spinner mEtMajor;
-    private EditText mEtGrade;
+    private Spinner mEtGrade;
     private EditText mEtPhoneNum;
 
     private String major;
+    private String grade;
 
     private User newUser;
 
@@ -85,6 +87,22 @@ public class StudentRegisterActivity extends AppCompatActivity {
             }
         });
 
+        ArrayAdapter<CharSequence> adapter_grade = ArrayAdapter.createFromResource(this, R.array.class_standing, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mEtGrade.setAdapter(adapter_grade);
+        mEtGrade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                grade = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mEtGrade.setPrompt("Choose Your Grade");
+            }
+        });
+
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
@@ -96,7 +114,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 String schoolEmail = mEtSchoolEmail.getText().toString();
                 String preferName = mEtPreferredName.getText().toString();
                 //String major = mEtMajor.getText().toString();
-                String grade = mEtGrade.getText().toString();
+                //String grade = mEtGrade.getText().toString();
                 String phoneNum = mEtPhoneNum.getText().toString();
 
 
@@ -110,9 +128,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
 //                else if(TextUtils.isEmpty(major)){
 //                    mEtMajor.setError("Please enter major");
 //                }
-                else if (TextUtils.isEmpty(grade)) {
-                    mEtGrade.setError("Please enter grade");
-                } else if (TextUtils.isEmpty(phoneNum)) {
+//                else if (TextUtils.isEmpty(grade)) {
+//                    mEtGrade.setError("Please enter grade");
+//                }
+                else if (TextUtils.isEmpty(phoneNum)) {
                     mEtPhoneNum.setError("Please enter phone number");
                 } else {
                     //TODO update to firebase
@@ -149,6 +168,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                                         intent.putExtra(GET_USER_KEY,newUser);
                                         startActivity(intent);
                                     } else {
+                                        Log.e("tag", task.getException().toString());
                                         Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
                                     }
                                 }

@@ -2,9 +2,11 @@ package com.example.planb_frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,10 +38,16 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore fStore;
     User user;
 
+    private TextView resetPassword;
+    private TextView signup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        resetPassword = findViewById(R.id.reset_password);
+
 
         //找到控件
         mBtnLogin = findViewById(R.id.btn_login);
@@ -48,80 +56,99 @@ public class LoginActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+        signup = findViewById(R.id.create);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, getStartedActivity.class);
+                startActivity(intent);
+            }
+        });
+
         if (fAuth.getCurrentUser() != null) {
-            String userId = fAuth.getCurrentUser().getUid();
-            DocumentReference documentReference = fStore.collection(USERS_TABLE_KEY).document(userId);
-            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if (documentSnapshot.exists()) {
-                        user = documentSnapshot.toObject(User.class);
-                        user.setEmail(fAuth.getCurrentUser().getEmail());
-                        user.setId(userId);
-                        if (user.getType().equals("tutor")) {
-                            Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
-                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
-                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+//            String userId = fAuth.getCurrentUser().getUid();
+//            DocumentReference documentReference = fStore.collection(USERS_TABLE_KEY).document(userId);
+//            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                @Override
+//                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                    if (documentSnapshot.exists()) {
+//                        user = documentSnapshot.toObject(User.class);
+//                        user.setEmail(fAuth.getCurrentUser().getEmail());
+//                        user.setId(userId);
+//                        if (user.getType().equals("tutor")) {
+//                            Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+//                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+//                            startActivity(intent);
+//                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+//                        }
+//                        else {
+//                            Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+//                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+//                            startActivity(intent);
+//                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            });
 
-            finish();
+//            finish();
         } else {
-            mBtnLogin.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent_n = null;
-                    email = mEtUser.getText().toString();
-                    password = mEtPassword.getText().toString();
 
-                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
-                            new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        String userId = fAuth.getCurrentUser().getUid();
-                                        DocumentReference documentReference = fStore.collection(USERS_TABLE_KEY).document(userId);
-                                        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                if (documentSnapshot.exists()) {
-                                                    user = documentSnapshot.toObject(User.class);
-                                                    Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
-                                                } else {
-                                                    Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
-                                                }
-                                            }
-                                        });
-                                        Intent intent = null;
-                                        if (user.getType().equals("tutor")) {
-                                            intent = new Intent(getApplicationContext(), TutorPageActivity.class);
-                                        } else {
-                                            intent = new Intent(getApplicationContext(), StudentPageActivity.class);
-                                        }
-                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                                        startActivity(intent);
-                                        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }
-                    );
-                }
-            });
         }
 
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_n = null;
+                email = mEtUser.getText().toString();
+                password = mEtPassword.getText().toString();
+
+                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
+                        new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    String userId = fAuth.getCurrentUser().getUid();
+                                    DocumentReference documentReference = fStore.collection(USERS_TABLE_KEY).document(userId);
+                                    documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            if (documentSnapshot.exists()) {
+                                                user = documentSnapshot.toObject(User.class);
+                                                Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
+                                            }
+                                            Intent intent = null;
+                                            if (user.getType().equals("tutor")) {
+                                                intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                            } else {
+                                                intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                                            }
+                                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                                            startActivity(intent);
+                                            Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+//                                    Intent intent = null;
+//                                    if (user.getType().equals("tutor")) {
+//                                        intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+//                                    } else {
+//                                        intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+//                                    }
+//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+//                                    startActivity(intent);
+//                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                );
+            }
+        });
     }
 }
 
