@@ -28,6 +28,7 @@ import java.util.Map;
 
 import com.example.planb_backend.User;
 
+import static com.example.planb_frontend.StudentRegisterActivity.GET_USER_KEY;
 import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
 import static com.example.planb_frontend.StudentRegisterActivity.USER_ID_KEY;
 import static com.example.planb_frontend.StudentRegisterActivity.USER_TYPE_KEY;
@@ -43,6 +44,9 @@ public class TutorRegisterActivity extends AppCompatActivity{
     private Spinner mEtMajor;
     private Spinner mEtGrade;
     private EditText mEtPhoneNum;
+    private User newUser;
+
+    private Button login;
 
     private String major;
     private String grade;
@@ -60,6 +64,15 @@ public class TutorRegisterActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutor_register);
+
+        login = findViewById(R.id.tutor_login_link);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TutorRegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         //找到控件
@@ -149,13 +162,25 @@ public class TutorRegisterActivity extends AppCompatActivity{
                                         user.put(MAJOR_KEY, major);
                                         user.put(CLASS_STANDING_KEY, grade);
                                         user.put(PHONE_NUMBER_KEY, phoneNum);
+                                        user.put(USER_TYPE_KEY,"tutor");
+                                        user.put(USER_ID_KEY,userId);
                                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                                             }
                                         });
+                                        newUser = new User();
+                                        newUser.setEmail(schoolEmail);
+                                        newUser.setClass_standing(grade);
+                                        newUser.setMajor(major);
+                                        newUser.setPhone_number(phoneNum);
+                                        newUser.setPreferred_name(preferName);
+                                        newUser.setType("tutor");
+                                        newUser.setId(userId);
                                         Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                        intent.putExtra(GET_USER_KEY,newUser);
+                                        Toast.makeText(getApplicationContext(), newUser.toString(), Toast.LENGTH_LONG).show();
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();

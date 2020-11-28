@@ -9,15 +9,27 @@
     android:gravity="clip_horizontal"
     android:orientation="vertical">
 
-
-    <SearchView
-        android:id="@+id/searchView"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar"
+        app:queryHint="Search course"
+        app:iconifiedByDefault="false"
+        android:layout_margin="2dp"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/shape1"
-        android:queryHint="Search the course"
-        android:iconifiedByDefault="true"/>
+        app:queryBackground="@color/green">
+    </androidx.appcompat.widget.SearchView>
+
+
+<!--    <SearchView-->
+<!--        android:id="@+id/searchView"-->
+<!--        android:layout_width="320dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:background="@drawable/shape1"-->
+<!--        android:queryHint="Search the course"-->
+<!--        android:iconifiedByDefault="true"/>-->
 
 
     <ListView
