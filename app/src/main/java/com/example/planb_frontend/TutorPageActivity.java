@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,10 @@ public class TutorPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+        Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
+
         CustomListView customListView=new CustomListView(this, names, time, major, course);
         fStore.collection("student_ticket").whereEqualTo("status", "submitted").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -102,6 +107,7 @@ public class TutorPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorPageActivity.this, TutorProfileActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });

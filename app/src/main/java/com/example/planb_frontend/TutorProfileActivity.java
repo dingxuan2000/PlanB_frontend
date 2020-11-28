@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.planb_backend.User;
 
 public class TutorProfileActivity extends AppCompatActivity {
     private ImageView connectionB;
@@ -18,6 +21,10 @@ public class TutorProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_tutor);
+
+        Intent intent = getIntent();
+        User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+        Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
 
         connectionB = findViewById(R.id.tutor_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
