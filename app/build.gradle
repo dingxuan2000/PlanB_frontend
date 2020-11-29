@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'            //add
 
     implementation 'com.google.firebase:firebase-auth:16.0.5'
-    implementation 'com.google.firebase:firebase-firestore:21.4.0'
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
     implementation 'androidx.navigation:navigation-fragment:2.2.2'
     implementation 'androidx.navigation:navigation-ui:2.2.2'
 

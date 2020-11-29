@@ -126,7 +126,9 @@ public class StudentPageActivity extends AppCompatActivity {
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentPageActivity.this, StudentSubmitTicketActivity.class);
+                Intent preIntent = getIntent();
+                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
                 startActivity(intent);
             }
         });
