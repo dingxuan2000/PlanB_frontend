@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.planb_backend.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,6 +32,8 @@ public class StudentPageActivity extends AppCompatActivity {
     private ImageView profileB;
     private ImageView submit_ticketB;
     private SearchView searchView;
+
+    private User user;
 
     //create custom adapter
     ListView tutor_rank;
@@ -127,9 +131,38 @@ public class StudentPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent preIntent = getIntent();
-                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
-                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-                startActivity(intent);
+                //if the user already has a ticket in firebase, then stop jump to the SubmitTicket page.
+                //1.check if the userId has already in student_collection
+                user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+                String userId = user.getId();
+                System.out.println("userId:" + userId);
+                DocumentReference documentReference = fStore.collection(SubmitTicketActivity.TICKET_TABLE_KEY).document(userId);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc = task.getResult();
+                            //这个是可以的，但还要修改一下！！
+                            if(doc.exists()){
+                                Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                Log.d("Document",doc.getString("user_id")+" "+doc.get("course_code").toString());
+                                Intent intent = new Intent(StudentPageActivity.this, StudentPageActivity.class);
+                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                                startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                                startActivity(intent);
+                            }
+
+                        }
+                    }
+                });
+
+//                    Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+//                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                    startActivity(intent);
+
             }
         });
 

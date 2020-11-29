@@ -26,8 +26,9 @@
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/student1" />
 
+        //changed to editText
         <TextView
-            android:id="@+id/illustarte"
+            android:id="@+id/illustrate"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="         Tutor Preferences"
+        android:text="         Meeting Preferences"
         android:textSize="15sp" />
 
     <LinearLayout
@@ -78,20 +79,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/Online_Tutoring"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:background="@drawable/shape"
-            android:backgroundTint="@color/button_background_grey"
-
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Online Tutoring"
-            android:textColor="#555555"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/empty1"
@@ -99,8 +86,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
+        //changed to EditText
         <TextView
-            android:id="@+id/Offline_Tutoring"
+            android:id="@+id/meeting_preference"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -117,63 +105,8 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/tutorType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="         Tutor Type"
-        android:textSize="15sp" />
+    //Tutor Type deleted
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/empty2"
-            android:layout_width="41dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/Free_Tutor"
-            android:layout_width="116dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:background="@drawable/shape"
-            android:backgroundTint="#80C4C4C4"
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center"
-            android:maxLines="1"
-            android:padding="5dp"
-            android:text="Free Tutor"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/empty3"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/Pay_Tutor"
-            android:layout_width="111dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/shape"
-            android:backgroundTint="#80C4C4C4"
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center"
-            android:maxLines="1"
-            android:padding="5dp"
-            android:text="Pay Tutor"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/Time_Preference"
@@ -197,7 +130,7 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/thirtyMinutes"
+            android:id="@+id/Time_Slot"
             android:layout_width="114dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
@@ -217,41 +150,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/oneHour"
-            android:layout_width="113dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/shape"
-            android:backgroundTint="#80C4C4C4"
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center"
-            android:maxLines="1"
-            android:padding="5dp"
-            android:text="1 Hours"
-            android:textColor="#555555"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/empty6"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/twoHours"
-            android:layout_width="104dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/shape"
-            android:backgroundTint="#80C4C4C4"
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center"
-            android:maxLines="1"
-            android:padding="5dp"
-            android:text="2 Hours"
-            android:textColor="#555555"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/empty7"
@@ -261,7 +159,7 @@
     </LinearLayout>
 
 
-    <EditText
+    <TextView
         android:id="@+id/comment"
         android:layout_width="331dp"
         android:layout_height="50dp"
