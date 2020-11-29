@@ -50,6 +50,8 @@ public class SubmitTicketActivity extends AppCompatActivity {
     private TextView mTvOneHr;
     private TextView mTvTwoHrs;
 
+    private Boolean play = false;
+
     private EditText mEtComment;
     private Button mBtnSubmit;
 
@@ -80,7 +82,14 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvOnlineTutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 tutorPre = mTvOnlineTutor.getText().toString();
+                if(play){
+                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_green);
+                    tutorPre = mTvOnlineTutor.getText().toString();
+                }
+                else {
+                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
+                }
+                play = !play;
 
             }
         });
@@ -88,7 +97,15 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvOfflineTutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tutorPre = mTvOfflineTutor.getText().toString();
+                if(play){
+                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_green);
+                    tutorPre = mTvOfflineTutor.getText().toString();
+                }
+                else {
+                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
+                }
+                play = !play;
+
 
             }
         });
@@ -96,7 +113,14 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvThirtenMin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePre = mTvThirtenMin.getText().toString();
+                if(play){
+                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_green);
+                    timePre = mTvThirtenMin.getText().toString();
+                }
+                else {
+                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                }
+                play = !play;
 
             }
         });
@@ -104,7 +128,14 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvOneHr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePre = mTvOneHr.getText().toString();
+                if(play){
+                    mTvOneHr.setBackgroundResource(R.drawable.shape_green);
+                    timePre = mTvOneHr.getText().toString();
+                }
+                else {
+                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                }
+                play = !play;
 
             }
         });
@@ -114,7 +145,13 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvTwoHrs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 timePre = mTvTwoHrs.getText().toString();
+                if(play){
+                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_green);
+                    timePre = mTvTwoHrs.getText().toString();
+                }
+                else {
+                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                }
 
             }
         });
