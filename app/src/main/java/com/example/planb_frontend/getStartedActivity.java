@@ -21,9 +21,6 @@ public class getStartedActivity extends AppCompatActivity {
         getStartedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                new HttpRequestTask().execute();
-
                 Intent intent = new Intent(getStartedActivity.this, ChooseActivity.class);
                 startActivity(intent);
             }

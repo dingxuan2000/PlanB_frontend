@@ -30,19 +30,6 @@ public class MainActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run(){
-                FirebaseMessaging.getInstance().subscribeToTopic("test_topic")
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = "TASK SUCCEEDED";
-                                if (!task.isSuccessful()) {
-                                    msg = "TASK FAILED";
-                                }
-                                Log.d("FCM_SERVICE", msg);
-                                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
                 Intent mainToStart = new Intent(MainActivity.this, LoginActivity.class);
                 MainActivity.this.startActivity(mainToStart);
                 MainActivity.this.finish();

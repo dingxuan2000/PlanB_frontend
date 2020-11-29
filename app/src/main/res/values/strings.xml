@@ -22,4 +22,6 @@
     <string name="tutor_reg_img">tutor_reg_img</string>
     <string name="channel_name">Plan-B Notification Channel</string>
     <string name="channel_description">Plan-B Notification Channel</string>
+    <string name="subscription_success">Successfully subscribed</string>
+    <string name="subscription_failure">Subscribed failed</string>
 </resources>
