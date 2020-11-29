@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,13 +36,15 @@ public class SubmitTicketActivity extends AppCompatActivity {
     public static final String TICKET_TABLE_KEY = "student_ticket";
     public static final String COURSE_CODE_KEY = "course_code";
     public static final String STATUS_KEY = "status"; //不确定要不要, "submitted" or "finished"
-    public static final String TUTOR_PREFERENCE_KEY = "tutor_preference"; //online or offline
+    public static final String TUTOR_PREFERENCE_KEY = "tutor_preferrence"; //online or offline
     public static final String TIME_PREFERENCE_KEY = "time_preference"; // choose time(1hr, 2hr..)
     public static final String COMMENT_KEY = "comment";
+
 
     FirebaseFirestore fStore;
 
     //声明控件
+    private ImageView mImArrow;
     private EditText mEtCourseCode;
     private TextView mTvOnlineTutor;
     private TextView mTvOfflineTutor;
@@ -68,7 +71,8 @@ public class SubmitTicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.submit_ticket);
 
-       //找到控件
+        //找到控件
+        mImArrow = findViewById(R.id.backarrow);
         mEtCourseCode = findViewById(R.id.search);
         mTvOnlineTutor = findViewById(R.id.Online_Tutoring);
         mTvOfflineTutor = findViewById(R.id.Offline_Tutoring);
@@ -77,6 +81,16 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvTwoHrs = findViewById(R.id.twoHours);
         mEtComment = findViewById(R.id.comment);
         mBtnSubmit = findViewById(R.id.submit);
+
+
+
+        mImArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //get the tutor preference by using onClick
         mTvOnlineTutor.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +119,6 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
                 }
                 play = !play;
-
 
             }
         });
@@ -152,7 +165,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
                 else {
                     mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
                 }
-
+                play = !play;
             }
         });
 
@@ -183,20 +196,29 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     Intent intent = getIntent();
                     System.out.println("intent:" + intent);
                     user = (User)intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+
+                    //if user is null, means that the user wants to submit instant ticket again. This is not allowed!!
+//                    if (user == null){
+//                        Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+//                        Intent intent2 = new Intent(getApplicationContext(), StudentPageActivity.class);
+//                        startActivity(intent2);
+//                    }
+
                     //test: userId: null
                     String userId = user.getId();
                     System.out.println("userId:" + userId);
-
+                    //error: java.lang.NullPointerException: Provided document path must not be null.
                     DocumentReference documentReference = fStore.collection(TICKET_TABLE_KEY).document(userId);
                     //in firebase, the collection name is student_ticket
                     Map<String, Object> student_ticket = new HashMap<>();
                     //save the current userId
                     student_ticket.put(StudentRegisterActivity.USER_ID_KEY,userId);
                     student_ticket.put(COURSE_CODE_KEY, courseCode);
-
                     student_ticket.put(TUTOR_PREFERENCE_KEY, tutorPre);
                     student_ticket.put(TIME_PREFERENCE_KEY, timePre);
                     student_ticket.put(COMMENT_KEY, comment);
+                    String status = "null";
+                    student_ticket.put(STATUS_KEY, status);
 
                     //不确定是要用addOnSuccessListener还是addOnCompleteListener!
                     documentReference.set(student_ticket).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -204,8 +226,19 @@ public class SubmitTicketActivity extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Submitted Ticket Successful", Toast.LENGTH_SHORT).show();
                             //needs to set status to be "submitted"
-                            String status = "submitted";
-                            student_ticket.put(STATUS_KEY, status);
+                            Map<String, Object> student_ticket_updated = new HashMap<>();
+                            student_ticket_updated.put(STATUS_KEY, "submitted");
+                            documentReference.update(student_ticket_updated).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG,"Updated the ticket");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e(TAG, "onFailure: ", e);
+                                }
+                            });
 
 //                            //after submit ticket sucessful, return to the student_mainPage
                             Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);

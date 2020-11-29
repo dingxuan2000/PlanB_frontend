@@ -11,6 +11,7 @@ public class ChooseActivity extends AppCompatActivity {
 
     private ImageButton studentChooseBtn;
     private ImageButton tutorChooseBtn;
+    //这里要加一个login button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
