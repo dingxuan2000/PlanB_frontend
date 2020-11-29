@@ -34,7 +34,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
     public static final String COURSE_CODE_KEY = "course_code";
     public static final String STATUS_KEY = "status"; //不确定要不要, "submitted" or "finished"
-    public static final String TUTOR_PREFERENCE_KEY = "tutor_preferrence"; //online or offline
+    public static final String TUTOR_PREFERENCE_KEY = "tutor_preference"; //online or offline
     public static final String TIME_PREFERENCE_KEY = "time_preference"; // choose time(1hr, 2hr..)
     public static final String COMMENT_KEY = "comment";
 

@@ -27,6 +27,7 @@
         <activity android:name=".TutorRegisterActivity" />
         <activity android:name=".StudentSubmitTicketActivity" />
         <activity android:name=".WelcomePageActivity" />
+        <activity android:name=".AcceptTicketActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
