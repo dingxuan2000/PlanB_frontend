@@ -32,9 +32,10 @@ import java.util.Map;
 
 public class SubmitTicketActivity extends AppCompatActivity {
 
+    public static final String TICKET_TABLE_KEY = "student_ticket";
     public static final String COURSE_CODE_KEY = "course_code";
     public static final String STATUS_KEY = "status"; //不确定要不要, "submitted" or "finished"
-    public static final String TUTOR_PREFERENCE_KEY = "tutor_preferrence"; //online or offline
+    public static final String TUTOR_PREFERENCE_KEY = "tutor_preference"; //online or offline
     public static final String TIME_PREFERENCE_KEY = "time_preference"; // choose time(1hr, 2hr..)
     public static final String COMMENT_KEY = "comment";
 
@@ -52,7 +53,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
     private EditText mEtComment;
     private Button mBtnSubmit;
 
-    private User newUser;
+    private User user;
 
     public static final  String TAG="SubmitTicketActivity";
 
@@ -143,11 +144,13 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     //TODO update to firebase
                     //get user id from the previous intent
                     Intent intent = getIntent();
-                    String userId = intent.getStringExtra(StudentRegisterActivity.GET_USER_KEY);
+                    System.out.println("intent:" + intent);
+                    user = (User)intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
                     //test: userId: null
+                    String userId = user.getId();
                     System.out.println("userId:" + userId);
-                    //error: java.lang.NullPointerException: Provided document path must not be null.
-                    DocumentReference documentReference = fStore.collection(StudentRegisterActivity.USERS_TABLE_KEY).document(userId);
+
+                    DocumentReference documentReference = fStore.collection(TICKET_TABLE_KEY).document(userId);
                     //in firebase, the collection name is student_ticket
                     Map<String, Object> student_ticket = new HashMap<>();
                     //save the current userId
