@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,7 +40,12 @@ public class TutorPageActivity extends AppCompatActivity {
     ArrayList<String> major = new ArrayList<String>();
     ArrayList<String> course = new ArrayList<String>();
 
-
+    //added list to hold ticket comments
+    ArrayList<String> comment = new ArrayList<String>();
+    ArrayList<String> student_id = new ArrayList<String>();
+    ArrayList<String> ticket_id = new ArrayList<String>();
+    //ArrayList<String> ticket_status = new ArrayList<String>();
+    ArrayList<String> tutor_preference = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,14 @@ public class TutorPageActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     DocumentSnapshot docc = task.getResult();
                                     if (docc.exists()){
+
+                                        //newly added: comment
+                                        comment.add(doc.getString(SubmitTicketActivity.COMMENT_KEY));
+                                        student_id.add(docc.getString(StudentRegisterActivity.USER_ID_KEY));
+                                        ticket_id.add(doc.getId());
+                                        //ticket_status.add(doc.getString(SubmitTicketActivity.STATUS_KEY));
+                                        tutor_preference.add(doc.getString(SubmitTicketActivity.TUTOR_PREFERENCE_KEY));
+
                                         names.add(docc.getString("preferred_name"));
                                         major.add(docc.getString("major"));
                                         time.add(doc.get("time_preference").toString());
@@ -82,6 +96,32 @@ public class TutorPageActivity extends AppCompatActivity {
 
         lst=(ListView)findViewById(R.id.listview);
         lst.setAdapter(customListView);
+
+
+        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.d("TutorRegisterActivity", "onItemClick, student name is: " + names.get(position));
+                //Toast.makeText(TutorPageActivity.this, "you click on " + names.get(position), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(TutorPageActivity.this, AcceptTicketActivity.class);
+
+                intent.putExtra("tutorUser", passUser);
+                intent.putExtra(AcceptTicketActivity.STUDENT_ID_KEY, names.get(position));
+                intent.putExtra(AcceptTicketActivity.COMMENT_KEY, comment.get(position));
+                intent.putExtra(AcceptTicketActivity.TIME_PERIOD_KEY, time.get(position));
+                intent.putExtra(SubmitTicketActivity.COURSE_CODE_KEY, course.get(position));
+                intent.putExtra(StudentRegisterActivity.PREFERRED_NAME_KEY, names.get(position));
+                //intent.putExtra("ticket_status", ticket_status.get(position));
+                intent.putExtra("ticket_id", ticket_id.get(position));
+                intent.putExtra(SubmitTicketActivity.TUTOR_PREFERENCE_KEY, tutor_preference.get(position));
+
+                startActivity(intent);
+            }
+        });
+
+
 
 
         connectionB = findViewById(R.id.tutor_connection_btn);
