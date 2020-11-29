@@ -124,10 +124,6 @@ public class TutorPageActivity extends AppCompatActivity {
 
 
 
-
-
-
-
         connectionB = findViewById(R.id.tutor_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override

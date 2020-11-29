@@ -147,6 +147,8 @@ public class AcceptTicketActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Meeting Created.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AcceptTicketActivity.this, TutorConnectionActivity.class);
+                            startActivity(intent);
                         }
                     })
                             .addOnFailureListener(new OnFailureListener() {
@@ -158,10 +160,7 @@ public class AcceptTicketActivity extends AppCompatActivity {
 
 
 
-
-
-
-                    //update Ticket status
+                    //delete Ticket from database
                     DocumentReference dRTicket = fStore.collection("student_ticket").document(ticket_id);
                     dRTicket.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -172,9 +171,6 @@ public class AcceptTicketActivity extends AppCompatActivity {
                 }
             //}
         });
-
-
-
 
 
 
