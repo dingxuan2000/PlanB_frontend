@@ -37,6 +37,7 @@ public class StudentPageActivity extends AppCompatActivity {
     private SearchView searchView;
 
     private User user;
+    public static final  String TAG="StudentPageActivity";
 
     //create custom adapter
     ListView tutor_rank;
@@ -68,28 +69,16 @@ public class StudentPageActivity extends AppCompatActivity {
 
 
         studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
-        fStore.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fStore.collection("users").whereEqualTo("type", "tutor").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot doc : task.getResult()){
-                        DocumentReference docref = fStore.collection("users").document(doc.getId());
-                        docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot docc = task.getResult();
-                                    if (docc.exists()){
-                                        tutor_name.add(docc.getString("preferred_name"));
-                                        tutor_major.add(docc.getString("major"));
-                                        //tutor_grade.add(doc.get("course_code").toString());
-                                        tutor_grade.add(docc.getString("class_standing"));
-                                        tutor_rank.setAdapter(StudentcustomListView);
-                                        //Log.d("Document",docc.getString("preferred_name")+" "+doc.get("course_code").toString());
-                                    }
-                                }
-                            }
-                        });
+                        tutor_name.add(doc.getString("preferred_name"));
+                        tutor_major.add(doc.getString("major"));
+                        //tutor_grade.add(doc.get("course_code").toString());
+                        tutor_grade.add(doc.getString("class_standing"));
+                        tutor_rank.setAdapter(StudentcustomListView);
                     }
                 }
             }
@@ -153,30 +142,130 @@ public class StudentPageActivity extends AppCompatActivity {
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("userId:" + userId);
-                DocumentReference documentReference = fStore.collection(SubmitTicketActivity.TICKET_TABLE_KEY).document(userId);
-                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                System.out.println("Once we loginned in again, userId:" + userId);
+                fStore.collection("student_ticket").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
-                            DocumentSnapshot doc = task.getResult();
-                            //这个是可以的，但还要修改一下！！
-                            if(doc.exists()){
-                                Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
-                                Log.d("Document",doc.getString("user_id")+" "+doc.get("course_code").toString());
-                                Intent intent = new Intent(StudentPageActivity.this, StudentPageActivity.class);
-                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-                                startActivity(intent);
-                            }else {
-                                Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
-                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-                                startActivity(intent);
+                            int sizeDoc = 0;
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                sizeDoc++;
+
+                                //if document.getData()中的userId == login pass进来的userId,
+                                //then 提示错误，不能跳转页面
+                                //else: 可以跳转页面
+//                                Log.d(TAG,document.get("user id") + "=>" + document.getData());
+//                                if(document.get("user id").equals(userId)){
+//                                    System.out.println("the user has already had a ticket: " + document.get("user id"));
+//                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+
+//                                    Intent intent = new Intent(StudentPageActivity.this, StudentPageActivity.class);
+//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                    startActivity(intent);
+//                                    StudentPageActivity.this.finish(); //can't finish!!
+//
+                                    //不跳转页面，保留在本activity, 暂时不知道怎么实现？？
+                                //}
+
                             }
 
+                            int count = 0;
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                count++;
+                                System.out.println("sizeDoc: "+ sizeDoc);
+                                System.out.println("count: " + count);
+                                if(count == sizeDoc){
+                                    System.out.println("we have reached the end!");
+                                    //then check the last document's user id
+                                    if(!(document.get("user id").equals(userId))){
+                                        System.out.println("the user doesn't have a ticket!");
+                                        System.out.println("compare ids: " + document.get("user id"));
+                                        System.out.println(userId);
+                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                                        startActivity(intent);
+                                        break;
+                                    }else{
+                                        System.out.println("the user has already had a ticket: " + document.get("user id"));
+                                        Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                        break;
+
+                                    }
+                                }
+                                Log.d(TAG,document.get("user id") + "=>" + document.getData());
+                                if(!(document.get("user id").equals(userId))){
+                                    System.out.println(document.get("user id"));
+                                    System.out.println(userId);
+                                    continue;
+                                }
+                                if(document.get("user id").equals(userId)) {
+                                    System.out.println("the user has already had a ticket: " + document.get("user id"));
+                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+
+
+                            }
+                            //test
+//                            System.out.println("the user doesn't have a ticket: " + userId);
+//                            Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+//                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                            startActivity(intent);
+                        }else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
 
+//                String ticketId = preIntent.getStringExtra(SubmitTicketActivity.GET_TICKET_KEY);
+//                System.out.println("when we come back to homepage, ticketId: " + ticketId);
+//                DocumentReference documentReference = fStore.collection(SubmitTicketActivity.TICKET_TABLE_KEY).document(ticketId);
+
+
+
+//                fStore.collection("student_ticket").whereNotEqualTo("user id", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            for (QueryDocumentSnapshot doc : task.getResult()) {
+//                                if (doc.exists()) {
+//                                    Log.d("Document", doc.getString("user id") + " " + doc.get("course_code").toString());
+////                                  Log.e("tag", task.getException().toString());
+//                                    Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                    startActivity(intent);
+//                                }
+//                            }
+//                        }
+//                    }
+//                });
+//
+//                //我需要从firebase中的每个ticket中查找是否有这个userId
+//                fStore.collection("student_ticket").whereEqualTo("user id", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot doc : task.getResult()) {
+//                                //这个是可以的，但还要修改一下！！
+//
+//                                if (doc.exists()) {
+//                                    Log.d("Document", doc.getString("user id") + " " + doc.get("course_code").toString());
+////                                    Log.e("tag", task.getException().toString());
+//                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+//
+//                                    Intent intent = new Intent(StudentPageActivity.this, StudentPageActivity.class);
+////                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                    startActivity(intent);
+//                                    StudentPageActivity.this.finish();
+//                                }
+//
+//                            }
+//                        }
+//                    }
+//                });
+
+
+//
 //                    Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
 //                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
 //                    startActivity(intent);

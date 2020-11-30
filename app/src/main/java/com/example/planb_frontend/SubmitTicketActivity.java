@@ -39,6 +39,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
     public static final String TUTOR_PREFERENCE_KEY = "tutor_preference"; //online or offline
     public static final String TIME_PREFERENCE_KEY = "time_preference"; // choose time(1hr, 2hr..)
     public static final String COMMENT_KEY = "comment";
+//    public static final String GET_TICKET_KEY = "get_ticket";
 
 
     FirebaseFirestore fStore;
@@ -87,7 +88,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mImArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent preIntent = getIntent();
+//                            //after submit ticket sucessful, return to the student_mainPage
                 Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
                 startActivity(intent);
             }
         });
@@ -99,6 +103,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
                 // Initially, set the button to unclicked condition
                 if(play){
                     mTvOnlineTutor.setBackgroundResource(R.drawable.shape_green);
+                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
                     tutorPre = mTvOnlineTutor.getText().toString();
                 }
                 else {
@@ -114,6 +119,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(play){
                     mTvOfflineTutor.setBackgroundResource(R.drawable.shape_green);
+                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
                     tutorPre = mTvOfflineTutor.getText().toString();
                 }
                 else {
@@ -129,6 +135,9 @@ public class SubmitTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(play){
                     mTvThirtenMin.setBackgroundResource(R.drawable.shape_green);
+                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+
                     timePre = mTvThirtenMin.getText().toString();
                 }
                 else {
@@ -145,6 +154,9 @@ public class SubmitTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(play){
                     mTvOneHr.setBackgroundResource(R.drawable.shape_green);
+                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+
                     timePre = mTvOneHr.getText().toString();
                 }
                 else {
@@ -163,6 +175,9 @@ public class SubmitTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(play){
                     mTvTwoHrs.setBackgroundResource(R.drawable.shape_green);
+                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+
                     timePre = mTvTwoHrs.getText().toString();
                 }
                 else {
@@ -211,7 +226,9 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     String userId = user.getId();
                     System.out.println("userId:" + userId);
                     //error: java.lang.NullPointerException: Provided document path must not be null.
-                    DocumentReference documentReference = fStore.collection(TICKET_TABLE_KEY).document(userId);
+                    String ticketId = fStore.collection(TICKET_TABLE_KEY).document().getId();
+                    System.out.println("ticketId: " + ticketId);
+                    System.out.println("after document, ticketId: " + ticketId);
                     //in firebase, the collection name is student_ticket
                     Map<String, Object> student_ticket = new HashMap<>();
                     //save the current userId
@@ -223,15 +240,13 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     String status = "null";
                     student_ticket.put(STATUS_KEY, status);
 
-                    //不确定是要用addOnSuccessListener还是addOnCompleteListener!
-                    documentReference.set(student_ticket).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    fStore.collection(TICKET_TABLE_KEY).document(ticketId).set(student_ticket).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Submitted Ticket Successful", Toast.LENGTH_SHORT).show();
                             //needs to set status to be "submitted"
-                            Map<String, Object> student_ticket_updated = new HashMap<>();
-                            student_ticket_updated.put(STATUS_KEY, "submitted");
-                            documentReference.update(student_ticket_updated).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            student_ticket.put(STATUS_KEY, "submitted");
+                            fStore.collection(TICKET_TABLE_KEY).document(ticketId).update(student_ticket).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.d(TAG,"Updated the ticket");
@@ -242,9 +257,13 @@ public class SubmitTicketActivity extends AppCompatActivity {
                                     Log.e(TAG, "onFailure: ", e);
                                 }
                             });
-
+                            Intent preIntent = getIntent();
 //                            //after submit ticket sucessful, return to the student_mainPage
                             Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                            System.out.println("check in the addOnsuccess, ticketId: " + ticketId);
+//                            intent.putExtra(GET_TICKET_KEY, ticketId);
+
                             startActivity(intent);
                         }
 
