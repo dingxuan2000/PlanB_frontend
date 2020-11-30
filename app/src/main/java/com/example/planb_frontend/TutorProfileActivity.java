@@ -82,10 +82,31 @@ public class TutorProfileActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fAuth.signOut();
-                Intent intent = new Intent(TutorProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Successfully signed out", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(TutorProfileActivity.this);
+                builder.setIcon(R.drawable.warning);
+                builder.setTitle("Sign Out");
+                builder.setMessage("Are you sure that you want to sign out?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        fAuth.signOut();
+                        Intent intent = new Intent(TutorProfileActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "Successfully signed out", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        Toast.makeText(TutorProfileActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 

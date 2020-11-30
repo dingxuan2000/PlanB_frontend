@@ -47,12 +47,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="163dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -75,16 +75,81 @@
                 android:textSize="25sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView16"
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:id="@+id/meet">
+
+        <ImageView
+            android:id="@+id/meet_pic"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/student1" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="65dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/meet_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif"
+                android:text="Zihao Chen"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/meet_major"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape1"
+                    android:gravity="center"
+                    android:text="Computer Science"
+                    android:textColor="#FFFFFF" />
+
+
+                <TextView
+                    android:id="@+id/meet_course"
+                    android:layout_width="66dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/shape1"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="cse 110"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/meet_start_time"
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="start time: 9:10"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,28 +180,29 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="118dp"
-        android:orientation="horizontal">
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:id="@+id/upcoming">
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/upcoming_pic"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             app:srcCompat="@drawable/student1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tutor_name"
+                android:id="@+id/upcoming_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="sans-serif"
                 android:text="Zihao Chen"
                 android:textColor="#000000"
@@ -144,12 +210,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="135dp"
+                    android:id="@+id/upcoming_major"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape1"
                     android:gravity="center"
@@ -157,23 +223,19 @@
                     android:textColor="#FFFFFF" />
 
                 <TextView
-                    android:id="@+id/pd"
-                    android:layout_width="10dp"
-                    android:layout_height="24dp" />
-
-                <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/upcoming_course"
                     android:layout_width="66dp"
                     android:layout_height="24dp"
                     android:background="@drawable/shape1"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="cse 110"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/start_time"
-                android:layout_width="115dp"
+                android:id="@+id/upcoming_start_time"
+                android:layout_width="116dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
@@ -187,7 +249,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="301dp"
+        android:layout_height="299dp"
         android:gravity="center|bottom"
         android:orientation="horizontal">
 
