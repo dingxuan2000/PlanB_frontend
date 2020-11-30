@@ -47,6 +47,8 @@ public class TutorPageActivity extends AppCompatActivity {
     //ArrayList<String> ticket_status = new ArrayList<String>();
     ArrayList<String> tutor_preference = new ArrayList<String>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
@@ -59,7 +61,7 @@ public class TutorPageActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot doc : task.getResult()){
-                        DocumentReference docref = fStore.collection("users").document(doc.getId());
+                        DocumentReference docref = fStore.collection("users").document(doc.get("user id").toString());
                         docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -97,7 +99,6 @@ public class TutorPageActivity extends AppCompatActivity {
         lst=(ListView)findViewById(R.id.listview);
         lst.setAdapter(customListView);
 
-
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -120,8 +121,6 @@ public class TutorPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
 
         connectionB = findViewById(R.id.tutor_connection_btn);
