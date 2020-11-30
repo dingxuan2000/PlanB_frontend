@@ -87,6 +87,7 @@
             android:layout_weight="1" />
 
         //changed to EditText
+
         <TextView
             android:id="@+id/meeting_preference"
             android:layout_width="wrap_content"
@@ -130,6 +131,13 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/empty5"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+
+        <TextView
             android:id="@+id/Time_Slot"
             android:layout_width="114dp"
             android:layout_height="35dp"
@@ -145,13 +153,6 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/empty5"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-
-        <TextView
             android:id="@+id/empty7"
             android:layout_width="20dp"
             android:layout_height="match_parent"
@@ -162,7 +163,7 @@
     <TextView
         android:id="@+id/comment"
         android:layout_width="331dp"
-        android:layout_height="50dp"
+        android:layout_height="113dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/shape1"
@@ -175,23 +176,21 @@
         android:padding="5dp"
         android:textSize="10sp" />
 
-
-
     <Button
         android:id="@+id/AcceptTicket"
         android:layout_width="331dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/shape1"
         android:fontFamily="@font/poppins_bold"
         android:hint="Accept Ticket"
+        android:letterSpacing="0.1"
         android:maxLines="1"
         android:padding="5dp"
         android:textAlignment="center"
         android:textColor="#555555"
-        android:textSize="16sp"
-        android:letterSpacing="0.1"/>
+        android:textSize="16sp" />
 
 
 </LinearLayout>
