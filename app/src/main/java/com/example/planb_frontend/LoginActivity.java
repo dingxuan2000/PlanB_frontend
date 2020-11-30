@@ -22,8 +22,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.net.URLEncoder;
-
 import com.example.planb_backend.User;
 
 import org.w3c.dom.Text;
@@ -91,8 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                             Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                         }
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -134,15 +131,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                             }
                                         });
-//                                        Intent intent = null;
-//                                        if (user.getType().equals("tutor")) {
-//                                            intent = new Intent(getApplicationContext(), TutorPageActivity.class);
-//                                        } else {
-//                                            intent = new Intent(getApplicationContext(), StudentPageActivity.class);
-//                                        }
-//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-//                                        startActivity(intent);
-//                                        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -150,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 }
 

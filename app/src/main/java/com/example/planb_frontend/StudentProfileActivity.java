@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,10 +16,14 @@ public class StudentProfileActivity extends AppCompatActivity {
     private ImageView mainB;
     private ImageView logout;
 
+    private FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_student);
+
+        fAuth = FirebaseAuth.getInstance();
 
         connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
@@ -49,11 +56,12 @@ public class StudentProfileActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fAuth.signOut();
                 Intent intent = new Intent(StudentProfileActivity.this, LoginActivity.class);
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Successfully signed out", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
 

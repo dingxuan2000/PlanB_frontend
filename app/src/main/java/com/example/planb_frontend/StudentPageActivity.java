@@ -22,8 +22,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+
+import static com.example.planb_backend.service.FCMService.FCM_TAG;
 
 public class StudentPageActivity extends AppCompatActivity {
 
@@ -44,6 +47,25 @@ public class StudentPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent preIntent = getIntent();
+        //if the user already has a ticket in firebase, then stop jump to the SubmitTicket page.
+        //1.check if the userId has already in student_collection
+        user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+        String userId = user.getId();
+
+        /**
+         * Subscribe to current user's message channel
+         * */
+        FirebaseMessaging.getInstance().subscribeToTopic("topic-" + userId)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = task.isSuccessful() ? getString(R.string.subscription_success) : getString(R.string.subscription_failure);
+                        Log.d(FCM_TAG, msg);
+                    }
+                });
+
 
         studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
         fStore.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -130,11 +152,6 @@ public class StudentPageActivity extends AppCompatActivity {
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent preIntent = getIntent();
-                //if the user already has a ticket in firebase, then stop jump to the SubmitTicket page.
-                //1.check if the userId has already in student_collection
-                user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-                String userId = user.getId();
                 System.out.println("userId:" + userId);
                 DocumentReference documentReference = fStore.collection(SubmitTicketActivity.TICKET_TABLE_KEY).document(userId);
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

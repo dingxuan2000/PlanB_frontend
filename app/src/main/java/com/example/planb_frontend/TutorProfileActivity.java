@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class TutorProfileActivity extends AppCompatActivity {
     private ImageView connectionB;
@@ -17,10 +18,14 @@ public class TutorProfileActivity extends AppCompatActivity {
     private ImageView mainB;
     private ImageView logout;
 
+    private FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_tutor);
+
+        fAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
         User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
@@ -57,8 +62,10 @@ public class TutorProfileActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fAuth.signOut();
                 Intent intent = new Intent(TutorProfileActivity.this, LoginActivity.class);
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Successfully signed out", Toast.LENGTH_SHORT).show();
             }
         });
     }
