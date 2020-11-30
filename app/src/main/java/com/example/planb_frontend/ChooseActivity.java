@@ -3,14 +3,19 @@ package com.example.planb_frontend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.w3c.dom.Text;
 
 public class ChooseActivity extends AppCompatActivity {
 
     private ImageButton studentChooseBtn;
     private ImageButton tutorChooseBtn;
+    private Button chooseLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,15 @@ public class ChooseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseActivity.this, TutorRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        chooseLogin = findViewById(R.id.choose_login);
+        chooseLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChooseActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

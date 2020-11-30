@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.planb_backend.task.HttpRequestTask;
+
 public class getStartedActivity extends AppCompatActivity {
 
     private Button getStartedBtn;

@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class TutorProfileActivity extends AppCompatActivity {
     private ImageView connectionB;
@@ -17,14 +19,35 @@ public class TutorProfileActivity extends AppCompatActivity {
     private ImageView mainB;
     private ImageView logout;
 
+    private FirebaseAuth fAuth;
+
+    private TextView studentName;
+    private TextView gradeStanding;
+    private TextView major;
+    private TextView phoneNumber;
+    private TextView email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_tutor);
 
+        fAuth = FirebaseAuth.getInstance();
+
         Intent intent = getIntent();
         User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
+
+        studentName = findViewById(R.id.tutor_name);
+        studentName.setText(passUser.getPreferred_name());
+        gradeStanding = findViewById(R.id.grade_standing);
+        gradeStanding.setText(passUser.getClass_standing());
+        major = findViewById(R.id.major);
+        major.setText(passUser.getMajor());
+        phoneNumber = findViewById(R.id.phone_number);
+        phoneNumber.setText(passUser.getPhone_number());
+        email = findViewById(R.id.email);
+        email.setText(passUser.getEmail());
 
         connectionB = findViewById(R.id.tutor_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +80,10 @@ public class TutorProfileActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fAuth.signOut();
                 Intent intent = new Intent(TutorProfileActivity.this, LoginActivity.class);
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Successfully signed out", Toast.LENGTH_SHORT).show();
             }
         });
     }
