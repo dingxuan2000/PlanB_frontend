@@ -145,6 +145,7 @@ public class StudentPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentPageActivity.this, StudentProfileActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });

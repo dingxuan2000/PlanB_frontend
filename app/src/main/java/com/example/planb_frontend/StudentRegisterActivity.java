@@ -45,7 +45,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     //声明控件
     private Button mBtnStuRegister;
-    private TextView mBtnStuLogin;
     private EditText mEtPassword;
     private EditText mEtSchoolEmail;
     private EditText mEtPreferredName;
@@ -82,7 +81,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
         mEtGrade = findViewById(R.id.stu_grade);
         mEtPhoneNum = findViewById(R.id.stu_phone_number);
         mBtnStuRegister = findViewById(R.id.stu_register);
-        mBtnStuLogin = findViewById(R.id.student_login_link);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.majors, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mEtMajor.setAdapter(adapter);
@@ -127,8 +125,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 String password = mEtPassword.getText().toString();
                 String schoolEmail = mEtSchoolEmail.getText().toString();
                 String preferName = mEtPreferredName.getText().toString();
-                //String major = mEtMajor.getText().toString();
-                //String grade = mEtGrade.getText().toString();
                 String phoneNum = mEtPhoneNum.getText().toString();
 
 
@@ -139,12 +135,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(preferName)) {
                     mEtPreferredName.setError("Please enter preferred name");
                 }
-//                else if(TextUtils.isEmpty(major)){
-//                    mEtMajor.setError("Please enter major");
-//                }
-//                else if (TextUtils.isEmpty(grade)) {
-//                    mEtGrade.setError("Please enter grade");
-//                }
                 else if (TextUtils.isEmpty(phoneNum)) {
                     mEtPhoneNum.setError("Please enter phone number");
                 } else {
@@ -192,15 +182,5 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 }
             }
         });
-//        mBtnStuLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (fAuth.getCurrentUser() != null) {
-//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//        });
     }
 }
