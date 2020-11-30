@@ -69,28 +69,16 @@ public class StudentPageActivity extends AppCompatActivity {
 
 
         studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
-        fStore.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fStore.collection("users").whereEqualTo("type", "tutor").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot doc : task.getResult()){
-                        DocumentReference docref = fStore.collection("users").document(doc.getId());
-                        docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot docc = task.getResult();
-                                    if (docc.exists()){
-                                        tutor_name.add(docc.getString("preferred_name"));
-                                        tutor_major.add(docc.getString("major"));
-                                        //tutor_grade.add(doc.get("course_code").toString());
-                                        tutor_grade.add(docc.getString("class_standing"));
-                                        tutor_rank.setAdapter(StudentcustomListView);
-                                        //Log.d("Document",docc.getString("preferred_name")+" "+doc.get("course_code").toString());
-                                    }
-                                }
-                            }
-                        });
+                        tutor_name.add(doc.getString("preferred_name"));
+                        tutor_major.add(doc.getString("major"));
+                        //tutor_grade.add(doc.get("course_code").toString());
+                        tutor_grade.add(doc.getString("class_standing"));
+                        tutor_rank.setAdapter(StudentcustomListView);
                     }
                 }
             }

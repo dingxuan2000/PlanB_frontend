@@ -1,5 +1,7 @@
 package com.example.planb_frontend;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -77,14 +79,36 @@ public class StudentProfileActivity extends AppCompatActivity {
             }
         });
 
+        //Logout verify box
         logout = findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fAuth.signOut();
-                Intent intent = new Intent(StudentProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Successfully signed out", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(StudentProfileActivity.this);
+                builder.setIcon(R.drawable.warning);
+                builder.setTitle("Sign Out");
+                builder.setMessage("Are you sure that you want to sign out?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        fAuth.signOut();
+                        Intent intent = new Intent(StudentProfileActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "Successfully signed out", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        Toast.makeText(StudentProfileActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }
