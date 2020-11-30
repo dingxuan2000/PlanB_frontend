@@ -25,6 +25,7 @@
     <string name="subscription_success">Successfully subscribed</string>
     <string name="subscription_failure">Subscribed failed</string>
     <string-array name="courses">
+        <item></item>
         <item>AAS 10 </item>
         <item>AAS 500</item>
         <item>ANTH 1</item>
