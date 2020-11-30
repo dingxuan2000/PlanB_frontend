@@ -139,7 +139,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
-            android:text="1 Hours"
+            android:text="1 Hour"
             android:textColor="#555555"
             android:textSize="16sp"
             android:clickable="true"/>
