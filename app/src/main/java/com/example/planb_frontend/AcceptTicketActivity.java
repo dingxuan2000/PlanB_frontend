@@ -137,6 +137,7 @@ public class AcceptTicketActivity extends AppCompatActivity {
 
                     DocumentReference dRTicket = fStore.collection("student_ticket").document(ticket_id);
 
+
                     documentReference.set(meetings)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
