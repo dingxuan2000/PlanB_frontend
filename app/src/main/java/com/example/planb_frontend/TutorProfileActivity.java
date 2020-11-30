@@ -12,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TutorProfileActivity extends AppCompatActivity {
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView mainB;
     private ImageView logout;
+    private ImageView courseadd;
 
     private FirebaseAuth fAuth;
 
@@ -26,6 +28,7 @@ public class TutorProfileActivity extends AppCompatActivity {
     private TextView major;
     private TextView phoneNumber;
     private TextView email;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +52,22 @@ public class TutorProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         email.setText(passUser.getEmail());
 
+        courseadd = findViewById(R.id.courseadd);
+        courseadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addCourse = new Intent(getApplicationContext(),CourseActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
+                startActivity(addCourse);
+            }
+        });
+
         connectionB = findViewById(R.id.tutor_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorProfileActivity.this, TutorConnectionActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -63,6 +77,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorProfileActivity.this, TutorHistoryActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });

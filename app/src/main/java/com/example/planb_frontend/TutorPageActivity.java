@@ -116,7 +116,7 @@ public class TutorPageActivity extends AppCompatActivity {
                 //intent.putExtra("ticket_status", ticket_status.get(position));
                 intent.putExtra("ticket_id", ticket_id.get(position));
                 intent.putExtra(SubmitTicketActivity.TUTOR_PREFERENCE_KEY, tutor_preference.get(position));
-
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -129,6 +129,7 @@ public class TutorPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorPageActivity.this, TutorConnectionActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -138,6 +139,7 @@ public class TutorPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorPageActivity.this, TutorHistoryActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -147,6 +149,7 @@ public class TutorPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorPageActivity.this, TutorProfileActivity.class);
+                Toast.makeText(getApplicationContext(),"PAGE: "+passUser.toString(),Toast.LENGTH_SHORT).show();
                 intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
