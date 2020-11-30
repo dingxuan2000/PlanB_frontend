@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run(){
-                Intent mainToStart = new Intent(MainActivity.this, LoginActivity.class);
+                Intent mainToStart = new Intent(MainActivity.this, getStartedActivity.class);
                 MainActivity.this.startActivity(mainToStart);
                 MainActivity.this.finish();
             }

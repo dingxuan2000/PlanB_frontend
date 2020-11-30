@@ -123,12 +123,15 @@ public class LoginActivity extends AppCompatActivity {
                                                 Intent intent = null;
                                                 if (user.getType().equals("tutor")) {
                                                     intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                                                    startActivity(intent);
+                                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                                 } else {
                                                     intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                                                    startActivity(intent);
+                                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                                 }
-                                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                                                startActivity(intent);
-                                                Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
