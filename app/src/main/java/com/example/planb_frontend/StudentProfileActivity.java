@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.planb_backend.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     private ImageView historyB;
     private ImageView mainB;
     private ImageView logout;
+    private User user;
 
     private FirebaseAuth fAuth;
 
@@ -22,6 +24,10 @@ public class StudentProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_student);
+
+        Intent prevIntent = getIntent();
+        user = (User) prevIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+
 
         fAuth = FirebaseAuth.getInstance();
 
