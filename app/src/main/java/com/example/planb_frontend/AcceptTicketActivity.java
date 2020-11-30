@@ -97,7 +97,7 @@ public class AcceptTicketActivity extends AppCompatActivity {
 
         //initialize components
         mEtIllustrate =  (TextView) findViewById(R.id.illustrate);
-        mEtCourseCode = (EditText) findViewById(R.id.search);
+        mEtCourseCode = (TextView) findViewById(R.id.search);
         mBtnAccept = (Button) findViewById(R.id.AcceptTicket);
         mEtComment = (TextView) findViewById(R.id.comment);
         mEtMeetingPreference = (TextView) findViewById(R.id.meeting_preference);
