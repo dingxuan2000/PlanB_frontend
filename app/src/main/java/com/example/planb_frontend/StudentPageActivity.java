@@ -54,6 +54,7 @@ public class StudentPageActivity extends AppCompatActivity {
         //1.check if the userId has already in student_collection
         user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         String userId = user.getId();
+        System.out.println("once we entered homepage, the userId: "+ userId);
 
         /**
          * Subscribe to current user's message channel
@@ -174,8 +175,20 @@ public class StudentPageActivity extends AppCompatActivity {
                                 count++;
                                 System.out.println("sizeDoc: "+ sizeDoc);
                                 System.out.println("count: " + count);
+                                System.out.println("document.get(user id): " + document.get("user id"));
+                                //if document.get("user is") is null, then allows the user to submit ticket!
+                                if(document.get("user id") == null){
+                                    System.out.println("the user doesn't have a ticket2.0!");
+                                    System.out.println("compare ids: " + document.get("user id"));
+                                    System.out.println(userId);
+                                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                                    startActivity(intent);
+                                    break;
+                                }
                                 if(count == sizeDoc){
                                     System.out.println("we have reached the end!");
+                                    System.out.println("Passed in: " + userId);
                                     //then check the last document's user id
                                     if(!(document.get("user id").equals(userId))){
                                         System.out.println("the user doesn't have a ticket!");
