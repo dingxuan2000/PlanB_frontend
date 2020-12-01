@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="right"
-            android:text="LOGIN IN"
+            android:text="LOGIN"
             android:textColor="#8BC34A"
             android:background="@android:color/transparent"/>
     </LinearLayout>
