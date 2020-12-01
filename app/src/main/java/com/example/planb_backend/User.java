@@ -19,10 +19,12 @@ public class User implements Serializable {
 
     private String type;
 
+    private Integer rating;
+
     public User() {
     }
 
-    public User(String email, String preferred_name, String major, String class_standing, String phone_number, String id, String type) {
+    public User(String email, String preferred_name, String major, String class_standing, String phone_number, String id, String type, Integer rating) {
         this.email = email;
         this.preferred_name = preferred_name;
         this.major = major;
@@ -30,6 +32,7 @@ public class User implements Serializable {
         this.phone_number = phone_number;
         this.id = id;
         this.type = type;
+        this.rating = rating;
     }
 
     public String getId() {
@@ -86,6 +89,14 @@ public class User implements Serializable {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     @Override
