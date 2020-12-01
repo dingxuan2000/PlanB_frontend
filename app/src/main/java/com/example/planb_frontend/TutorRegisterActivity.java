@@ -35,6 +35,13 @@ import static com.example.planb_frontend.StudentRegisterActivity.USER_TYPE_KEY;
 
 public class TutorRegisterActivity extends AppCompatActivity{
 
+    public static final String TUTOR_RATING_KEY = "rating";
+    public static final String PREFERRED_NAME_KEY = "preferred_name";
+    public static final String MAJOR_KEY = "major";
+    public static final String CLASS_STANDING_KEY = "class_standing";
+    public static final String PHONE_NUMBER_KEY = "phone_number";
+    public static final String USERS_TABLE_KEY = "users";
+
     //声明控件
     private Button mBtnTutorRegister;
     private Button mBtnTutorLogin;
@@ -50,12 +57,6 @@ public class TutorRegisterActivity extends AppCompatActivity{
 
     private String major;
     private String grade;
-
-    public static final String PREFERRED_NAME_KEY = "preferred_name";
-    public static final String MAJOR_KEY = "major";
-    public static final String CLASS_STANDING_KEY = "class_standing";
-    public static final String PHONE_NUMBER_KEY = "phone_number";
-    public static final String USERS_TABLE_KEY = "users";
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -164,6 +165,7 @@ public class TutorRegisterActivity extends AppCompatActivity{
                                         user.put(PHONE_NUMBER_KEY, phoneNum);
                                         user.put(USER_TYPE_KEY,"tutor");
                                         user.put(USER_ID_KEY,userId);
+                                        user.put(TUTOR_RATING_KEY,5);
                                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -178,6 +180,7 @@ public class TutorRegisterActivity extends AppCompatActivity{
                                         newUser.setPreferred_name(preferName);
                                         newUser.setType("tutor");
                                         newUser.setId(userId);
+                                        newUser.setRating(5);
                                         Intent intent = new Intent(getApplicationContext(), TutorPageActivity.class);
                                         intent.putExtra(GET_USER_KEY,newUser);
                                         Toast.makeText(getApplicationContext(), newUser.toString(), Toast.LENGTH_LONG).show();

@@ -58,6 +58,7 @@ public class StudentPageActivity extends AppCompatActivity {
         String userId = user.getId();
         System.out.println("once we entered homepage, the userId: "+ userId);
 
+//        Log.d("DEBUG", userId);
         /**
          * Subscribe to current user's message channel
          * */
@@ -72,10 +73,12 @@ public class StudentPageActivity extends AppCompatActivity {
 
 
         studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
-        fStore.collection("users").whereEqualTo("type", "tutor")
+
+        fStore.collection("users")
+                .whereEqualTo("type", "tutor")
                 .orderBy("rating", Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -121,6 +124,7 @@ public class StudentPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentPageActivity.this, StudentConnectionActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });
@@ -130,6 +134,7 @@ public class StudentPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentPageActivity.this, StudentHistoryActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });

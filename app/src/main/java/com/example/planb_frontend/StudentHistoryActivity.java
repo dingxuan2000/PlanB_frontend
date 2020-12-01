@@ -15,7 +15,7 @@ public class StudentHistoryActivity extends AppCompatActivity {
     private ImageView mainB;
     private ImageView connectionB;
     private ImageView profileB;
-    //private User user;
+    private User user;
 
     ListView lst;
     String[] names={"Caiwei Zhao", "Xuan Ding"};
@@ -28,19 +28,20 @@ public class StudentHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_student);
 
-//        Intent prevIntent = getIntent();
-//        user = (User) prevIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
 
         lst=(ListView)findViewById(R.id.listview);
         StudentHistoryCustomListView customListView=new StudentHistoryCustomListView(this, names, time, course, tutor_imgid);
         lst.setAdapter(customListView);
+
+        Intent prevIntent = getIntent();
+        user = (User) prevIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
 
         mainB = findViewById(R.id.student_main_btn);
         mainB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentHistoryActivity.this, StudentPageActivity.class);
-                //intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });
@@ -50,7 +51,7 @@ public class StudentHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentHistoryActivity.this, StudentConnectionActivity.class);
-                //intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });
@@ -60,7 +61,7 @@ public class StudentHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentHistoryActivity.this, StudentProfileActivity.class);
-                //intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });
