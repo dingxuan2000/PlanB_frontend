@@ -82,18 +82,16 @@
 
         <TextView
             android:id="@+id/grade_standing"
-            android:layout_width="120dp"
+            android:layout_width="205dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:layout_weight="1"
             android:gravity="center"
             android:textColor="#000000" />
 
         <TextView
             android:id="@+id/major"
-            android:layout_width="wrap_content"
+            android:layout_width="187dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center"
             android:textColor="#000000" />
 
@@ -136,11 +134,10 @@
             app:srcCompat="@drawable/emailpic" />
 
         <TextView
-            android:id="@+id/phone_number"
-            android:layout_width="140dp"
-            android:layout_height="match_parent"
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="(123)-456-7890"
             android:textColor="#000000"
             android:textSize="18sp" />
     </LinearLayout>
@@ -161,11 +158,10 @@
             app:srcCompat="@drawable/phonepic" />
 
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1234@ucsd.edu"
             android:textColor="#000000"
             android:textSize="18sp" />
     </LinearLayout>
@@ -183,7 +179,7 @@
     <LinearLayout
         android:id="@+id/recent_tutor_pic"
         android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_height="170dp"
         android:orientation="horizontal"></LinearLayout>
 
 
