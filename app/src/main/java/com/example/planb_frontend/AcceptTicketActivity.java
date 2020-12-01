@@ -6,6 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+
 import com.example.planb_backend.task.HttpRequestTask;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,6 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import android.content.Intent;
+
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -53,10 +64,10 @@ public class AcceptTicketActivity extends AppCompatActivity {
     private String student_id;
     private String tutor_id;
     private String student_name;
-   // private String major;
+    // private String major;
     private String time;   //meeting time slot
     private String course;
-   // private String ticket_status;
+    // private String ticket_status;
     private String ticket_id;
     private String comment;
     private String meeting_preference;    // online or offline meeting
@@ -86,7 +97,7 @@ public class AcceptTicketActivity extends AppCompatActivity {
 
         //initialize components
         mEtIllustrate =  (TextView) findViewById(R.id.illustrate);
-        mEtCourseCode = (EditText) findViewById(R.id.search);
+        mEtCourseCode = (TextView) findViewById(R.id.search);
         mBtnAccept = (Button) findViewById(R.id.AcceptTicket);
         mEtComment = (TextView) findViewById(R.id.comment);
         mEtMeetingPreference = (TextView) findViewById(R.id.meeting_preference);
@@ -96,6 +107,8 @@ public class AcceptTicketActivity extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
 
 
+
+        //加Tutor和student手机号
         //get fields from TutorPageActivity with getExtra()
         Intent intent = getIntent();
         tutorUser = (User)intent.getSerializableExtra("tutorUser");
@@ -105,9 +118,9 @@ public class AcceptTicketActivity extends AppCompatActivity {
         comment = intent.getStringExtra(COMMENT_KEY);
         course = intent.getStringExtra(SubmitTicketActivity.COURSE_CODE_KEY);
         student_name = intent.getStringExtra(StudentRegisterActivity.PREFERRED_NAME_KEY);
-        //ticket_status = intent.getStringExtra("ticket_status");
         ticket_id = intent.getStringExtra("ticket_id");
         meeting_preference = intent.getStringExtra(SubmitTicketActivity.TUTOR_PREFERENCE_KEY);
+
 
 
         //Fill components with new Info
@@ -117,64 +130,80 @@ public class AcceptTicketActivity extends AppCompatActivity {
         mEtComment.setText(comment);
         mEtTimeSlot.setText(time);
 
+
         //on clicking the Accept bottom, create meeting
         mBtnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    fStore = FirebaseFirestore.getInstance();
-                    DocumentReference documentReference = fStore.collection(MEETING_TABLE_KEY).document();
-                    meeting_id = documentReference.getId();
+                fStore = FirebaseFirestore.getInstance();
+                DocumentReference documentReference = fStore.collection(MEETING_TABLE_KEY).document();
+                meeting_id = documentReference.getId();
 
-                    //Store fields of meeting to Firebase, under collection "meetings"
-                    Map<String, Object> meetings = new HashMap<>();
-                    meetings.put(STATUS_KEY, meetingUninitiated);
-                    meetings.put(COMMENT_KEY, comment);
-                    meetings.put(TIME_PERIOD_KEY, time);
-                    meetings.put(STUDENT_ID_KEY, student_id);
-                    meetings.put(TUTOR_ID_KEY, tutor_id);
-                    meetings.put(COURSE_KEY, course);
-
-                    DocumentReference dRTicket = fStore.collection("student_ticket").document(ticket_id);
+                //Store fields of meeting to Firebase, under collection "meetings"
+                Map<String, Object> meetings = new HashMap<>();
+                meetings.put(STATUS_KEY, meetingUninitiated);
+                meetings.put(COMMENT_KEY, comment);
+                meetings.put(TIME_PERIOD_KEY, time);
+                meetings.put(STUDENT_ID_KEY, student_id);
+                meetings.put(TUTOR_ID_KEY, tutor_id);
+                meetings.put(COURSE_KEY, course);
 
 
-                    documentReference.set(meetings)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(), "Meeting Created.", Toast.LENGTH_SHORT).show();
-                            /**
-                             * If successfully created meeting, send notification and delete ticket
-                             * */
-                            dRTicket.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot dr) {
-                                    if (dr.exists()) {
-                                        new HttpRequestTask().execute(dr.getString(StudentRegisterActivity.USER_ID_KEY), tutor_id, tutorUser.getPreferred_name());
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
-                                    }
+                DocumentReference dRTicket = fStore.collection("student_ticket").document(ticket_id);
 
-                                    dRTicket.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("AcceptTicket", "Ticket is accepted and deleted! ");
+
+                documentReference.set(meetings)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "Meeting Created.", Toast.LENGTH_SHORT).show();
+
+                                /**
+                                 * If successfully created meeting, send notification and delete ticket
+                                 * */
+                                dRTicket.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot dr) {
+                                        if (dr.exists()) {
+                                            new HttpRequestTask().execute(dr.getString(StudentRegisterActivity.USER_ID_KEY), tutor_id, tutorUser.getPreferred_name());
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
                                         }
-                                    });
-                                }
-                            });
 
-                            Intent intent = new Intent(AcceptTicketActivity.this, TutorConnectionActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d("AcceptTicket", "Error creating meeting document", e);
-                                }
-                            });
-                }
+                                        dRTicket.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("AcceptTicket", "Ticket is accepted and deleted! ");
+                                            }
+                                        });
+                                    }
+                                });
+
+
+                                Intent intent = new Intent(AcceptTicketActivity.this, TutorConnectionActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("AcceptTicket", "Error creating meeting document", e);
+                            }
+                        });
+
+
+
+                //delete Ticket from database
+                DocumentReference ticketRef = fStore.collection("student_ticket").document(ticket_id);
+                ticketRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("AcceptTicket", "Ticket is accepted and deleted! ");
+                    }
+                });
+
+            }
             //}
         });
 

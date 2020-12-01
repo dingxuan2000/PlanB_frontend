@@ -57,6 +57,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentProfileActivity.this, StudentConnectionActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });
@@ -66,6 +67,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentProfileActivity.this, StudentHistoryActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });
@@ -75,6 +77,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentProfileActivity.this, StudentPageActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,user);
                 startActivity(intent);
             }
         });
