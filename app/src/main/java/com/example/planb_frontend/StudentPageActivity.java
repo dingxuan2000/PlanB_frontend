@@ -58,6 +58,7 @@ public class StudentPageActivity extends AppCompatActivity {
         String userId = user.getId();
         System.out.println("once we entered homepage, the userId: "+ userId);
 
+//        Log.d("DEBUG", userId);
         /**
          * Subscribe to current user's message channel
          * */
