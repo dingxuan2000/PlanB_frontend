@@ -71,6 +71,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorProfileActivity.this, TutorConnectionActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -80,6 +81,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorProfileActivity.this, TutorHistoryActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -89,6 +91,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorProfileActivity.this, TutorPageActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });

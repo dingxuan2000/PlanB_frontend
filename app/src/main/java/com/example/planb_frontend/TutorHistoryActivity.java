@@ -8,6 +8,8 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.planb_backend.User;
+
 public class TutorHistoryActivity extends AppCompatActivity {
 
     private ImageView mainB;
@@ -25,6 +27,9 @@ public class TutorHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_tutor);
 
+        Intent intent = getIntent();
+        User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+
         lst=(ListView)findViewById(R.id.listview);
         TutorHistoryCustomListView customListView=new TutorHistoryCustomListView(this, names, time, course, tutor_imgid);
         lst.setAdapter(customListView);
@@ -34,6 +39,7 @@ public class TutorHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorHistoryActivity.this, TutorPageActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -43,6 +49,7 @@ public class TutorHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorHistoryActivity.this, TutorConnectionActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -52,6 +59,7 @@ public class TutorHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorHistoryActivity.this, TutorProfileActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });

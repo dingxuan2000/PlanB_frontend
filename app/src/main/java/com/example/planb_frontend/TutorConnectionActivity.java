@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.planb_backend.User;
+
 public class TutorConnectionActivity extends AppCompatActivity {
 
     private ImageView mainB;
@@ -25,11 +27,15 @@ public class TutorConnectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connection_tutor);
 
+        Intent intent = getIntent();
+        User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+
         mainB = findViewById(R.id.tutor_main_btn);
         mainB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorConnectionActivity.this, TutorPageActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -39,6 +45,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorConnectionActivity.this, TutorHistoryActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
@@ -48,6 +55,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TutorConnectionActivity.this, TutorProfileActivity.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
             }
         });
