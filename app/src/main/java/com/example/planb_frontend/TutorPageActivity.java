@@ -55,6 +55,8 @@ public class TutorPageActivity extends AppCompatActivity {
         User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
 
+//        Log.d("DEBUG", passUser.getId());
+
         CustomListView customListView=new CustomListView(this, names, time, major, course);
         fStore.collection("student_ticket").whereEqualTo("status", "submitted").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

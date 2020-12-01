@@ -116,21 +116,24 @@ public class LoginActivity extends AppCompatActivity {
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 if (documentSnapshot.exists()) {
                                                     user = documentSnapshot.toObject(User.class);
+                                                    assert user != null;
+                                                    user.setEmail(fAuth.getCurrentUser().getEmail());
+                                                    user.setId(userId);
+                                                    Intent intent = null;
+                                                    if (user.getType().equals("tutor")) {
+                                                        intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                                                        startActivity(intent);
+                                                        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                                                        startActivity(intent);
+                                                        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                                    }
                                                     Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                                                 } else {
                                                     Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
-                                                }
-                                                Intent intent = null;
-                                                if (user.getType().equals("tutor")) {
-                                                    intent = new Intent(getApplicationContext(), TutorPageActivity.class);
-                                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                                                    startActivity(intent);
-                                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    intent = new Intent(getApplicationContext(), StudentPageActivity.class);
-                                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                                                    startActivity(intent);
-                                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
