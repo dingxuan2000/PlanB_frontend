@@ -171,7 +171,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center|left"
-                android:text="Upcoimg"
+                android:text="Upcoming"
                 android:textColor="#373535"
                 android:textSize="25sp" />
         </LinearLayout>
