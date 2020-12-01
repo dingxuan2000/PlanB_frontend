@@ -40,7 +40,7 @@ public class TutorProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-        Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "AT PROFILE"+passUser.toString(), Toast.LENGTH_SHORT).show();
 
         studentName = findViewById(R.id.tutor_name);
         studentName.setText(passUser.getPreferred_name());
@@ -57,8 +57,11 @@ public class TutorProfileActivity extends AppCompatActivity {
         courseadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addCourse = new Intent(getApplicationContext(),CourseActivity.class);
-                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
+                Intent previousIntent = getIntent();
+                User addCourseUser = (User)previousIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+                Toast.makeText(getApplicationContext(),"LEAVING PROFILE: "+addCourseUser.toString(),Toast.LENGTH_LONG).show();
+                Intent addCourse = new Intent(TutorProfileActivity.this,AddCourses.class);
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,addCourseUser);
                 startActivity(addCourse);
             }
         });

@@ -147,9 +147,11 @@ public class TutorPageActivity extends AppCompatActivity {
         profileB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent previousIntent = getIntent();
+                User userProfile = (User) previousIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
                 Intent intent = new Intent(TutorPageActivity.this, TutorProfileActivity.class);
-                Toast.makeText(getApplicationContext(),"PAGE: "+passUser.toString(),Toast.LENGTH_SHORT).show();
-                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
+                Toast.makeText(getApplicationContext(),"PAGE: "+userProfile.toString(),Toast.LENGTH_SHORT).show();
+                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,userProfile);
                 startActivity(intent);
             }
         });
