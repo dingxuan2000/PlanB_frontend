@@ -25,12 +25,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+
 import java.util.ArrayList;
 
 public class TutorPageActivity extends AppCompatActivity {
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView profileB;
+
+
     ListView listView;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
@@ -49,11 +52,13 @@ public class TutorPageActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
+
 
         CustomListView customListView=new CustomListView(this, names, time, major, course);
         fStore.collection("student_ticket").whereEqualTo("status", "submitted").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

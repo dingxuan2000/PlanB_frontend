@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -71,7 +72,10 @@ public class StudentPageActivity extends AppCompatActivity {
 
 
         studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
-        fStore.collection("users").whereEqualTo("type", "tutor").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fStore.collection("users").whereEqualTo("type", "tutor")
+                .orderBy("rating", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -144,6 +148,8 @@ public class StudentPageActivity extends AppCompatActivity {
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent lastIntent = getIntent();
+                user = (User)lastIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
                 System.out.println("Once we loginned in again, userId:" + userId);
                 fStore.collection("student_ticket").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -152,23 +158,6 @@ public class StudentPageActivity extends AppCompatActivity {
                             int sizeDoc = 0;
                             for(QueryDocumentSnapshot document: task.getResult()){
                                 sizeDoc++;
-
-                                //if document.getData()中的userId == login pass进来的userId,
-                                //then 提示错误，不能跳转页面
-                                //else: 可以跳转页面
-//                                Log.d(TAG,document.get("user id") + "=>" + document.getData());
-//                                if(document.get("user id").equals(userId)){
-//                                    System.out.println("the user has already had a ticket: " + document.get("user id"));
-//                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
-
-//                                    Intent intent = new Intent(StudentPageActivity.this, StudentPageActivity.class);
-//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                                    startActivity(intent);
-//                                    StudentPageActivity.this.finish(); //can't finish!!
-//
-                                //不跳转页面，保留在本activity, 暂时不知道怎么实现？？
-                                //}
-
                             }
 
                             int count = 0;
@@ -178,13 +167,11 @@ public class StudentPageActivity extends AppCompatActivity {
                                 System.out.println("count: " + count);
                                 System.out.println("document.get(user id): " + document.get("user id"));
                                 //if document.get("user is") is null, then allows the user to submit ticket!
+
+                                //case 2: if user id is null, which means count=1, so we only have the initial empty meeting!
+                                //这和我写的acceptTicketActivity的case2是一个意思!
                                 Map<String, Object> map = document.getData();
-                                if(map.size() == 0){
-                                    //skip the null field
-                                    Log.d(TAG, "Initial documnet is empty! Skip it");
-                                    continue;
-                                }
-                                if(document.get("user id") == null){
+                                if(document.get("user id") == null && map.size() != 0){
                                     System.out.println("the user doesn't have a ticket2.0!");
                                     System.out.println("compare ids: " + document.get("user id"));
                                     System.out.println(userId);
@@ -193,6 +180,23 @@ public class StudentPageActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     break;
                                 }
+                                //if the empty documnet is at the last one, then we need to allow the user
+                                // to submit ticket!
+                                if(map.size() == 0){
+                                    if(count == sizeDoc){
+                                        System.out.println("the user doesn't have a ticket!");
+                                        System.out.println("compare ids: " + document.get("user id"));//null
+                                        System.out.println(userId);
+                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                                        startActivity(intent);
+                                        break;
+                                    }
+                                    //skip the null field
+                                    Log.d(TAG, "Initial documnet is empty! Skip it");
+                                    continue;
+                                }
+
                                 if(count == sizeDoc){
                                     System.out.println("we have reached the end!");
                                     System.out.println("Passed in: " + userId);
