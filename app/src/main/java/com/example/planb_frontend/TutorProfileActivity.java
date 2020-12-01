@@ -14,14 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TutorProfileActivity extends AppCompatActivity {
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView mainB;
     private ImageView logout;
-    private ImageView courseadd;
 
     private FirebaseAuth fAuth;
 
@@ -40,7 +38,7 @@ public class TutorProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-        Toast.makeText(getApplicationContext(), "AT PROFILE"+passUser.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
 
         studentName = findViewById(R.id.tutor_name);
         studentName.setText(passUser.getPreferred_name());
@@ -52,19 +50,6 @@ public class TutorProfileActivity extends AppCompatActivity {
         phoneNumber.setText(passUser.getPhone_number());
         email = findViewById(R.id.email);
         email.setText(passUser.getEmail());
-
-        courseadd = findViewById(R.id.courseadd);
-        courseadd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent previousIntent = getIntent();
-                User addCourseUser = (User)previousIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-                Toast.makeText(getApplicationContext(),"LEAVING PROFILE: "+addCourseUser.toString(),Toast.LENGTH_LONG).show();
-                Intent addCourse = new Intent(TutorProfileActivity.this,AddCourses.class);
-                intent.putExtra(StudentRegisterActivity.GET_USER_KEY,addCourseUser);
-                startActivity(addCourse);
-            }
-        });
 
         connectionB = findViewById(R.id.tutor_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {

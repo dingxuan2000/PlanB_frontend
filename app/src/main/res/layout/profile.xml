@@ -24,7 +24,7 @@
 
 
     <TextView
-        android:id="@+id/tutor_name"
+        android:id="@+id/TutorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -94,7 +94,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/grade_standing"
+            android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
@@ -185,7 +185,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/phone_number"
+            android:id="@+id/phoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
