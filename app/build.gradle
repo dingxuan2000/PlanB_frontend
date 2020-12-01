@@ -1,3 +1,4 @@
+
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
@@ -53,6 +54,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
 
 
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
