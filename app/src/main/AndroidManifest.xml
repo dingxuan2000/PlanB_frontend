@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddCourses"></activity>
         <activity android:name=".StudentConnectionActivity" />
         <activity android:name=".StudentHistoryActivity" />
         <activity android:name=".StudentProfileActivity" />
