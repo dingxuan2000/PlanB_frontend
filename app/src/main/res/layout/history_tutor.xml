@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/homebar1" />
+            app:srcCompat="@drawable/homebar" />
 
         <ImageView
             android:id="@+id/tutor_connection_btn"
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/historybar" />
+            app:srcCompat="@drawable/historybar1" />
 
         <ImageView
             android:id="@+id/tutor_profile_btn"
