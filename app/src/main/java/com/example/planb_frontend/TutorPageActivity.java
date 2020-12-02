@@ -44,7 +44,6 @@ public class TutorPageActivity extends AppCompatActivity {
     ArrayList<String> comment = new ArrayList<String>();
     ArrayList<String> student_id = new ArrayList<String>();
     ArrayList<String> ticket_id = new ArrayList<String>();
-    //ArrayList<String> ticket_status = new ArrayList<String>();
     ArrayList<String> tutor_preference = new ArrayList<String>();
 
 
@@ -69,11 +68,10 @@ public class TutorPageActivity extends AppCompatActivity {
                                     DocumentSnapshot docc = task.getResult();
                                     if (docc.exists()){
 
-                                        //newly added: comment
+                                        //newly added: comment, studentID, ticketID, preference are to be passed to AcceptTicket
                                         comment.add(doc.getString(SubmitTicketActivity.COMMENT_KEY));
-                                        student_id.add(docc.getString(StudentRegisterActivity.USER_ID_KEY));
+                                        student_id.add(docc.getId());
                                         ticket_id.add(doc.getId());
-                                        //ticket_status.add(doc.getString(SubmitTicketActivity.STATUS_KEY));
                                         tutor_preference.add(doc.getString(SubmitTicketActivity.TUTOR_PREFERENCE_KEY));
 
                                         names.add(docc.getString("preferred_name"));
@@ -109,12 +107,11 @@ public class TutorPageActivity extends AppCompatActivity {
                 Intent intent = new Intent(TutorPageActivity.this, AcceptTicketActivity.class);
 
                 intent.putExtra("tutorUser", passUser);
-                intent.putExtra(AcceptTicketActivity.STUDENT_ID_KEY, names.get(position));
+                intent.putExtra(AcceptTicketActivity.STUDENT_ID_KEY, student_id.get(position));
                 intent.putExtra(AcceptTicketActivity.COMMENT_KEY, comment.get(position));
                 intent.putExtra(AcceptTicketActivity.TIME_PERIOD_KEY, time.get(position));
                 intent.putExtra(SubmitTicketActivity.COURSE_CODE_KEY, course.get(position));
                 intent.putExtra(StudentRegisterActivity.PREFERRED_NAME_KEY, names.get(position));
-                //intent.putExtra("ticket_status", ticket_status.get(position));
                 intent.putExtra("ticket_id", ticket_id.get(position));
                 intent.putExtra(SubmitTicketActivity.TUTOR_PREFERENCE_KEY, tutor_preference.get(position));
 

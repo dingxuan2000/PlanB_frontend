@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/backarrow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         app:srcCompat="@drawable/backarrow" />
 
 
@@ -27,7 +27,6 @@
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/student1" />
 
-        //changed to editText
 
         <TextView
             android:id="@+id/illustrate"
@@ -165,15 +164,15 @@
 
     <TextView
         android:id="@+id/comment"
-        android:layout_width="265dp"
-        android:layout_height="93dp"
+        android:layout_width="232dp"
+        android:layout_height="82dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/shape1"
         android:backgroundTint="#EAE9E9"
         android:fontFamily="@font/poppins_bold"
         android:gravity="left|center_vertical"
-        android:hint="Want to leave comments to your tutor?"
+        android:hint="Comment"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"

@@ -12,25 +12,25 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-public class tutorCCustomListView extends ArrayAdapter<String> {
+public class TutorCCustomListView extends ArrayAdapter<String> {
 
-    private Integer[] tutor_imgid;
-    private ArrayList<String> tutor_name;
+    //private Integer[] tutor_imgid;
+    private ArrayList<String> student_name;
     private ArrayList<String> course_code;
     private ArrayList<String> time;
-    private ArrayList<String> tutor_phone_number;
+    private ArrayList<String> student_phone_number;
 
     private Activity context;
 
-    public tutorCCustomListView(Activity context, ArrayList<String> tutor_name, ArrayList<String> course_code,
-                                ArrayList<String> time, ArrayList<String> tutor_phone_number) {
-        super(context, R.layout.student_main_listview_layout, tutor_name);
+    public TutorCCustomListView(Activity context, ArrayList<String> student_name, ArrayList<String> course_code,
+                                ArrayList<String> time, ArrayList<String> student_phone_number) {
+        super(context, R.layout.tutor_connection_listview_layout, student_name);
 
         this.context = context;
-        this.tutor_name = tutor_name;
+        this.student_name = student_name;
         this.course_code = course_code;
         this.time = time;
-        this.tutor_phone_number = tutor_phone_number;
+        this.student_phone_number = student_phone_number;
         //this.tutor_imgid = tutor_imgid;
 
         }
@@ -52,10 +52,10 @@ public class tutorCCustomListView extends ArrayAdapter<String> {
             }
 
             //viewHolder.ivt.setImageResource(tutor_imgid.get(position0);
-            viewHolder.tvname.setText(tutor_name.get(position));
+            viewHolder.tvname.setText(student_name.get(position));
             viewHolder.tvccode.setText(course_code.get(position));
             viewHolder.tvtime.setText(time.get(position));
-            viewHolder.tvpnumber.setText(tutor_phone_number.get(position));
+            viewHolder.tvpnumber.setText(student_phone_number.get(position));
 
 
             //Handle buttons and add onClickListeners

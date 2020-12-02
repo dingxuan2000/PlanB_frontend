@@ -70,80 +70,113 @@
                 android:layout_height="63dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center|left"
-                android:text="Meet"
+                android:text="Ongoing"
                 android:textColor="#373535"
                 android:textSize="25sp" />
         </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:id="@+id/meet">
 
-        <ImageView
-            android:id="@+id/meet_pic"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/student1" />
+
+    //Ongoing meeting is unique
+    <RelativeLayout
+        android:id="@+id/imageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tutor_connection_name"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Zanyuan Yang"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/meet_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif"
-                android:text="Zihao Chen"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/meet_major"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shape1"
-                    android:gravity="center"
-                    android:text="Computer Science"
-                    android:textColor="#FFFFFF" />
-
-
-                <TextView
-                    android:id="@+id/meet_course"
-                    android:layout_width="66dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/shape1"
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:text="cse 110"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
 
             <TextView
-                android:id="@+id/meet_start_time"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:id="@+id/tutor_conncetion_pnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="#A8C6A0"
+                android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:text="start time: 9:10"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:text="phone number: 1111111111"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tutor_connection_ccode"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="#A8C6A0"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="CSE 110"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
 
         </LinearLayout>
-    </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tutor_connection_time"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginLeft="90sp"
+            android:layout_marginTop="77sp"
+            android:background="@drawable/shape"
+            android:backgroundTint="#A8C6A0"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="30 min"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/cancel_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="10sp"
+            android:background="@drawable/shape_grey"
+            android:text="Cancel"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/start_Btn"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="210sp"
+            android:layout_marginTop="30sp"
+            android:background="@drawable/shape_green"
+            android:text="Start"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -178,78 +211,23 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:id="@+id/upcoming">
+    //list view for upcoming section:display 3 meetings
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="195dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/upcoming_pic"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/student1" />
-
-        <LinearLayout
+        <ListView
+            android:id="@+id/upcoming_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/upcoming_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif"
-                android:text="Zihao Chen"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/upcoming_major"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shape1"
-                    android:gravity="center"
-                    android:text="Computer Science"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/upcoming_course"
-                    android:layout_width="66dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/shape1"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="cse 110"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/upcoming_start_time"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="start time: 9:10"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
 
+    //change linear layout height
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="299dp"
+        android:layout_height="126dp"
         android:gravity="center|bottom"
         android:orientation="horizontal">
 
