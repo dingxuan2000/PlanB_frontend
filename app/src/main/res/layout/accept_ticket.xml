@@ -164,8 +164,8 @@
 
     <TextView
         android:id="@+id/comment"
-        android:layout_width="232dp"
-        android:layout_height="82dp"
+        android:layout_width="265dp"
+        android:layout_height="93dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/shape1"
