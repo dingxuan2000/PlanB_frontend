@@ -156,8 +156,7 @@
             android:layout_marginLeft="35dp"
             android:layout_height="40dp"
             android:background="@drawable/shape1"
-            app:hintText="Add preferred courses :D"
-            />
+            app:hintText="Add preferred courses :D" />
         <Button
             android:layout_width="80dp"
             android:layout_height="40dp"
