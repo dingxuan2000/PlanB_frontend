@@ -28,7 +28,7 @@ import com.example.planb_frontend.TutorConnectionActivity;
 
 import java.util.ArrayList;
 
-public class TutorCCustomListView extends ArrayAdapter<String> {
+public class TutorUpcomingCustomListView extends ArrayAdapter<String> {
 
     private ArrayList<String> student_name;
     private ArrayList<String> course_code;
@@ -38,12 +38,12 @@ public class TutorCCustomListView extends ArrayAdapter<String> {
     private User tutor;
     private String curr_meeting_id;
 
-    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
     private Activity context;
 
-    public TutorCCustomListView(Activity context, ArrayList<String> student_name, ArrayList<String> course_code,
-                                ArrayList<String> time, ArrayList<String> student_phone_number, ArrayList<String> meeting_id, User tutor) {
+    public TutorUpcomingCustomListView(Activity context, ArrayList<String> student_name, ArrayList<String> course_code,
+                                       ArrayList<String> time, ArrayList<String> student_phone_number, ArrayList<String> meeting_id, User tutor) {
         super(context, R.layout.tutor_upcoming_listview_layout, student_name);
 
         this.context = context;

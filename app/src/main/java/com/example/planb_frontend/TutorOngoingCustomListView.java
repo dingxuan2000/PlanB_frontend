@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TutorOngoingcustomListView extends ArrayAdapter<String> {
+public class TutorOngoingCustomListView extends ArrayAdapter<String> {
 
     private ArrayList<String> student_name;
     private ArrayList<String> course_code;
@@ -37,13 +37,13 @@ public class TutorOngoingcustomListView extends ArrayAdapter<String> {
     private String curr_tutor_id;
     private String curr_course;
     private String curr_time_period;
-    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
     private Activity context;
 
 
-    public TutorOngoingcustomListView(Activity context, ArrayList<String> student_name, ArrayList<String> course_code,
-                                ArrayList<String> time, ArrayList<String> student_phone_number, ArrayList<String> meeting_id,
+    public TutorOngoingCustomListView(Activity context, ArrayList<String> student_name, ArrayList<String> course_code,
+                                      ArrayList<String> time, ArrayList<String> student_phone_number, ArrayList<String> meeting_id,
                                       ArrayList<String> student_id, User tutor) {
         super(context, R.layout.tutor_ongoing_listview_layout, student_name);
         this.context = context;

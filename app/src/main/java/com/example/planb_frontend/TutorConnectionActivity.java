@@ -1,10 +1,7 @@
 package com.example.planb_frontend;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -76,7 +73,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
             queryOngoing = queryAll.whereEqualTo(AcceptTicketActivity.STATUS_KEY, AcceptTicketActivity.meetingOngoing);
 
             if(queryUpcoming!=null){
-                TutorCCustomListView TCListView = new TutorCCustomListView(this, upcoming_student_name, upcoming_course_code, upcoming_time, upcoming_student_phone, upcoming_meeting_id, passUser);
+                TutorUpcomingCustomListView TCListView = new TutorUpcomingCustomListView(this, upcoming_student_name, upcoming_course_code, upcoming_time, upcoming_student_phone, upcoming_meeting_id, passUser);
                 queryUpcoming.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -117,7 +114,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
             if(queryOngoing!=null){
                 // To be Implemented
                 //Use setText to set fields
-                TutorOngoingcustomListView TOCustomListView = new TutorOngoingcustomListView(this, ongoing_student_name, ongoing_course_code, ongoing_time, ongoing_student_phone, ongoing_meeting_id, ongoing_student_id, passUser);
+                TutorOngoingCustomListView TOCustomListView = new TutorOngoingCustomListView(this, ongoing_student_name, ongoing_course_code, ongoing_time, ongoing_student_phone, ongoing_meeting_id, ongoing_student_id, passUser);
                 queryOngoing.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

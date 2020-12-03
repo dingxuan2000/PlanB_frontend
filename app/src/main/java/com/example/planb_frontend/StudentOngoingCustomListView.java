@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-public class StudentOngoingcustomListView extends ArrayAdapter<String> {
+public class StudentOngoingCustomListView extends ArrayAdapter<String> {
     
     private ArrayList<String> tutor_name;
     private ArrayList<String> course_code;
@@ -20,7 +20,7 @@ public class StudentOngoingcustomListView extends ArrayAdapter<String> {
 
     private Activity context;
 
-    public StudentOngoingcustomListView(Activity context, ArrayList<String> tutor_name, ArrayList<String> course_code,
+    public StudentOngoingCustomListView(Activity context, ArrayList<String> tutor_name, ArrayList<String> course_code,
                                         ArrayList<String> time, ArrayList<String> phone_number) {
         super(context, R.layout.student_ongoing_listview_layout, tutor_name);
 
