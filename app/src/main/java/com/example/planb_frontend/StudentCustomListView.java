@@ -24,7 +24,7 @@ public class StudentCustomListView extends BaseAdapter implements Filterable
     Context c;
     ArrayList<tutorInfo> originalArray,tempArray;
     CustomFilter cs;
-    String course_1,course_2,course_3,course_4,course_5;
+    String course_1,course_2,course_3,course_4;
 
 
     public StudentCustomListView(Context c, ArrayList<tutorInfo> originalArray)
@@ -86,25 +86,24 @@ public class StudentCustomListView extends BaseAdapter implements Filterable
                     course_2 = tempArray.get(i).getCourse_2();
                     course_3 = tempArray.get(i).getCourse_3();
                     course_4 = tempArray.get(i).getCourse_4();
-                    course_5 = tempArray.get(i).getCourse_5();
-                    if(course_1 == null){course_1 = "";}
-                    if(course_2 == null){course_2 = "";}
-                    if(course_3 == null){course_3 = "";}
-                    if(course_4 == null){course_4 = "";}
-                    if(course_5 == null){course_5 = "";}
+                    //course_5 = tempArray.get(i).getCourse_5();
+//                    if(course_1 == null){course_1 = "";}
+//                    if(course_2 == null){course_2 = "";}
+//                    if(course_3 == null){course_3 = "";}
+//                    if(course_4 == null){course_4 = "";}
+                    //if(course_5 == null){course_5 = "";}
                     if(tempArray.get(i).getName().toUpperCase().contains(constraint)||
                             tempArray.get(i).getMajor().toUpperCase().contains(constraint)||
                             course_1.toUpperCase().contains(constraint)||
                             course_2.toUpperCase().contains(constraint)||
                             course_3.toUpperCase().contains(constraint)||
-                            course_4.toUpperCase().contains(constraint)||
-                            course_5.toUpperCase().contains(constraint)){
+                            course_4.toUpperCase().contains(constraint)){
 
 
                         tutorInfo sr = new tutorInfo(tempArray.get(i).getName(),
                                 tempArray.get(i).getMajor(),
                                 tempArray.get(i).getGrade(),
-                                course_1, course_2, course_3, course_4, course_5);
+                                course_1, course_2, course_3, course_4);
                         //tempArray.get(i).getImage());
                         filters.add(sr);
                     }

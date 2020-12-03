@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import javax.annotation.Nullable;
 
 public class tutorInfo {
-    String name,major,grade,course_1,course_2,course_3,course_4,course_5;
+    String name,major,grade,course_1,course_2,course_3,course_4;
     int image;
 
     public tutorInfo(String name, String major, String grade,@Nullable String course_1,
-                     @Nullable String course_2,@Nullable String course_3,@Nullable String course_4,
-                     @Nullable String course_5) {
+                     @Nullable String course_2,@Nullable String course_3,@Nullable String course_4) {
         this.name = name;
         this.major = major;
         this.grade = grade;
@@ -18,7 +17,7 @@ public class tutorInfo {
         this.course_2 = course_2;
         this.course_3 = course_3;
         this.course_4 = course_4;
-        this.course_5 = course_5;
+
         //this.image = image;
     }
 
@@ -78,13 +77,6 @@ public class tutorInfo {
         this.course_4 = course_4;
     }
 
-    public String getCourse_5() {
-        return course_5;
-    }
-
-    public void setCourse_5(String course_5) {
-        this.course_5 = course_5;
-    }
 //    public int getImage() {
 //        return image;
 //    }
