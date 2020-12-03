@@ -104,7 +104,7 @@ public class TutorOngoingcustomListView extends ArrayAdapter<String> {
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //TODO: delete meeting from collection, add document to history_meetings
+                            //Task: delete meeting from collection, add document to history_meetings
 
                             //create historyMeeting document and put into history_meetings collection
                             DocumentReference documentReference = fStore.collection("history_meetings").document();
