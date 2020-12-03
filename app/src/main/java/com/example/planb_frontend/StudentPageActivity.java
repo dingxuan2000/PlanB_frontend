@@ -2,10 +2,13 @@ package com.example.planb_frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -15,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
+import com.example.planb_frontend.AddCourses;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,26 +34,39 @@ import java.util.Map;
 
 import static com.example.planb_backend.service.FCMService.FCM_TAG;
 
-public class StudentPageActivity extends AppCompatActivity {
+public class StudentPageActivity extends AppCompatActivity implements TextWatcher {
 
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView profileB;
     private ImageView submit_ticketB;
-    private SearchView searchView;
+
+    //CustomListView Search
+    private EditText search;
+    ListView tutor_rank;
+    ArrayList<tutorInfo> tutorList= new ArrayList<>();
+    ArrayList<tutorCourse> tutorCouses = new ArrayList<>();
+    String name,major,grade,course_1,course_2,course_3,course_4,course_5, tutorId,uid;
+
+//    tutorInfo ti;
+    StudentCustomListView myListview;
 
     private User user;
     public static final  String TAG="StudentPageActivity";
 
     //create custom adapter
-    ListView tutor_rank;
+
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    FirebaseFirestore fStore2 = FirebaseFirestore.getInstance();
     ArrayList<String> tutor_name = new ArrayList<String>();
     ArrayList<String> tutor_major = new ArrayList<String>();
     ArrayList<String> tutor_grade = new ArrayList<String>();
+    ArrayList<String> tutor_id = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_student);
 
         Intent preIntent = getIntent();
         //if the user already has a ticket in firebase, then stop jump to the SubmitTicket page.
@@ -72,7 +89,14 @@ public class StudentPageActivity extends AppCompatActivity {
                 });
 
 
-        studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
+        // Search Function
+        search = (EditText) findViewById(R.id.search_bar);
+        tutor_rank = (ListView) findViewById(R.id.tutor_listview);
+
+        search.addTextChangedListener(this);
+
+        //studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
+        myListview = new StudentCustomListView(this, tutorList);
 
         fStore.collection("users")
                 .whereEqualTo("type", "tutor")
@@ -83,24 +107,58 @@ public class StudentPageActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot doc : task.getResult()){
-                        tutor_name.add(doc.getString("preferred_name"));
-                        tutor_major.add(doc.getString("major"));
-                        //tutor_grade.add(doc.get("course_code").toString());
-                        tutor_grade.add(doc.getString("class_standing"));
-                        tutor_rank.setAdapter(StudentcustomListView);
+//                        tutor_name.add(doc.getString("preferred_name"));
+//                        tutor_major.add(doc.getString("major"));
+//                        //tutor_grade.add(doc.get("course_code").toString());
+//                        tutor_grade.add(doc.getString("class_standing"));
+//                        tutor_rank.setAdapter(StudentcustomListView);
+                        name = doc.getString("preferred_name");
+                        major = doc.getString("major");
+                        grade = doc.getString("class_standing");
+                        tutorId = doc.getString(StudentRegisterActivity.USER_ID_KEY);
+
+                        course_1 = "";course_2 = "";course_3 = "";course_4 = "";course_5 = "";
+                        fStore2.collection("preferred_courses").get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    for(QueryDocumentSnapshot docCourse : task.getResult()){
+                                        uid = docCourse.getId();
+                                        Log.d("tutorid","current id is:"+tutorId);
+                                        Log.d("uid","user id is:"+uid);
+                                        if(tutorId == uid){
+                                            course_1 = docCourse.getString("course_1");
+                                            course_2 = docCourse.getString("course_2");
+                                            course_3 = docCourse.getString("course_3");
+                                            course_4 = docCourse.getString("course_4");
+                                            course_5 = docCourse.getString("course_5");
+                                            Log.d("COURSE","adding course_1:"+course_1);
+                                        }
+                                    }
+                                } else {
+                                    Log.e("tag", task.getException().toString());
+                                    Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+//                        course_1 = doc.getString("course_1");
+//                        course_2 = doc.getString("course_2");
+//                        course_3 = doc.getString("course_3");
+//                        course_4 = doc.getString("course_4");
+//                        course_5 = doc.getString("course_5");
+
+                        tutorInfo ti = new tutorInfo(name, major,grade,course_1,course_2
+                                ,course_3,course_4,course_5);
+                        tutorList.add(ti);
+                        tutor_rank.setAdapter(myListview);
                     }
                 }
             }
         });
 
-
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_student);
-
-
         tutor_rank = findViewById(R.id.tutor_listview);
-        tutor_rank.setAdapter(StudentcustomListView);
+        tutor_rank.setAdapter(myListview);
 
         //search view
 //        searchView = findViewById(R.id.search_bar);
@@ -302,6 +360,7 @@ public class StudentPageActivity extends AppCompatActivity {
             }
         });
 
+
 //        submit_ticketB = findViewById(R.id.student_submit_ticket);
 //        submit_ticketB.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -321,6 +380,21 @@ public class StudentPageActivity extends AppCompatActivity {
 //        });
 
 
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        this.myListview.getFilter().filter(s);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
 
     }
 

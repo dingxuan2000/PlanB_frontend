@@ -9,7 +9,7 @@
     android:gravity="clip_horizontal"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.SearchView
+    <EditText
         android:id="@+id/search_bar"
         app:queryHint="Search course"
         app:iconifiedByDefault="false"
@@ -19,7 +19,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/shape1"
         app:queryBackground="@color/green">
-    </androidx.appcompat.widget.SearchView>
+    </EditText>
 
 
 <!--    <SearchView-->
