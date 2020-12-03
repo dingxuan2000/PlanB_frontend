@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.planb_backend.User;
 
 import org.w3c.dom.Text;
+
+import java.util.Objects;
 
 import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
 
@@ -137,6 +141,20 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                                             }
                                         });
+                                    }
+                                    else {
+                                        try {
+                                            throw Objects.requireNonNull(task.getException());
+                                        } catch (FirebaseAuthInvalidUserException e) {
+                                            // User does not exist
+                                            Toast.makeText(getApplicationContext(), "User does not exist.", Toast.LENGTH_SHORT).show();
+                                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                                            // User authentication failed
+                                            Toast.makeText(getApplicationContext(), "Email or password incorrect.", Toast.LENGTH_SHORT).show();
+                                        } catch (Exception e) {
+                                            Toast.makeText(getApplicationContext(), "Unexpected error occurred.", Toast.LENGTH_SHORT).show();
+                                            Log.e("E/LoginActivity", e.getMessage());
+                                        }
                                     }
                                 }
                             }
