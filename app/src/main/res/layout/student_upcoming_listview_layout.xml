@@ -72,7 +72,7 @@
             android:textSize="12sp" />
 
         <Button
-            android:id="@+id/end_Btn"
+            android:id="@+id/cancel_Btn"
             android:layout_width="143dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/student_upcoming_name"

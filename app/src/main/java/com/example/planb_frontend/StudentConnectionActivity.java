@@ -101,7 +101,7 @@ public class StudentConnectionActivity extends AppCompatActivity {
                 });
 
                 //set the screen
-                UpcomingList = (ListView) findViewById(R.id.upcoming_listview);
+                UpcomingList = (ListView) findViewById(R.id.student_upcoming_listview);
                 UpcomingList.setAdapter(SUCListView);
 
             } else {
@@ -117,8 +117,8 @@ public class StudentConnectionActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot doc : task.getResult()) {
-                                student_id = doc.get("student_id").toString();
-                                DocumentReference docref = fStore.collection("users").document(student_id);
+                                curr_tutor_id = doc.get("tutor_id").toString();
+                                DocumentReference docref = fStore.collection("users").document(curr_tutor_id);
                                 docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -141,7 +141,7 @@ public class StudentConnectionActivity extends AppCompatActivity {
                     }
                 });
 
-                OngoingList = (ListView) findViewById(R.id.meet_listview);
+                OngoingList = (ListView) findViewById(R.id.student_ongoing_listview);
                 OngoingList.setAdapter(SOCustomListView);
             } else {
                 Toast.makeText(getApplicationContext(), "No Ongoing Meeting", Toast.LENGTH_SHORT).show();

@@ -70,11 +70,11 @@ public class StudentUpcomingCustomListView extends ArrayAdapter<String> {
             viewHolder.tvpnumber.setText(phone_number.get(position));
 
             //Handle buttons and add onClickListeners
-            Button endBtn = r.findViewById(R.id.cancel_Btn);
+            Button cancelBtn = r.findViewById(R.id.cancel_Btn);
             curr_meeting_id = meeting_id.get(position);
 
 
-            endBtn.setOnClickListener(new View.OnClickListener(){
+            cancelBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     //add alert dialog
