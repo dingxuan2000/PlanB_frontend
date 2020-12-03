@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.planb_backend.User;
 
 import org.w3c.dom.Text;
+
+import java.util.Objects;
 
 import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
 
@@ -116,24 +120,41 @@ public class LoginActivity extends AppCompatActivity {
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 if (documentSnapshot.exists()) {
                                                     user = documentSnapshot.toObject(User.class);
+                                                    assert user != null;
+                                                    user.setEmail(fAuth.getCurrentUser().getEmail());
+                                                    user.setId(userId);
+                                                    Intent intent = null;
+                                                    if (user.getType().equals("tutor")) {
+                                                        intent = new Intent(getApplicationContext(), TutorPageActivity.class);
+                                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                                                        startActivity(intent);
+                                                        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        intent = new Intent(getApplicationContext(), StudentPageActivity.class);
+                                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                                                        startActivity(intent);
+                                                        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                                    }
                                                     Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                                                 } else {
                                                     Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
                                                 }
-                                                Intent intent = null;
-                                                if (user.getType().equals("tutor")) {
-                                                    intent = new Intent(getApplicationContext(), TutorPageActivity.class);
-                                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                                                    startActivity(intent);
-                                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    intent = new Intent(getApplicationContext(), StudentPageActivity.class);
-                                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
-                                                    startActivity(intent);
-                                                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                                                }
                                             }
                                         });
+                                    }
+                                    else {
+                                        try {
+                                            throw Objects.requireNonNull(task.getException());
+                                        } catch (FirebaseAuthInvalidUserException e) {
+                                            // User does not exist
+                                            Toast.makeText(getApplicationContext(), "User does not exist.", Toast.LENGTH_SHORT).show();
+                                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                                            // User authentication failed
+                                            Toast.makeText(getApplicationContext(), "Email or password incorrect.", Toast.LENGTH_SHORT).show();
+                                        } catch (Exception e) {
+                                            Toast.makeText(getApplicationContext(), "Unexpected error occurred.", Toast.LENGTH_SHORT).show();
+                                            Log.e("E/LoginActivity", e.getMessage());
+                                        }
                                     }
                                 }
                             }
