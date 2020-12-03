@@ -37,20 +37,23 @@ public class TutorConnectionActivity extends AppCompatActivity {
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
     private ListView UpcomingList;
+    private ListView OngoingList;
 
+    private ArrayList<String> upcoming_student_name= new ArrayList<String>();
+    private ArrayList<String> upcoming_course_code= new ArrayList<String>();
+    private ArrayList<String> upcoming_time= new ArrayList<String>();
+    private ArrayList<String> upcoming_student_phone= new ArrayList<String>();
+    private ArrayList<String> upcoming_meeting_id = new ArrayList<String>();
 
-    private ArrayList<String> student_name= new ArrayList<String>();
-    private ArrayList<String> course_code= new ArrayList<String>();
-    private ArrayList<String> time= new ArrayList<String>();
-    private ArrayList<String> student_phone= new ArrayList<String>();
+    private ArrayList<String> ongoing_student_name= new ArrayList<String>();
+    private ArrayList<String> ongoing_course_code= new ArrayList<String>();
+    private ArrayList<String> ongoing_time= new ArrayList<String>();
+    private ArrayList<String> ongoing_student_phone= new ArrayList<String>();
+    private ArrayList<String> ongoing_meeting_id = new ArrayList<String>();
+    private ArrayList<String> ongoing_student_id = new ArrayList<String>();
 
     private String tutor_id;
     private String student_id;
-    private boolean yesUpcoming = false;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,37 +76,39 @@ public class TutorConnectionActivity extends AppCompatActivity {
             queryOngoing = queryAll.whereEqualTo(AcceptTicketActivity.STATUS_KEY, AcceptTicketActivity.meetingOngoing);
 
             if(queryUpcoming!=null){
-                    TutorCCustomListView TCListView = new TutorCCustomListView(this, student_name, course_code, time, student_phone);
-                    queryUpcoming.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()){
-                                for (QueryDocumentSnapshot doc : task.getResult()){
-                                    student_id = doc.get("student_id").toString();
-                                    DocumentReference docref = fStore.collection("users").document(student_id);
-                                    docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            if(task.isSuccessful()){
-                                                DocumentSnapshot docc = task.getResult();
-                                                if (docc.exists()){
-                                                    student_name.add(docc.getString(StudentRegisterActivity.PREFERRED_NAME_KEY));
-                                                    student_phone.add(docc.getString(StudentRegisterActivity.PHONE_NUMBER_KEY));
-                                                    course_code.add(doc.getString(AcceptTicketActivity.COURSE_KEY));
-                                                    time.add(doc.getString(AcceptTicketActivity.TIME_PERIOD_KEY));
-                                                    UpcomingList.setAdapter(TCListView);
-                                                  // Log.d("Upcoming", docc.getString("preferred_name") + " " + doc.get("course").toString());
-                                                }
+                TutorCCustomListView TCListView = new TutorCCustomListView(this, upcoming_student_name, upcoming_course_code, upcoming_time, upcoming_student_phone, upcoming_meeting_id, passUser);
+                queryUpcoming.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot doc : task.getResult()){
+                                student_id = doc.get("student_id").toString();
+                                DocumentReference docref = fStore.collection("users").document(student_id);
+                                docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            DocumentSnapshot docc = task.getResult();
+                                            if (docc.exists()){
+                                                upcoming_meeting_id.add(doc.getId());
+                                                upcoming_student_name.add(docc.getString(StudentRegisterActivity.PREFERRED_NAME_KEY));
+                                                upcoming_student_phone.add(docc.getString(StudentRegisterActivity.PHONE_NUMBER_KEY));
+                                                upcoming_course_code.add(doc.getString(AcceptTicketActivity.COURSE_KEY));
+                                                upcoming_time.add(doc.getString(AcceptTicketActivity.TIME_PERIOD_KEY));
+                                                UpcomingList.setAdapter(TCListView);
                                             }
                                         }
-                                    });
-                                }
+                                    }
+                                });
                             }
                         }
-                    });
+                    }
+                });
+
                 //set the screen
                 UpcomingList = (ListView) findViewById(R.id.upcoming_listview);
                 UpcomingList.setAdapter(TCListView);
+
             }
             else{
                 Toast.makeText(getApplicationContext(), "No Upcoming Meeting", Toast.LENGTH_SHORT).show();
@@ -112,7 +117,38 @@ public class TutorConnectionActivity extends AppCompatActivity {
             if(queryOngoing!=null){
                 // To be Implemented
                 //Use setText to set fields
+                TutorOngoingcustomListView TOCustomListView = new TutorOngoingcustomListView(this, ongoing_student_name, ongoing_course_code, ongoing_time, ongoing_student_phone, ongoing_meeting_id, ongoing_student_id, passUser);
+                queryOngoing.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot doc : task.getResult()){
+                                student_id = doc.get("student_id").toString();
+                                DocumentReference docref = fStore.collection("users").document(student_id);
+                                docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            DocumentSnapshot docc = task.getResult();
+                                            if (docc.exists()){
+                                                ongoing_student_id.add(docc.getId());
+                                                ongoing_meeting_id.add(doc.getId());
+                                                ongoing_student_name.add(docc.getString(StudentRegisterActivity.PREFERRED_NAME_KEY));
+                                                ongoing_student_phone.add(docc.getString(StudentRegisterActivity.PHONE_NUMBER_KEY));
+                                                ongoing_course_code.add(doc.getString(AcceptTicketActivity.COURSE_KEY));
+                                                ongoing_time.add(doc.getString(AcceptTicketActivity.TIME_PERIOD_KEY));
+                                                OngoingList.setAdapter(TOCustomListView);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
 
+                OngoingList = (ListView) findViewById(R.id.meet_listview);
+                OngoingList.setAdapter(TOCustomListView);
             }
             else{
                 Toast.makeText(getApplicationContext(), "No Ongoing Meeting", Toast.LENGTH_SHORT).show();
@@ -126,64 +162,6 @@ public class TutorConnectionActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-       /*
-        //Query meeting collection for student name and phone number
-        Query queryAll = fStore.collection(AcceptTicketActivity.MEETING_TABLE_KEY).whereEqualTo(AcceptTicketActivity.TUTOR_ID_KEY, tutor_id);
-      //  Query queryUpComing = queryAll.whereEqualTo(AcceptTicketActivity.STATUS_KEY, AcceptTicketActivity.meetingUninitiated);
-
-        if(queryAll != null) {
-            TutorCCustomListView TCListView = new TutorCCustomListView(this, student_name, course_code, time, student_phone);
-            noUpcoming = false;
-            queryAll.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot doc : task.getResult()) {
-                            //grab student_id from meeting collection with tutor_id
-                            student_id = doc.get(AcceptTicketActivity.STUDENT_ID_KEY).toString();
-                            DocumentReference docref = fStore.collection("users").document(student_id);
-                            docref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        //docc refers to student User, doc refers to the Meeting
-                                        DocumentSnapshot docc = task.getResult();
-                                        if (docc.exists()) {
-
-                                            student_name.add(docc.getString(StudentRegisterActivity.PREFERRED_NAME_KEY));
-                                            student_phone.add(docc.getString(StudentRegisterActivity.PHONE_NUMBER_KEY));
-                                            course_code.add(doc.getString(AcceptTicketActivity.COURSE_KEY));
-                                            time.add(doc.getString(AcceptTicketActivity.TIME_PERIOD_KEY));
-
-                                            UpcomingList.setAdapter(TCListView);
-                                            Log.d("Upcoming", docc.getString("preferred_name") + " " + doc.get("course_code").toString());
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    }
-                }
-            });
-
-            //set the screen
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.connection_tutor);
-
-            UpcomingList = (ListView) findViewById(R.id.upcoming_listview);
-            UpcomingList.setAdapter(TCListView);
-
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "No Upcoming Meeting", Toast.LENGTH_SHORT).show();
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.connection_tutor);
-        }*/
 
 
 
@@ -223,84 +201,6 @@ public class TutorConnectionActivity extends AppCompatActivity {
         });
 
 
-
-/*
-        //Meet verify box
-        meet = findViewById(R.id.meet);
-        meet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(TutorProfileActivity.this, LoginActivity.class);
-//                startActivity(intent);
-                AlertDialog.Builder builder = new AlertDialog.Builder(TutorConnectionActivity.this);
-                builder.setIcon(R.drawable.warning);
-                builder.setTitle("Verify");
-                builder.setMessage("Are you sure that you finish the meeting?");
-
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        Intent intent = new Intent(TutorConnectionActivity.this, StudentHistoryActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        Toast.makeText(TutorConnectionActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-
-
-
-
-
-        //Upcoming verify box
-        upcoming = findViewById(R.id.upcoming);
-        upcoming.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(TutorProfileActivity.this, LoginActivity.class);
-//                startActivity(intent);
-                AlertDialog.Builder builder = new AlertDialog.Builder(TutorConnectionActivity.this);
-                builder.setIcon(R.drawable.warning);
-                builder.setTitle("Verify");
-                builder.setMessage("Are you sure that you meet the student?");
-
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        Intent intent = new Intent(TutorConnectionActivity.this, TutorConnectionActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        Toast.makeText(TutorConnectionActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        */
-
-
-
     }
 }
-
 

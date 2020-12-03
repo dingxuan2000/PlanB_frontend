@@ -177,6 +177,7 @@ public class AcceptTicketActivity extends AppCompatActivity {
 
 
                                 Intent intent = new Intent(AcceptTicketActivity.this, TutorConnectionActivity.class);
+                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, tutorUser);
                                 startActivity(intent);
                             }
                         })
