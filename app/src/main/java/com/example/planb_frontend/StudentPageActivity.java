@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
-import com.example.planb_frontend.AddCourses;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -44,10 +43,10 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
     //CustomListView Search
     private EditText search;
     ListView tutor_rank;
-    ArrayList<tutorInfo> tutorList= new ArrayList<>();
-    ArrayList<tutorCourse> tutorCourses = new ArrayList<>();
+    private ArrayList<tutorInfo> tutorList= new ArrayList<>();
+    private ArrayList<tutorCourse> tutorCourses = new ArrayList<>();
     String name,major,grade,course_1,course_2,course_3,course_4,course_5, tutorId,uid;
-
+    private tutorCourse tC;
 //    tutorInfo ti;
     StudentCustomListView myListview;
 
@@ -101,20 +100,30 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                         course_3 = docCourse.getString("course_3");
                         course_4 = docCourse.getString("course_4");
                         //course_5 = docCourse.getString("course_5");
-                        tutorCourse tc = new tutorCourse(uid,course_1,course_2,course_3,course_4);
-                        tutorCourses.add(tc);
+//                        Log.d("GETUID",uid);
+//                        Log.d("GETCOURSE1",course_1);
+//                        Log.d("GETCOURSE2",course_2);
+//                        Log.d("GETCOURSE3",course_3);
+//                        Log.d("GETCOURSE4",course_4);
+                        tC = new tutorCourse(uid,course_1,course_2,course_3,course_4);
+                        tutorCourses.add(tC);
+
                     }
                 } else {
                     Log.e("tag", task.getException().toString());
                     Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
                 }
+//                Log.d("DEBUG COURSE1","begin");
+//                for(int i=0;i<tutorCourses.size();i++){
+//                    Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
+//                }
             }
          });
 
-        Log.d("DEBUG COURSE","begin");
-        for(int i=0;i<tutorCourses.size();i++){
-            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
-        }
+//        Log.d("DEBUG COURSE2","begin");
+//        for(int i=0;i<tutorCourses.size();i++){
+//            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
+//        }
 
         // Search Function
         search = (EditText) findViewById(R.id.search_bar);
@@ -144,15 +153,22 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                         grade = doc.getString("class_standing");
                         tutorId = doc.getString(StudentRegisterActivity.USER_ID_KEY);
                         course_1 = "";course_2 = "";course_3 = "";course_4 = "";course_5 = "";
-                        for(tutorCourse tC : tutorCourses){
-                            if(tC.getUid() == tutorId){
-                                course_1 = tC.getCourse_1();
-                                course_2 = tC.getCourse_2();
-                                course_3 = tC.getCourse_3();
-                                course_4 = tC.getCourse_4();
+//                        Log.d("DEBUG COURSE3","begin");
+//                        for(int i=0;i<tutorCourses.size();i++){
+//                            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
+//                        }
+
+
+                        for(int i=0;i<tutorCourses.size();i++){
+//                            System.out.println("EQUAL: "+tutorCourses.get(i).getUid() + tutorId);
+                            if(tutorCourses.get(i).getUid().equals(tutorId)){
+                                course_1 = tutorCourses.get(i).getCourse_1();
+                                course_2 = tutorCourses.get(i).getCourse_2();
+                                course_3 = tutorCourses.get(i).getCourse_3();
+                                course_4 = tutorCourses.get(i).getCourse_4();
                             }
                         }
-
+//                        Log.d("COURSESEARCH",course_1);
 
 //                        course_1 = doc.getString("course_1");
 //                        course_2 = doc.getString("course_2");
@@ -171,22 +187,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
 
         tutor_rank = findViewById(R.id.tutor_listview);
         tutor_rank.setAdapter(myListview);
-
-        //search view
-//        searchView = findViewById(R.id.search_bar);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-//            @Override
-//            public boolean onQueryTextSubmit(String text){
-//                StudentcustomListView.getFilter().filter(text);
-//                tutor_rank.setAdapter(StudentcustomListView);
-//                return true;
-//            }
-//            @Override
-//            public boolean onQueryTextChange(String newText){
-//                StudentcustomListView.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
 
 
         connectionB = findViewById(R.id.student_connection_btn);
