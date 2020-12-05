@@ -106,6 +106,8 @@ public class TutorOngoingCustomListView extends ArrayAdapter<String> {
                         public void onClick(DialogInterface dialog, int which) {
                             //Task: delete meeting from collection, add document to history_meetings
 
+
+
                             //create historyMeeting document and put into history_meetings collection
                             DocumentReference documentReference = fStore.collection("history_meetings").document();
                             Map<String, Object> historyMeeting = new HashMap<>();
