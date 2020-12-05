@@ -103,8 +103,8 @@ public class TutorConnectionActivity extends AppCompatActivity {
                 });
 
                 //set the screen
-                UpcomingList = (ListView) findViewById(R.id.student_upcoming_listview);
-                UpcomingList.setAdapter(TCListView);
+                UpcomingList = (ListView) findViewById(R.id.tutor_upcoming_listview);
+                //UpcomingList.setAdapter(TCListView);
 
             }
             else{
@@ -144,7 +144,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
                     }
                 });
 
-                OngoingList = (ListView) findViewById(R.id.student_ongoing_listview);
+                OngoingList = (ListView) findViewById(R.id.tutor_ongoing_listview);
                 OngoingList.setAdapter(TOCustomListView);
             }
             else{

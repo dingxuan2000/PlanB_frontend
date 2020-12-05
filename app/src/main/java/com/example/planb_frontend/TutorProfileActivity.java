@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +24,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -214,7 +212,7 @@ public class TutorProfileActivity extends AppCompatActivity {
 //            }
 //        });
 
-        connectionB = findViewById(R.id.tutor_connection_btn);
+        connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,7 +222,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
-        historyB = findViewById(R.id.tutor_history_btn);
+        historyB = findViewById(R.id.student_history_btn);
         historyB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,7 +232,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
-        mainB = findViewById(R.id.tutor_main_btn);
+        mainB = findViewById(R.id.student_main_btn);
         mainB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

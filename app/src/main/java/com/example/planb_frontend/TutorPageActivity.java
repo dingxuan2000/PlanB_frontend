@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.planb_backend.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -125,7 +122,7 @@ public class TutorPageActivity extends AppCompatActivity {
         });
 
 
-        connectionB = findViewById(R.id.tutor_connection_btn);
+        connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +132,7 @@ public class TutorPageActivity extends AppCompatActivity {
             }
         });
 
-        historyB = findViewById(R.id.tutor_history_btn);
+        historyB = findViewById(R.id.student_history_btn);
         historyB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +142,7 @@ public class TutorPageActivity extends AppCompatActivity {
             }
         });
 
-        profileB = findViewById(R.id.tutor_profile_btn);
+        profileB = findViewById(R.id.student_profile_btn);
         profileB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
