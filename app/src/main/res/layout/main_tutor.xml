@@ -8,6 +8,7 @@
     android:orientation="vertical"
     >
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <TextView
         android:id="@+id/textView14"
@@ -16,6 +17,8 @@
         android:layout_weight="1"
         android:text="" />
 =======
+=======
+>>>>>>> main
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
         app:queryHint="Search course"
@@ -51,7 +54,11 @@
             android:layout_width="130dp"
             android:layout_height="30dp"
             android:layout_marginLeft="110dp"
+<<<<<<< HEAD
             android:checked="false"
+=======
+            android:checked="true"
+>>>>>>> main
             android:fontFamily="@font/poppins_semibold"
             android:text="On campus"
             />
@@ -72,7 +79,10 @@
             android:layout_height="match_parent" />
     </RelativeLayout>
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
 
     <LinearLayout
         android:layout_width="match_parent"

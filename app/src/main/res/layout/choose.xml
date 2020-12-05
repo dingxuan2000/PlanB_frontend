@@ -71,14 +71,15 @@
             android:gravity="right"
             android:text="Already have an account?" />
 
-        <TextView
-            android:id="@+id/textView12"
+        <Button
+            android:id="@+id/choose_login"
             android:layout_width="67dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="right"
-            android:text="LOGIN IN"
-            android:textColor="#8BC34A" />
+            android:text="LOGIN"
+            android:textColor="#8BC34A"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -12,5 +12,7 @@
     <color name="grey_background">#E5E5E5</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="button">#A8C6A0</color>
+    <color name="green">#A8C6A0</color>
 
 </resources>
