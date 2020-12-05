@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="106dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/padding"
             android:layout_width="393dp"
-            android:layout_height="39dp" />
+            android:layout_height="31dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -46,209 +47,76 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="186dp"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="74dp"
+                android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                app:srcCompat="@drawable/meet_icon" />
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                app:srcCompat="@drawable/ongoing_icon" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/Ongoingtitle"
                 android:layout_width="141dp"
                 android:layout_height="63dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center|left"
-                android:text="Meet"
+                android:text="Ongoing"
                 android:textColor="#373535"
                 android:textSize="25sp" />
+
         </LinearLayout>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:id="@+id/meet">
-
-        <ImageView
-            android:id="@+id/meet_pic"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/student1" />
-
-        <LinearLayout
+        <ListView
+            android:id="@+id/student_ongoing_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="131dp" />
 
-            <TextView
-                android:id="@+id/meet_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif"
-                android:text="Zihao Chen"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/meet_major"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shape1"
-                    android:gravity="center"
-                    android:text="Computer Science"
-                    android:textColor="#FFFFFF" />
-
-
-                <TextView
-                    android:id="@+id/meet_course"
-                    android:layout_width="66dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/shape1"
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:text="cse 110"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/meet_start_time"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="start time: 9:10"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="86dp"
-                android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                app:srcCompat="@drawable/coming_icon" />
-
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="145dp"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center|left"
-                android:text="Upcoimg"
-                android:textColor="#373535"
-                android:textSize="25sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:id="@+id/upcoming">
+        android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/upcoming_pic"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/student1" />
+            android:id="@+id/imageView9"
+            android:layout_width="74dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:scaleX="0.65"
+            android:scaleY="0.65"
+            app:srcCompat="@drawable/upcoming_icon" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/upcoming_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif"
-                android:text="Zihao Chen"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/upcoming_major"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shape1"
-                    android:gravity="center"
-                    android:text="Computer Science"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/upcoming_course"
-                    android:layout_width="66dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/shape1"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="cse 110"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/upcoming_start_time"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="start time: 9:10"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/upcomingtitle"
+            android:layout_width="155dp"
+            android:layout_height="52dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center|left"
+            android:text="Upcoming"
+            android:textColor="#373535"
+            android:textSize="25sp" />
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/student_upcoming_listview"
+        android:layout_width="match_parent"
+        android:layout_height="357dp" />
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="299dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center|bottom"
         android:orientation="horizontal">
 
@@ -258,36 +126,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/studenthomebtn" />
+            app:srcCompat="@drawable/homebar" />
 
         <ImageView
-            android:id="@+id/tutor_connection_btn"
+            android:id="@+id/student_connection_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/studentconnectionbtn1" />
-
-        <ImageView
-            android:id="@+id/submit_ticket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/studentaddbtn" />
+            app:srcCompat="@drawable/connectionbar1" />
 
         <ImageView
             android:id="@+id/student_history_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/studenthistorybtn" />
+            app:srcCompat="@drawable/historybar" />
 
         <ImageView
             android:id="@+id/student_profile_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/studentprofilebtn" />
-
+            app:srcCompat="@drawable/profilebar" />
     </LinearLayout>
 </LinearLayout>
