@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.planb_backend.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -59,7 +60,13 @@ public class StudentConnectionActivity extends AppCompatActivity {
 
         Intent prevIntent = getIntent();
         studentUser = (User) prevIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-        student_id = studentUser.getId();
+        if (studentUser != null) {
+            student_id = studentUser.getId();
+        }
+        else {
+            student_id = FirebaseAuth.getInstance().getUid();
+        }
+
 
         Query queryAll = fStore.collection(AcceptTicketActivity.MEETING_TABLE_KEY).whereEqualTo(AcceptTicketActivity.STUDENT_ID_KEY, student_id);
         Query queryUpcoming;
