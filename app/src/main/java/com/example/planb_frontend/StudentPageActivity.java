@@ -45,7 +45,7 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
     ListView tutor_rank;
     private ArrayList<tutorInfo> tutorList= new ArrayList<>();
     private ArrayList<tutorCourse> tutorCourses = new ArrayList<>();
-    String name,major,grade,course_1,course_2,course_3,course_4,course_5, tutorId,uid;
+    String name,major,grade,course_1,course_2,course_3,course_4, tutorId,uid;
     private tutorCourse tC;
 //    tutorInfo ti;
     StudentCustomListView myListview;
@@ -72,6 +72,15 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
         user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         String userId = user.getId();
         System.out.println("once we entered homepage, the userId: "+ userId);
+
+        // Search Function
+        search = (EditText) findViewById(R.id.student_search_bar);
+        tutor_rank = (ListView) findViewById(R.id.tutor_listview);
+
+        search.addTextChangedListener(this);
+
+        //studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
+        myListview = new StudentCustomListView(this, tutorList);
 
 //        Log.d("DEBUG", userId);
         /**
@@ -125,14 +134,7 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
 //            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
 //        }
 
-        // Search Function
-        search = (EditText) findViewById(R.id.search_bar);
-        tutor_rank = (ListView) findViewById(R.id.tutor_listview);
 
-        search.addTextChangedListener(this);
-
-        //studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
-        myListview = new StudentCustomListView(this, tutorList);
 
         fStore.collection("users")
                 .whereEqualTo("type", "tutor")
@@ -152,12 +154,7 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                         major = doc.getString("major");
                         grade = doc.getString("class_standing");
                         tutorId = doc.getString(StudentRegisterActivity.USER_ID_KEY);
-                        course_1 = "";course_2 = "";course_3 = "";course_4 = "";course_5 = "";
-//                        Log.d("DEBUG COURSE3","begin");
-//                        for(int i=0;i<tutorCourses.size();i++){
-//                            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
-//                        }
-
+                        course_1 = "";course_2 = "";course_3 = "";course_4 = "";
 
                         for(int i=0;i<tutorCourses.size();i++){
 //                            System.out.println("EQUAL: "+tutorCourses.get(i).getUid() + tutorId);
@@ -168,7 +165,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                 course_4 = tutorCourses.get(i).getCourse_4();
                             }
                         }
-//                        Log.d("COURSESEARCH",course_1);
 
 //                        course_1 = doc.getString("course_1");
 //                        course_2 = doc.getString("course_2");
