@@ -206,7 +206,7 @@ public class TutorPageActivity extends AppCompatActivity implements TextWatcher 
                 Intent intent = new Intent(TutorPageActivity.this, AcceptTicketActivity.class);
 
                 intent.putExtra("tutorUser", passUser);
-                intent.putExtra(AcceptTicketActivity.STUDENT_ID_KEY, names.get(position));
+                intent.putExtra(AcceptTicketActivity.STUDENT_ID_KEY, student_id.get(position));
                 intent.putExtra(AcceptTicketActivity.COMMENT_KEY, comment.get(position));
                 intent.putExtra(AcceptTicketActivity.TIME_PERIOD_KEY, time.get(position));
                 intent.putExtra(SubmitTicketActivity.COURSE_CODE_KEY, course.get(position));
