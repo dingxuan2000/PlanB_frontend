@@ -328,28 +328,28 @@
 
 
         <ImageView
-            android:id="@+id/tutor_main_btn"
+            android:id="@+id/student_main_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/homebar" />
 
         <ImageView
-            android:id="@+id/tutor_connection_btn"
+            android:id="@+id/student_connection_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/connectionbar" />
 
         <ImageView
-            android:id="@+id/tutor_history_btn"
+            android:id="@+id/student_history_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/historybar" />
 
         <ImageView
-            android:id="@+id/tutor_profile_btn"
+            android:id="@+id/student_profile_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

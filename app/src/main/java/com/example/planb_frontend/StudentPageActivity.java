@@ -2,10 +2,13 @@ package com.example.planb_frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -30,26 +33,38 @@ import java.util.Map;
 
 import static com.example.planb_backend.service.FCMService.FCM_TAG;
 
-public class StudentPageActivity extends AppCompatActivity {
+public class StudentPageActivity extends AppCompatActivity implements TextWatcher {
 
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView profileB;
     private ImageView submit_ticketB;
-    private SearchView searchView;
+
+    //CustomListView Search
+    private EditText search;
+    ListView tutor_rank;
+    private ArrayList<tutorInfo> tutorList= new ArrayList<>();
+    private ArrayList<tutorCourse> tutorCourses = new ArrayList<>();
+    String name,major,grade,course_1,course_2,course_3,course_4, tutorId,uid;
+    private tutorCourse tC;
+//    tutorInfo ti;
+    StudentCustomListView myListview;
 
     private User user;
     public static final  String TAG="StudentPageActivity";
 
     //create custom adapter
-    ListView tutor_rank;
+
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     ArrayList<String> tutor_name = new ArrayList<String>();
     ArrayList<String> tutor_major = new ArrayList<String>();
     ArrayList<String> tutor_grade = new ArrayList<String>();
+    ArrayList<String> tutor_id = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_student);
 
         Intent preIntent = getIntent();
         //if the user already has a ticket in firebase, then stop jump to the SubmitTicket page.
@@ -57,6 +72,15 @@ public class StudentPageActivity extends AppCompatActivity {
         user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         String userId = user.getId();
         System.out.println("once we entered homepage, the userId: "+ userId);
+
+        // Search Function
+        search = (EditText) findViewById(R.id.student_search_bar);
+        tutor_rank = (ListView) findViewById(R.id.tutor_listview);
+
+        search.addTextChangedListener(this);
+
+        //studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
+        myListview = new StudentCustomListView(this, tutorList);
 
 //        Log.d("DEBUG", userId);
         /**
@@ -72,7 +96,45 @@ public class StudentPageActivity extends AppCompatActivity {
                 });
 
 
-        studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
+        fStore.collection(AddCourses.PREFERRED_COURSES_KEY).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    for(QueryDocumentSnapshot docCourse : task.getResult()){
+                        uid = docCourse.getId();
+
+                        course_1 = docCourse.getString("course_1");
+                        course_2 = docCourse.getString("course_2");
+                        course_3 = docCourse.getString("course_3");
+                        course_4 = docCourse.getString("course_4");
+                        //course_5 = docCourse.getString("course_5");
+//                        Log.d("GETUID",uid);
+//                        Log.d("GETCOURSE1",course_1);
+//                        Log.d("GETCOURSE2",course_2);
+//                        Log.d("GETCOURSE3",course_3);
+//                        Log.d("GETCOURSE4",course_4);
+                        tC = new tutorCourse(uid,course_1,course_2,course_3,course_4);
+                        tutorCourses.add(tC);
+
+                    }
+                } else {
+                    Log.e("tag", task.getException().toString());
+                    Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
+                }
+//                Log.d("DEBUG COURSE1","begin");
+//                for(int i=0;i<tutorCourses.size();i++){
+//                    Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
+//                }
+            }
+         });
+
+//        Log.d("DEBUG COURSE2","begin");
+//        for(int i=0;i<tutorCourses.size();i++){
+//            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
+//        }
+
+
 
         fStore.collection("users")
                 .whereEqualTo("type", "tutor")
@@ -83,40 +145,44 @@ public class StudentPageActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot doc : task.getResult()){
-                        tutor_name.add(doc.getString("preferred_name"));
-                        tutor_major.add(doc.getString("major"));
-                        //tutor_grade.add(doc.get("course_code").toString());
-                        tutor_grade.add(doc.getString("class_standing"));
-                        tutor_rank.setAdapter(StudentcustomListView);
+//                        tutor_name.add(doc.getString("preferred_name"));
+//                        tutor_major.add(doc.getString("major"));
+//                        //tutor_grade.add(doc.get("course_code").toString());
+//                        tutor_grade.add(doc.getString("class_standing"));
+//                        tutor_rank.setAdapter(StudentcustomListView);
+                        name = doc.getString("preferred_name");
+                        major = doc.getString("major");
+                        grade = doc.getString("class_standing");
+                        tutorId = doc.getString(StudentRegisterActivity.USER_ID_KEY);
+                        course_1 = "";course_2 = "";course_3 = "";course_4 = "";
+
+                        for(int i=0;i<tutorCourses.size();i++){
+//                            System.out.println("EQUAL: "+tutorCourses.get(i).getUid() + tutorId);
+                            if(tutorCourses.get(i).getUid().equals(tutorId)){
+                                course_1 = tutorCourses.get(i).getCourse_1();
+                                course_2 = tutorCourses.get(i).getCourse_2();
+                                course_3 = tutorCourses.get(i).getCourse_3();
+                                course_4 = tutorCourses.get(i).getCourse_4();
+                            }
+                        }
+
+//                        course_1 = doc.getString("course_1");
+//                        course_2 = doc.getString("course_2");
+//                        course_3 = doc.getString("course_3");
+//                        course_4 = doc.getString("course_4");
+//                        course_5 = doc.getString("course_5");
+
+                        tutorInfo ti = new tutorInfo(name, major,grade,course_1,course_2
+                                ,course_3,course_4);
+                        tutorList.add(ti);
+                        tutor_rank.setAdapter(myListview);
                     }
                 }
             }
         });
 
-
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_student);
-
-
         tutor_rank = findViewById(R.id.tutor_listview);
-        tutor_rank.setAdapter(StudentcustomListView);
-
-        //search view
-//        searchView = findViewById(R.id.search_bar);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-//            @Override
-//            public boolean onQueryTextSubmit(String text){
-//                StudentcustomListView.getFilter().filter(text);
-//                tutor_rank.setAdapter(StudentcustomListView);
-//                return true;
-//            }
-//            @Override
-//            public boolean onQueryTextChange(String newText){
-//                StudentcustomListView.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
+        tutor_rank.setAdapter(myListview);
 
 
         connectionB = findViewById(R.id.student_connection_btn);
@@ -302,6 +368,7 @@ public class StudentPageActivity extends AppCompatActivity {
             }
         });
 
+
 //        submit_ticketB = findViewById(R.id.student_submit_ticket);
 //        submit_ticketB.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -321,6 +388,21 @@ public class StudentPageActivity extends AppCompatActivity {
 //        });
 
 
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        this.myListview.getFilter().filter(s);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
 
     }
 

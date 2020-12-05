@@ -24,7 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.example.planb_backend.User;
-import com.example.planb_frontend.StudentRegisterActivity;
+//import com.example.planb_frontend.StudentRegisterActivity;
 
 import org.w3c.dom.Text;
 
