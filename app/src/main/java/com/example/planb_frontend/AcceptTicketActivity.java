@@ -51,8 +51,6 @@ public class AcceptTicketActivity extends AppCompatActivity {
     public static final String STATUS_KEY= "status";
     public static final String STUDENT_ID_KEY = "student_id";
     public static final String TUTOR_ID_KEY = "tutor_id";
-    public static final String STUDENT_RATING_KEY = "student_rating";
-    public static final String TUTOR_RATING_KEY = "tutor_rating";
     public static final String COURSE_KEY = "course";
     public static final String MEETING_TABLE_KEY = "meetings";
 
@@ -64,16 +62,13 @@ public class AcceptTicketActivity extends AppCompatActivity {
     //Meeting Status
     public static final String meetingUninitiated = "Uninitiated";
     public static final String meetingOngoing = "Ongoing";
-    public static final String meetingCompleted = "Completed";
 
     private String meeting_id;
     private String student_id;
     private String tutor_id;
     private String student_name;
-    // private String major;
-    private String time;   //meeting time slot
+    private String time;   //meeting time period
     private String course;
-    // private String ticket_status;
     private String ticket_id;
     private String comment;
     private String meeting_preference;    // online or offline meeting
@@ -223,7 +218,6 @@ public class AcceptTicketActivity extends AppCompatActivity {
                                     break;
                                 }
 
-
                             }
 
                         }
@@ -286,7 +280,6 @@ public class AcceptTicketActivity extends AppCompatActivity {
 
         DocumentReference dRTicket = fStore.collection("student_ticket").document(ticket_id);
 
-
         documentReference.set(meetings)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -299,6 +292,7 @@ public class AcceptTicketActivity extends AppCompatActivity {
                         dRTicket.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot dr) {
+                                Log.e("WTF", "SUCCESS ENTER");
                                 if (dr.exists()) {
                                     new HttpRequestTask().execute(dr.getString(StudentRegisterActivity.USER_ID_KEY), tutor_id, tutorUser.getPreferred_name());
                                 } else {
@@ -316,6 +310,7 @@ public class AcceptTicketActivity extends AppCompatActivity {
 
 
                         Intent intent = new Intent(AcceptTicketActivity.this, TutorConnectionActivity.class);
+                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, tutorUser);
                         startActivity(intent);
                     }
                 });
@@ -327,13 +322,13 @@ public class AcceptTicketActivity extends AppCompatActivity {
 //                        });
 
         //delete Ticket from database
-        DocumentReference ticketRef = fStore.collection("student_ticket").document(ticket_id);
-        ticketRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("AcceptTicket", "Ticket is accepted and deleted! ");
-            }
-        });
+//        DocumentReference ticketRef = fStore.collection("student_ticket").document(ticket_id);
+//        ticketRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Log.d("AcceptTicket", "Ticket is accepted and deleted! ");
+//            }
+//        });
 
     }
 

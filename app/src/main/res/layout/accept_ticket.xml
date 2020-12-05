@@ -5,24 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:gravity="center|start"
     android:orientation="vertical">
+
 
     <ImageView
         android:id="@+id/backarrow"
-        android:layout_width="wrap_content"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
         app:srcCompat="@drawable/backarrow" />
 
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="Ticket Information"
+        android:textColor="#403E3E"
+        android:textSize="28dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="111dp">
 
         <ImageView
             android:id="@+id/logout"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/student1" />
@@ -33,21 +44,19 @@
             android:id="@+id/illustrate"
             android:layout_width="269dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Zihao Chen"
-            android:textColor="#000000"
+            android:textColor="#3E3D3D"
             android:textSize="20sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/search"
         android:layout_width="331dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
         android:background="@drawable/shape"
         android:backgroundTint="#BCA8C6A0"
         android:fontFamily="@font/poppins_bold"
@@ -62,12 +71,13 @@
     <TextView
         android:id="@+id/tutorPreferences"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center|start"
-        android:text="         Meeting Preferences"
-        android:textSize="20sp" />
+        android:text="Meeting Preferences"
+        android:layout_marginLeft="27dp"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -75,30 +85,19 @@
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/empty"
-            android:layout_width="41dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-
-        <TextView
-            android:id="@+id/empty1"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
         //changed to EditText
 
         <TextView
             android:id="@+id/meeting_preference"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="178dp"
+            android:layout_height="33dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="27dp"
             android:background="@drawable/shape"
             android:backgroundTint="#BCA8C6A0"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
+            android:letterSpacing="0.1"
             android:maxLines="1"
             android:padding="5dp"
             android:text="Offline Tutoring"
@@ -114,12 +113,13 @@
     <TextView
         android:id="@+id/Time_Preference"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15sp"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center|left"
-        android:text="         Time Preference"
-        android:textSize="20sp" />
+        android:text="Time Preference"
+        android:layout_marginLeft="27dp"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -128,51 +128,42 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/empty4"
-            android:layout_width="62dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <TextView
             android:id="@+id/Time_Slot"
-            android:layout_width="114dp"
-            android:layout_height="35dp"
+            android:layout_width="150dp"
+            android:layout_height="33dp"
             android:layout_gravity="center"
             android:background="@drawable/shape"
             android:backgroundTint="#BCA8C6A0"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
+            android:letterSpacing="0.1"
             android:maxLines="1"
             android:padding="5dp"
             android:text="30 Minutes"
             android:textColor="#555555"
+            android:layout_marginLeft="27dp"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/empty5"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-
-        <TextView
-            android:id="@+id/empty7"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/commenttext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15sp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center|left"
+        android:text="Comment"
+        android:layout_marginLeft="27dp"
+        android:textSize="16sp" />
 
 
     <TextView
         android:id="@+id/comment"
-        android:layout_width="265dp"
-        android:layout_height="93dp"
+        android:layout_width="340dp"
+        android:layout_height="121dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/shape1"
-        android:backgroundTint="#EAE9E9"
         android:fontFamily="@font/poppins_bold"
-        android:gravity="left|center_vertical"
         android:hint="Want to leave comments to your tutor?"
         android:inputType="textEmailAddress"
         android:maxLines="1"

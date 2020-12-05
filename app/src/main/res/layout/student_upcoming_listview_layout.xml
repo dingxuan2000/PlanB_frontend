@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="110dp">
+
+    <RelativeLayout
+        android:id="@+id/imageButton"
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+
+
+        <TextView
+            android:id="@+id/student_upcoming_name"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Zanyuan Yang"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/student_upcoming_pnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_below="@+id/student_upcoming_name"
+            android:layout_alignStart="@+id/student_upcoming_name"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="#A8C6A0"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="phone number: 1111111111"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/student_upcoming_time"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_alignTop="@+id/student_upcoming_ccode"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/student_upcoming_ccode"
+            android:background="@drawable/shape"
+            android:backgroundTint="#A8C6A0"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="30 min"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/student_upcoming_ccode"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_below="@+id/student_upcoming_pnumber"
+            android:layout_alignStart="@+id/student_upcoming_pnumber"
+            android:layout_marginLeft="0sp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="#A8C6A0"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="CSE 110"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/cancel_Btn"
+            android:layout_width="143dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/student_upcoming_name"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/shape_grey"
+            android:text="Cancel"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+</LinearLayout>

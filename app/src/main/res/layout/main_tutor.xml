@@ -8,17 +8,19 @@
     android:orientation="vertical"
     >
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_bar"
-        app:queryHint="Search course"
-        app:iconifiedByDefault="false"
-        android:layout_marginTop="20dp"
-        android:layout_width="331dp"
+    <EditText
+        android:id="@+id/tutor_search_bar"
+        android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
         android:background="@drawable/shape1"
+        android:drawableLeft="@drawable/searchicon"
+        android:hint="Search the course"
+        app:iconifiedByDefault="false"
         app:queryBackground="@color/green">
-    </androidx.appcompat.widget.SearchView>
+
+    </EditText>
 
 
     <LinearLayout
@@ -55,7 +57,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="566dp"
+        android:layout_height="562dp"
         android:orientation="vertical">
 
         <ListView
