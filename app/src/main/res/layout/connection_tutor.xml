@@ -85,7 +85,7 @@
             android:background="#525352" />
 
         <ListView
-            android:id="@+id/meet_listview"
+            android:id="@+id/student_ongoing_listview"
             android:layout_width="match_parent"
             android:layout_height="196dp" />
 
@@ -125,7 +125,7 @@
         android:background="#525352" />
 
     <ListView
-        android:id="@+id/upcoming_listview"
+        android:id="@+id/student_upcoming_listview"
         android:layout_width="match_parent"
         android:layout_height="250dp" />
 
