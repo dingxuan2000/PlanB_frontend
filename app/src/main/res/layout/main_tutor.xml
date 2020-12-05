@@ -8,12 +8,71 @@
     android:orientation="vertical"
     >
 
+<<<<<<< Updated upstream
     <TextView
         android:id="@+id/textView14"
         android:layout_width="match_parent"
         android:layout_height="636dp"
         android:layout_weight="1"
         android:text="" />
+=======
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar"
+        app:queryHint="Search course"
+        app:iconifiedByDefault="false"
+        android:layout_marginTop="20dp"
+        android:layout_width="331dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape1"
+        app:queryBackground="@color/green">
+    </androidx.appcompat.widget.SearchView>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/ticket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Student Ticket"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="110dp"
+            android:checked="false"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="On campus"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="566dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+>>>>>>> Stashed changes
 
     <LinearLayout
         android:layout_width="match_parent"
