@@ -104,7 +104,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
 
                 //set the screen
                 UpcomingList = (ListView) findViewById(R.id.tutor_upcoming_listview);
-                //UpcomingList.setAdapter(TCListView);
+                UpcomingList.setAdapter(TCListView);
 
             }
             else{
@@ -156,13 +156,6 @@ public class TutorConnectionActivity extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(), "No Available Meeting", Toast.LENGTH_SHORT).show();
         }
-
-
-
-
-
-
-
 
 
 

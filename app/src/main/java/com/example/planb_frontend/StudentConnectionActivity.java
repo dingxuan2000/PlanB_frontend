@@ -157,8 +157,6 @@ public class StudentConnectionActivity extends AppCompatActivity {
 
 
 
-
-
         mainB = findViewById(R.id.student_main_btn);
         mainB.setOnClickListener(new View.OnClickListener() {
             @Override
