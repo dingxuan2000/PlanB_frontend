@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planb_backend.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,11 +30,17 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TutorPageActivity extends AppCompatActivity {
     private ImageView connectionB;
     private ImageView historyB;
     private ImageView profileB;
+    private Switch switchB;
+
+    public static final  String TAG="TutorPageActivity";
+    public static final String TUTOR_STATUS_KEY = "status";
 
 
     ListView listView;
@@ -155,6 +164,74 @@ public class TutorPageActivity extends AppCompatActivity {
                 Intent intent = new Intent(TutorPageActivity.this, TutorProfileActivity.class);
                 intent.putExtra(StudentRegisterActivity.GET_USER_KEY,passUser);
                 startActivity(intent);
+            }
+        });
+
+        switchB = findViewById(R.id.switch1);
+        //store the tutor's status in preferred_courses collection
+        switchB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check current state of a sWITCH (if switch checked, returns true)
+                //default: false (offCampus)
+
+                String tutorId = passUser.getId();
+                System.out.println(tutorId);
+                Map<String, Object> preferred_courses = new HashMap<>();
+                preferred_courses.put(TUTOR_STATUS_KEY, "null");
+                //Find the document through tutorId (for now).
+                DocumentReference docRef = fStore.collection("preferred_courses").document(tutorId);
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            if(document.exists()){
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                ////store status: "offCampus"
+                                Boolean switchState = switchB.isChecked();
+                                System.out.println("swith status: "+ switchState);
+                                if (switchState == false) {
+                                    preferred_courses.put(TUTOR_STATUS_KEY, "offCampus");
+                                    //update the document
+                                    fStore.collection("preferred_courses").document(tutorId).update(preferred_courses).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG,"Updated the ticket");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e(TAG, "onFailure: ", e);
+                                        }
+                                    });
+                                }else {
+                                    preferred_courses.put(TUTOR_STATUS_KEY, "onCampus");
+                                    //update the document
+                                    fStore.collection("preferred_courses").document(tutorId).update(preferred_courses).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG,"Updated the ticket");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e(TAG, "onFailure: ", e);
+                                        }
+                                    });
+                                }
+                            }else {
+                                Log.d(TAG, "No such document");
+                            }
+                        }else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+
+
+
+
             }
         });
     }
