@@ -103,7 +103,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
                 });
 
                 //set the screen
-                UpcomingList = (ListView) findViewById(R.id.upcoming_listview);
+                UpcomingList = (ListView) findViewById(R.id.tutor_upcoming_listview);
                 UpcomingList.setAdapter(TCListView);
 
             }
@@ -144,7 +144,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
                     }
                 });
 
-                OngoingList = (ListView) findViewById(R.id.meet_listview);
+                OngoingList = (ListView) findViewById(R.id.tutor_ongoing_listview);
                 OngoingList.setAdapter(TOCustomListView);
             }
             else{
@@ -156,13 +156,6 @@ public class TutorConnectionActivity extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(), "No Available Meeting", Toast.LENGTH_SHORT).show();
         }
-
-
-
-
-
-
-
 
 
 

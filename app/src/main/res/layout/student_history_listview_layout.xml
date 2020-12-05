@@ -57,10 +57,10 @@
         <View
             android:id="@+id/line_between"
             android:layout_width="match_parent"
-            android:layout_height="40px"
+            android:layout_height="2px"
             android:layout_below="@+id/name"
             android:layout_marginTop="15dp"
-            android:background="#D0D3D0" />
+            android:background="@color/black" />
     </RelativeLayout>
 
 

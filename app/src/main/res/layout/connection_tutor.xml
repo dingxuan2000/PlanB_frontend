@@ -10,17 +10,17 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="106dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/padding"
             android:layout_width="393dp"
-            android:layout_height="39dp" />
+            android:layout_height="31dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -47,7 +47,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="264dp"
+        android:layout_height="186dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -57,15 +57,15 @@
 
             <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="74dp"
+                android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                app:srcCompat="@drawable/meet_icon" />
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                app:srcCompat="@drawable/ongoing_icon" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/Ongoingtitle"
                 android:layout_width="141dp"
                 android:layout_height="63dp"
                 android:fontFamily="@font/poppins_bold"
@@ -76,18 +76,10 @@
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/line_between1"
-            android:layout_width="380dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="-2dp"
-            android:background="#525352" />
-
         <ListView
-            android:id="@+id/meet_listview"
+            android:id="@+id/tutor_ongoing_listview"
             android:layout_width="match_parent"
-            android:layout_height="196dp" />
+            android:layout_height="131dp" />
 
     </LinearLayout>
 
@@ -98,17 +90,17 @@
 
         <ImageView
             android:id="@+id/imageView9"
-            android:layout_width="86dp"
-            android:layout_height="wrap_content"
+            android:layout_width="74dp"
+            android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            app:srcCompat="@drawable/coming_icon" />
+            android:scaleX="0.65"
+            android:scaleY="0.65"
+            app:srcCompat="@drawable/upcoming_icon" />
 
         <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/upcomingtitle"
+            android:layout_width="155dp"
+            android:layout_height="52dp"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center|left"
             android:text="Upcoming"
@@ -116,18 +108,10 @@
             android:textSize="25sp" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_between2"
-        android:layout_width="380dp"
-        android:layout_height="2dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="-2dp"
-        android:background="#525352" />
-
     <ListView
-        android:id="@+id/upcoming_listview"
+        android:id="@+id/tutor_upcoming_listview"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="357dp" />
 
 
     <LinearLayout
