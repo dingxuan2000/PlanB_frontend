@@ -111,7 +111,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent preIntent = getIntent();
-//                            //after submit ticket sucessful, return to the student_mainPage
+                 //after submit ticket sucessful, return to the student_mainPage
                 Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
                 intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
                 startActivity(intent);
