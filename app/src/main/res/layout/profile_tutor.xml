@@ -92,11 +92,12 @@
             app:srcCompat="@drawable/major" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/star1"
             android:layout_width="150px"
             android:layout_height="150px"
             android:layout_weight="1"
-            app:srcCompat="@drawable/moneyh" />
+            app:srcCompat="@drawable/star" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -107,52 +108,52 @@
 
         <TextView
             android:id="@+id/grade_standing"
-            android:layout_width="wrap_content"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="#000000" />
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:fontFamily="@font/poppins_semibold"/>
 
         <TextView
             android:id="@+id/major"
-            android:layout_width="wrap_content"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
             android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
             android:textColor="#000000" />
 
         <TextView
-            android:id="@+id/prices"
-            android:layout_width="wrap_content"
+            android:id="@+id/rating"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
+            android:gravity="center"
             android:fontFamily="@font/poppins_semibold"
-            android:text="$5/hr"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#000000" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/rating"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="35dp"-->
+<!--        android:fontFamily="@font/poppins_semibold"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Body2"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="18sp" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="13dp" >
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/search_spinner"
-            android:layout_width="250dp"
+            android:layout_width="240dp"
             android:layout_marginLeft="35dp"
             android:layout_height="40dp"
             android:background="@drawable/shape1"
@@ -160,17 +161,11 @@
         <Button
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
             android:background="@drawable/shape1"
             android:id="@+id/confirm"
             android:text="Confirm"/>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/courseadd"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="180dp"-->
-<!--            app:srcCompat="@drawable/courseadd" />-->
     </LinearLayout>
 
 
@@ -178,13 +173,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="15dp">
 
             <Button
                 android:id="@+id/course_1"
-                android:layout_width="70dp"
+                android:layout_width="65dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="35dp"
                 android:background="@drawable/shape1"
                 android:visibility="invisible"/>
 
@@ -197,7 +192,7 @@
 
         <Button
             android:id="@+id/course_2"
-            android:layout_width="70dp"
+            android:layout_width="65dp"
             android:layout_height="40dp"
             android:background="@drawable/shape1"
             android:visibility="invisible"/>
@@ -211,7 +206,7 @@
 
         <Button
             android:id="@+id/course_3"
-            android:layout_width="70dp"
+            android:layout_width="65dp"
             android:layout_height="40dp"
             android:background="@drawable/shape1"
             android:visibility="invisible"/>
@@ -225,7 +220,7 @@
 
         <Button
             android:id="@+id/course_4"
-            android:layout_width="70dp"
+            android:layout_width="65dp"
             android:layout_height="40dp"
             android:background="@drawable/shape1"
             android:visibility="invisible"/>
@@ -245,11 +240,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Contact"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -271,9 +266,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -297,59 +294,47 @@
             android:id="@+id/phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="310dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/shape1"
-        android:text="Submit your unoffiicial transcript"
-        android:textColor="#FBF7F7" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:text="" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
+        android:layout_marginTop="68dp"
         android:gravity="center|bottom">
 
 
         <ImageView
-            android:id="@+id/tutor_main_btn"
+            android:id="@+id/student_main_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/homebar" />
 
         <ImageView
-            android:id="@+id/tutor_connection_btn"
+            android:id="@+id/student_connection_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/connectionbar" />
 
         <ImageView
-            android:id="@+id/tutor_history_btn"
+            android:id="@+id/student_history_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/historybar" />
 
         <ImageView
-            android:id="@+id/tutor_profile_btn"
+            android:id="@+id/student_profile_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

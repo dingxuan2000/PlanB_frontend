@@ -21,7 +21,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -106,7 +105,7 @@ public class TutorHistoryActivity extends AppCompatActivity {
 
         lst=(ListView)findViewById(R.id.listview);
 
-        mainB = findViewById(R.id.tutor_main_btn);
+        mainB = findViewById(R.id.student_main_btn);
         mainB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +115,7 @@ public class TutorHistoryActivity extends AppCompatActivity {
             }
         });
 
-        connectionB = findViewById(R.id.tutor_connection_btn);
+        connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +125,7 @@ public class TutorHistoryActivity extends AppCompatActivity {
             }
         });
 
-        profileB = findViewById(R.id.tutor_profile_btn);
+        profileB = findViewById(R.id.student_profile_btn);
         profileB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

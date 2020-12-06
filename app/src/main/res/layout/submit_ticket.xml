@@ -27,7 +27,7 @@
 
 
     <EditText
-        android:id="@+id/search"
+        android:id="@+id/search_course"
         android:layout_width="331dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
@@ -36,11 +36,12 @@
         android:drawableLeft="@drawable/searchicon"
         android:fontFamily="@font/poppins_bold"
         android:gravity="left|center_vertical"
-        android:hint="Search the course..."
+        android:hint="Enter the course...(such as: CSE 110)"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="16sp" />
+
 
     <TextView
         android:id="@+id/tutorPreferences"

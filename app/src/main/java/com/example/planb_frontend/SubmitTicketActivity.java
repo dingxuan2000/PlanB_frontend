@@ -24,7 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.example.planb_backend.User;
-import com.example.planb_frontend.StudentRegisterActivity;
+//import com.example.planb_frontend.StudentRegisterActivity;
 
 import org.w3c.dom.Text;
 
@@ -74,7 +74,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
         //找到控件
         mImArrow = findViewById(R.id.backarrow);
-        mEtCourseCode = findViewById(R.id.search);
+        mEtCourseCode = findViewById(R.id.search_course);
         mTvOnlineTutor = findViewById(R.id.Online_Tutoring);
         mTvOfflineTutor = findViewById(R.id.Offline_Tutoring);
         mTvThirtenMin = findViewById(R.id.thirtyMinutes);

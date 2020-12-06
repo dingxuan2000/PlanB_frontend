@@ -162,6 +162,7 @@ public class AddCourses extends AppCompatActivity {
                 courses.put(COURSE_3_KEY, courses3);
                 courses.put(COURSE_4_KEY, courses4);
                 courses.put(COURSE_5_KEY,courses5);
+                courses.put(TutorPageActivity.TUTOR_STATUS_KEY,"offCampus");
                 documentReference.set(courses).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

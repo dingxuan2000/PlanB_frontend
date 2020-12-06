@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +24,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +35,7 @@ public class TutorProfileActivity extends AppCompatActivity {
     public static final String COURSE_2_KEY = "course_2";
     public static final String COURSE_3_KEY = "course_3";
     public static final String COURSE_4_KEY = "course_4";
-    public static final String RATING_KEY = "rating";
+//    public static final String RATING_KEY = "rating";
 
     private ImageView connectionB;
     private ImageView historyB;
@@ -53,7 +51,7 @@ public class TutorProfileActivity extends AppCompatActivity {
     private TextView major;
     private TextView phoneNumber;
     private TextView email;
-    private TextView rating;
+//    private TextView rating;
 
     private int courseCount = 0;
 
@@ -177,18 +175,18 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
-        rating = findViewById(R.id.rating);
-        DocumentReference tutorRating = fStore.collection(USERS_TABLE_KEY).document(passUser.getId());
-        tutorRating.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists() && documentSnapshot.getLong(RATING_KEY) != null) {
-                    rating.setText("Rating: " + documentSnapshot.getLong(RATING_KEY).toString());
-                } else {
-                    Toast.makeText(getApplicationContext(), "Document does not exists.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        rating = findViewById(R.id.rating);
+//        DocumentReference tutorRating = fStore.collection(USERS_TABLE_KEY).document(passUser.getId());
+//        tutorRating.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if (documentSnapshot.exists()) {
+////                    rating.setText("Rating: " + documentSnapshot.getLong(RATING_KEY).toString());
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Document does not exists.", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
         studentName = findViewById(R.id.tutor_name);
         studentName.setText(passUser.getPreferred_name());
@@ -214,7 +212,7 @@ public class TutorProfileActivity extends AppCompatActivity {
 //            }
 //        });
 
-        connectionB = findViewById(R.id.tutor_connection_btn);
+        connectionB = findViewById(R.id.student_connection_btn);
         connectionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,7 +222,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
-        historyB = findViewById(R.id.tutor_history_btn);
+        historyB = findViewById(R.id.student_history_btn);
         historyB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,7 +232,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
-        mainB = findViewById(R.id.tutor_main_btn);
+        mainB = findViewById(R.id.student_main_btn);
         mainB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
