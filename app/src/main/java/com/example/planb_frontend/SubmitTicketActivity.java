@@ -54,8 +54,6 @@ public class SubmitTicketActivity extends AppCompatActivity {
     private TextView mTvOneHr;
     private TextView mTvTwoHrs;
 
-    private Boolean play = false;
-
     private EditText mEtComment;
     private Button mBtnSubmit;
 
@@ -101,70 +99,38 @@ public class SubmitTicketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Initially, set the button to unclicked condition
-                if(play){
-                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_green);
-                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
-                    tutorPre = mTvOnlineTutor.getText().toString();
-                }
-                else {
-                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
+                mTvOnlineTutor.setBackgroundResource(R.drawable.shape_green);
+                mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
+                tutorPre = mTvOnlineTutor.getText().toString();
             }
         });
 
         mTvOfflineTutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_green);
-                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
-                    tutorPre = mTvOfflineTutor.getText().toString();
-                }
-                else {
-                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
+                mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
+                mTvOfflineTutor.setBackgroundResource(R.drawable.shape_green);
+                tutorPre = mTvOfflineTutor.getText().toString();
             }
         });
 
         mTvThirtenMin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_green);
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
-
-                    timePre = mTvThirtenMin.getText().toString();
-                }
-                else {
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
-
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_green);
+                mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvThirtenMin.getText().toString();
             }
         });
 
         mTvOneHr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_green);
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
-
-                    timePre = mTvOneHr.getText().toString();
-                }
-                else {
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
-
+                mTvOneHr.setBackgroundResource(R.drawable.shape_green);
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvOneHr.getText().toString();
             }
         });
 
@@ -173,17 +139,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvTwoHrs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_green);
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
-
-                    timePre = mTvTwoHrs.getText().toString();
-                }
-                else {
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_green);
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvTwoHrs.getText().toString();
             }
         });
 
