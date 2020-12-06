@@ -216,12 +216,14 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
         });
 
         submit_ticketB = findViewById(R.id.student_submit_ticket);
+        Boolean[] flag = {false};//initialize a boolean flag, if the user can submit ticket, then reset the flag to be true!
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent lastIntent = getIntent();
                 user = (User)lastIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
                 System.out.println("Once we loginned in again, userId:" + userId);
+
                 fStore.collection("student_ticket").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -239,28 +241,31 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                 System.out.println("document.get(user id): " + document.get("user id"));
                                 //if document.get("user is") is null, then allows the user to submit ticket!
 
-                                //case 2: if user id is null, which means count=1, so we only have the initial empty meeting!
+                                /** case 1: we only have one empty field in the collection,
+                                    so the user id we get is null and it's an empty field, then reset the flag to be true
+                                    means may be it can submit ticket. But we also need to check the meeting collection!
+                                 **/
+                                // count=1, so we only have the initial empty meeting!
                                 //这和我写的acceptTicketActivity的case2是一个意思!
                                 Map<String, Object> map = document.getData();
                                 if(document.get("user id") == null && map.size() != 0){
                                     System.out.println("the user doesn't have a ticket2.0!");
-                                    System.out.println("compare ids: " + document.get("user id"));
-                                    System.out.println(userId);
-                                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-                                    startActivity(intent);
+                                    flag[0] = true;
+                                    System.out.println("case1, only have one empty field: " + flag[0]);
+//                                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                    startActivity(intent);
                                     break;
                                 }
-                                //if the empty documnet is at the last one, then we need to allow the user
+                                //case2: if the empty document is at the last one, then we need to allow the user
                                 // to submit ticket!
                                 if(map.size() == 0){
                                     if(count == sizeDoc){
-                                        System.out.println("the user doesn't have a ticket!");
-                                        System.out.println("compare ids: " + document.get("user id"));//null
-                                        System.out.println(userId);
-                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-                                        startActivity(intent);
+                                        flag[0] = true;
+                                        System.out.println("case2, empty field is the last one: " + flag[0]);
+//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                        startActivity(intent);
                                         break;
                                     }
                                     //skip the null field
@@ -270,19 +275,18 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
 
                                 if(count == sizeDoc){
                                     System.out.println("we have reached the end!");
-                                    System.out.println("Passed in: " + userId);
                                     //then check the last document's user id
                                     if(!(document.get("user id").equals(userId))){
-                                        System.out.println("the user doesn't have a ticket!");
-                                        System.out.println("compare ids: " + document.get("user id"));
-                                        System.out.println(userId);
-                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-                                        startActivity(intent);
+                                        flag[0] = true;
+                                        System.out.println("case3, reached to the last one, still not find this userId: " + flag[0]);
+
+//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                        startActivity(intent);
                                         break;
                                     }else{
-                                        System.out.println("the user has already had a ticket: " + document.get("user id"));
-                                        Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                        flag[0] = false;
+//                                        Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
                                         break;
 
                                     }
@@ -294,8 +298,8 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                     continue;
                                 }
                                 if(document.get("user id").equals(userId)) {
-                                    System.out.println("the user has already had a ticket: " + document.get("user id"));
-                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                    flag[0] = false;
+//                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
                                     break;
                                 }
 
@@ -311,6 +315,135 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                         }
                     }
                 });
+
+                System.out.println("after traversing the tickets collection, the current flag is: "+flag[0]);
+                //test meeting collection!
+                fStore.collection("meetings").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            int sizeDoc = 0;
+                            //first, get the size of meetings collection
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                sizeDoc++;
+                            }
+
+                            int count = 0;
+                            //traverse the meeting collection
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                count++;
+                                System.out.println("sizeDoc: "+ sizeDoc);
+                                System.out.println("count: " + count);
+                                System.out.println("document.get(student_id): " + document.get("student_id"));
+                                //if document.get("user is") is null, then allows the user to submit ticket!
+
+                                /** case 1: we only have one empty field in the collection,
+                                 so the student_id we get is null and it's an empty field, then reset the flag to be true
+                                 means may be it can submit ticket. But we also need to check the meeting collection!
+                                 **/
+                                //这和我写的acceptTicketActivity的case2是一个意思!
+                                Map<String, Object> map = document.getData();
+                                if(document.get("student_id") == null && map.size() != 0){
+                                    System.out.println("the user doesn't have a meeting2.0!");
+                                    System.out.println("compare ids: " + document.get("student_id"));
+                                    System.out.println(userId);
+                                    //if previous flag is true, then also set flag to be true; else, it should still be false!
+                                    if(flag[0] == true){
+                                        flag[0] = true;
+                                    }else {
+                                        flag[0] = false;
+                                    }
+                                    System.out.println("meeting case1, only have one empty field: " + flag[0]);
+
+//                                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                    startActivity(intent);
+                                    break;
+                                }
+                                //case2: if the empty document is at the last one, then we need to allow the user
+                                // to submit ticket!
+                                if(map.size() == 0){
+                                    if(count == sizeDoc){
+                                        System.out.println("the user doesn't have a meeting!");
+                                        System.out.println("compare ids: " + document.get("student_id"));//null
+                                        System.out.println(userId);
+                                        //if previous flag is true, then also set flag to be true; else, it should still be false!
+                                        if(flag[0] == true){
+                                            flag[0] = true;
+                                        }else {
+                                            flag[0] = false;
+                                        }
+                                        System.out.println("meeting case2, empty field is the last one: " + flag[0]);
+//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                        startActivity(intent);
+                                        break;
+                                    }
+                                    //skip the null field
+                                    Log.d(TAG, "Initial documnet is empty! Skip it");
+                                    continue;
+                                }
+
+                                //case3: when reach to the last document!
+                                if(count == sizeDoc){
+                                    System.out.println("we have reached the end!");
+                                    System.out.println("Passed in: " + userId);
+                                    //then check the last document's user id
+                                    if(!(document.get("student_id").equals(userId))){
+                                        System.out.println("the user doesn't have a meeting!");
+                                        System.out.println("compare ids: " + document.get("student_id"));
+                                        System.out.println(userId);
+                                        //if previous flag is true, then also set flag to be true; else, it should still be false!
+                                        if(flag[0] == true){
+                                            flag[0] = true;
+                                        }else {
+                                            flag[0] = false;
+                                        }
+//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                        startActivity(intent);
+                                        break;
+                                    }else{
+                                        flag[0] = false;
+                                        System.out.println("the user has already had a meeting: " + document.get("student_id"));
+//                                        Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                        break;
+
+                                    }
+                                }
+                                Log.d(TAG,document.get("student_id") + "=>" + document.getData());
+                                if(!(document.get("student_id").equals(userId))){
+                                    System.out.println(document.get("student_id"));
+                                    System.out.println(userId);
+                                    continue;
+                                }
+                                if(document.get("student_id").equals(userId)) {
+                                    flag[0] = false;
+//                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+
+
+                            }
+                            //test
+//                            System.out.println("the user doesn't have a ticket: " + userId);
+//                            Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
+//                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                            startActivity(intent);
+                        }else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+                System.out.println("after traversing both two collections, flag is: "+ flag[0]);
+                if(flag[0] == true){
+                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                }
 
 //                String ticketId = preIntent.getStringExtra(SubmitTicketActivity.GET_TICKET_KEY);
 //                System.out.println("when we come back to homepage, ticketId: " + ticketId);
@@ -335,7 +468,28 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
 //                    }
 //                });
 //
-//                //我需要从firebase中的每个ticket中查找是否有这个userId
+                //我需要从firebase中的每个ticket中查找是否有这个userId
+//                Query queryTickets;
+//                Query queryMeetings;
+//                queryTickets = fStore.collection("student_ticket").whereEqualTo("user id", userId);
+//                queryMeetings = fStore.collection("meetings").whereEqualTo("student_id", userId);
+//                //1.if the student has a ticket in queryTickets or has a meeting in queryMeetings, then not allowed to submit ticket.
+//                //2. if the student doesn't have a ticket in queryTickets and
+//                if(queryTickets == null && queryMeetings== null){
+//                    //submit ticket
+//                    System.out.println("the user doesn't have a ticket2.0!");
+//                    System.out.println("queryTickets is: " + queryTickets);
+//                    System.out.println(userId);
+//                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                    startActivity(intent);
+//                }else{
+//                    //not allowed
+////                    System.out.println("the user has already had a ticket: " + document.get("user id"));
+//                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+//                }
+
+
 //                fStore.collection("student_ticket").whereEqualTo("user id", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //                    @Override
 //                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
