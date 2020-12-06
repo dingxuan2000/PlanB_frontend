@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         startActivity(intent);
                                                         Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                                     }
-                                                    Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+//                                                    Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                                                 } else {
                                                     Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
                                                 }

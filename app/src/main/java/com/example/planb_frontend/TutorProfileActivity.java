@@ -317,7 +317,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(TutorProfileActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(TutorProfileActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
                     }
                 });
 

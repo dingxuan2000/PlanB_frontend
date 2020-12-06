@@ -71,7 +71,7 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
         //1.check if the userId has already in student_collection
         user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         String userId = user.getId();
-        System.out.println("once we entered homepage, the userId: "+ userId);
+//        System.out.println("once we entered homepage, the userId: "+ userId);
 
         // Search Function
         search = (EditText) findViewById(R.id.student_search_bar);
@@ -82,7 +82,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
         //studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
         myListview = new StudentCustomListView(this, tutorList);
 
-//        Log.d("DEBUG", userId);
         /**
          * Subscribe to current user's message channel
          * */
@@ -108,12 +107,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                         course_2 = docCourse.getString("course_2");
                         course_3 = docCourse.getString("course_3");
                         course_4 = docCourse.getString("course_4");
-                        //course_5 = docCourse.getString("course_5");
-//                        Log.d("GETUID",uid);
-//                        Log.d("GETCOURSE1",course_1);
-//                        Log.d("GETCOURSE2",course_2);
-//                        Log.d("GETCOURSE3",course_3);
-//                        Log.d("GETCOURSE4",course_4);
                         tC = new tutorCourse(uid,course_1,course_2,course_3,course_4);
                         tutorCourses.add(tC);
 
@@ -122,17 +115,9 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                     Log.e("tag", task.getException().toString());
                     Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
                 }
-//                Log.d("DEBUG COURSE1","begin");
-//                for(int i=0;i<tutorCourses.size();i++){
-//                    Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
-//                }
             }
          });
 
-//        Log.d("DEBUG COURSE2","begin");
-//        for(int i=0;i<tutorCourses.size();i++){
-//            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
-//        }
 
 
 
@@ -145,11 +130,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot doc : task.getResult()){
-//                        tutor_name.add(doc.getString("preferred_name"));
-//                        tutor_major.add(doc.getString("major"));
-//                        //tutor_grade.add(doc.get("course_code").toString());
-//                        tutor_grade.add(doc.getString("class_standing"));
-//                        tutor_rank.setAdapter(StudentcustomListView);
                         name = doc.getString("preferred_name");
                         major = doc.getString("major");
                         grade = doc.getString("class_standing");
@@ -166,11 +146,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                             }
                         }
 
-//                        course_1 = doc.getString("course_1");
-//                        course_2 = doc.getString("course_2");
-//                        course_3 = doc.getString("course_3");
-//                        course_4 = doc.getString("course_4");
-//                        course_5 = doc.getString("course_5");
 
                         tutorInfo ti = new tutorInfo(name, major,grade,course_1,course_2
                                 ,course_3,course_4);

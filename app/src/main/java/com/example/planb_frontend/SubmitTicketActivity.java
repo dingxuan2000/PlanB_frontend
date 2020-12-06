@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +49,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
     //声明控件
     private ImageView mImArrow;
-    private EditText mEtCourseCode;
+//    private EditText mEtCourseCode;
     private TextView mTvOnlineTutor;
     private TextView mTvOfflineTutor;
 
@@ -58,6 +61,8 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
     private EditText mEtComment;
     private Button mBtnSubmit;
+    private Spinner mCourse;
+    private String course;
 
     private User user;
 
@@ -74,7 +79,8 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
         //找到控件
         mImArrow = findViewById(R.id.backarrow);
-        mEtCourseCode = findViewById(R.id.search_course);
+//        mEtCourseCode = findViewById(R.id.search_course);
+        mCourse = findViewById(R.id.course);
         mTvOnlineTutor = findViewById(R.id.Online_Tutoring);
         mTvOfflineTutor = findViewById(R.id.Offline_Tutoring);
         mTvThirtenMin = findViewById(R.id.thirtyMinutes);
@@ -82,6 +88,24 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvTwoHrs = findViewById(R.id.twoHours);
         mEtComment = findViewById(R.id.comment);
         mBtnSubmit = findViewById(R.id.submit);
+
+        //courses spinner
+        ArrayAdapter<CharSequence> adapter_course = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_spinner_dropdown_item);
+        adapter_course.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCourse.setAdapter(adapter_course);
+        mCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                course = adapterView.getItemAtPosition(i).toString();
+                mCourse.setPrompt("Change Marked");
+                System.out.println("it works...   ");
+                System.out.println("the selected course is: " + course);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
 
 
 
@@ -194,14 +218,14 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String courseCode = mEtCourseCode.getText().toString();
+//                String courseCode = mEtCourseCode.getText().toString();
                 //set status to be finished later. Once submit ticket sucessfully, set status to be
                 //"submitted"
 
                 String comment = mEtComment.getText().toString();
 
-                if(TextUtils.isEmpty(courseCode)){
-                    mEtCourseCode.setError("Please enter course code");
+                if(TextUtils.isEmpty(course)){
+                    mBtnSubmit.setError("Please enter course code");
                 }else if(TextUtils.isEmpty(tutorPre)){
                     mTvOnlineTutor.setError("Please choose your preferred tutor way");
                 }else if(TextUtils.isEmpty(timePre)){
@@ -233,7 +257,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     Map<String, Object> student_ticket = new HashMap<>();
                     //save the current userId
                     student_ticket.put(StudentRegisterActivity.USER_ID_KEY,userId);
-                    student_ticket.put(COURSE_CODE_KEY, courseCode);
+                    student_ticket.put(COURSE_CODE_KEY, course);
                     student_ticket.put(TUTOR_PREFERENCE_KEY, tutorPre);
                     student_ticket.put(TIME_PREFERENCE_KEY, timePre);
                     student_ticket.put(COMMENT_KEY, comment);

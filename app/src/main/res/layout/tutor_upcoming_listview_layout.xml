@@ -22,51 +22,47 @@
             android:textColor="@color/black"
             android:textSize="24sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tutor_conncetion_pnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/shape_green"
+            android:backgroundTint="#A8C6A0"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="phone number: 1111111111"
+            android:textColor="#ffffff"
+            android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/tutor_conncetion_pnumber"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/shape_green"
-                android:backgroundTint="#A8C6A0"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:text="phone number: 1111111111"
-                android:textColor="#ffffff"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/tutor_connection_ccode"
-                android:layout_width="wrap_content"
-                android:layout_height="23dp"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/shape_green"
-                android:backgroundTint="#A8C6A0"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:text="CSE 110"
-                android:textColor="#ffffff"
-                android:textSize="12sp" />
-
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tutor_connection_ccode"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_below="@+id/tutor_conncetion_pnumber"
+            android:layout_alignStart="@+id/tutor_conncetion_pnumber"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="#A8C6A0"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="CSE 110"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
 
 
         <TextView
             android:id="@+id/tutor_connection_time"
             android:layout_width="wrap_content"
             android:layout_height="23dp"
-            android:layout_marginLeft="90sp"
-            android:layout_marginTop="77sp"
-            android:background="@drawable/shape_green"
+            android:layout_alignTop="@+id/tutor_connection_ccode"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/tutor_connection_ccode"
+            android:background="@drawable/shape"
             android:backgroundTint="#A8C6A0"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
