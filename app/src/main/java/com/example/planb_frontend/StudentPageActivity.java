@@ -246,15 +246,11 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                     means may be it can submit ticket. But we also need to check the meeting collection!
                                  **/
                                 // count=1, so we only have the initial empty meeting!
-                                //这和我写的acceptTicketActivity的case2是一个意思!
                                 Map<String, Object> map = document.getData();
                                 if(document.get("user id") == null && map.size() != 0){
                                     System.out.println("the user doesn't have a ticket2.0!");
                                     flag[0] = true;
                                     System.out.println("case1, only have one empty field: " + flag[0]);
-//                                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                                    startActivity(intent);
                                     break;
                                 }
                                 //case2: if the empty document is at the last one, then we need to allow the user
@@ -263,9 +259,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                     if(count == sizeDoc){
                                         flag[0] = true;
                                         System.out.println("case2, empty field is the last one: " + flag[0]);
-//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                                        startActivity(intent);
                                         break;
                                     }
                                     //skip the null field
@@ -279,14 +272,9 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                     if(!(document.get("user id").equals(userId))){
                                         flag[0] = true;
                                         System.out.println("case3, reached to the last one, still not find this userId: " + flag[0]);
-
-//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                                        startActivity(intent);
                                         break;
                                     }else{
                                         flag[0] = false;
-//                                        Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
                                         break;
 
                                     }
@@ -299,7 +287,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                 }
                                 if(document.get("user id").equals(userId)) {
                                     flag[0] = false;
-//                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
                                     break;
                                 }
 
@@ -331,7 +318,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                              so the student_id we get is null and it's an empty field, then reset the flag to be true
                                              means may be it can submit ticket. But we also need to check the meeting collection!
                                              **/
-                                            //这和我写的acceptTicketActivity的case2是一个意思!
                                             Map<String, Object> map = document.getData();
                                             if(document.get("student_id") == null && map.size() != 0){
                                                 System.out.println("the user doesn't have a meeting2.0!");
@@ -344,10 +330,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                                     flag[0] = false;
                                                 }
                                                 System.out.println("meeting case1, only have one empty field: " + flag[0]);
-
-//                                    Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-//                                    intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                                    startActivity(intent);
                                                 break;
                                             }
                                             //case2: if the empty document is at the last one, then we need to allow the user
@@ -364,9 +346,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                                         flag[0] = false;
                                                     }
                                                     System.out.println("meeting case2, empty field is the last one: " + flag[0]);
-//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                                        startActivity(intent);
                                                     break;
                                                 }
                                                 //skip the null field
@@ -389,14 +368,10 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                                     }else {
                                                         flag[0] = false;
                                                     }
-//                                        Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-//                                        intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                                        startActivity(intent);
                                                     break;
                                                 }else{
                                                     flag[0] = false;
                                                     System.out.println("the user has already had a meeting: " + document.get("student_id"));
-//                                        Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
                                                     break;
 
                                                 }
@@ -409,7 +384,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                             }
                                             if(document.get("student_id").equals(userId)) {
                                                 flag[0] = false;
-//                                    Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
                                                 break;
                                             }
 
@@ -424,21 +398,11 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                                         }else {
                                             Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
                                         }
-                                        //test
-//                            System.out.println("the user doesn't have a ticket: " + userId);
-//                            Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
-//                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                            startActivity(intent);
                                     }else {
                                         Log.d(TAG, "Error getting documents: ", task.getException());
                                     }
                                 }
                             });
-                            //test
-//                            System.out.println("the user doesn't have a ticket: " + userId);
-//                            Intent intent = new Intent(StudentPageActivity.this, SubmitTicketActivity.class);
-//                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-//                            startActivity(intent);
                         }else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
