@@ -35,7 +35,7 @@ public class TutorProfileActivity extends AppCompatActivity {
     public static final String COURSE_2_KEY = "course_2";
     public static final String COURSE_3_KEY = "course_3";
     public static final String COURSE_4_KEY = "course_4";
-    public static final String RATING_KEY = "rating";
+//    public static final String RATING_KEY = "rating";
 
     private ImageView connectionB;
     private ImageView historyB;
@@ -51,7 +51,7 @@ public class TutorProfileActivity extends AppCompatActivity {
     private TextView major;
     private TextView phoneNumber;
     private TextView email;
-    private TextView rating;
+//    private TextView rating;
 
     private int courseCount = 0;
 
@@ -175,18 +175,18 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
-        rating = findViewById(R.id.rating);
-        DocumentReference tutorRating = fStore.collection(USERS_TABLE_KEY).document(passUser.getId());
-        tutorRating.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    rating.setText("Rating: " + documentSnapshot.getLong(RATING_KEY).toString());
-                } else {
-                    Toast.makeText(getApplicationContext(), "Document does not exists.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        rating = findViewById(R.id.rating);
+//        DocumentReference tutorRating = fStore.collection(USERS_TABLE_KEY).document(passUser.getId());
+//        tutorRating.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if (documentSnapshot.exists()) {
+////                    rating.setText("Rating: " + documentSnapshot.getLong(RATING_KEY).toString());
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Document does not exists.", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
         studentName = findViewById(R.id.tutor_name);
         studentName.setText(passUser.getPreferred_name());
