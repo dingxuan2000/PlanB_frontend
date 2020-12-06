@@ -106,7 +106,7 @@ public class TutorUpcomingCustomListView extends ArrayAdapter<String> {
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -138,7 +138,7 @@ public class TutorUpcomingCustomListView extends ArrayAdapter<String> {
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
                     }
                 });
 

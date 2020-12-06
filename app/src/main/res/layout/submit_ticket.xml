@@ -25,22 +25,42 @@
         android:text="Submitting a ticket to connect with tutor!"
         android:textSize="18sp" />
 
-
-    <EditText
-        android:id="@+id/search"
-        android:layout_width="331dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/shape1"
-        android:drawableLeft="@drawable/searchicon"
+    <TextView
+        android:id="@+id/illustarte2"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:gravity="left|center_vertical"
-        android:hint="Search the course..."
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="5dp"
-        android:textSize="16sp" />
+        android:layout_marginTop="5dp"
+        android:text="          Please select a course: "
+        android:textSize="14sp"
+        />
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/search_course"-->
+<!--        android:layout_width="331dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:background="@drawable/shape1"-->
+<!--        android:drawableLeft="@drawable/searchicon"-->
+<!--        android:fontFamily="@font/poppins_bold"-->
+<!--        android:gravity="left|center_vertical"-->
+<!--        android:hint="Enter the course...(such as: CSE 110)"-->
+<!--        android:inputType="textEmailAddress"-->
+<!--        android:maxLines="1"-->
+<!--        android:padding="5dp"-->
+<!--        android:textSize="16sp" />-->
+
+    <Spinner
+        android:id="@+id/course"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
 
     <TextView
         android:id="@+id/tutorPreferences"

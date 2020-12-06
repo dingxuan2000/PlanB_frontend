@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +49,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
     //声明控件
     private ImageView mImArrow;
-    private EditText mEtCourseCode;
+//    private EditText mEtCourseCode;
     private TextView mTvOnlineTutor;
     private TextView mTvOfflineTutor;
 
@@ -54,10 +57,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
     private TextView mTvOneHr;
     private TextView mTvTwoHrs;
 
-    private Boolean play = false;
-
     private EditText mEtComment;
     private Button mBtnSubmit;
+    private Spinner mCourse;
+    private String course;
 
     private User user;
 
@@ -74,7 +77,8 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
         //找到控件
         mImArrow = findViewById(R.id.backarrow);
-        mEtCourseCode = findViewById(R.id.search);
+//        mEtCourseCode = findViewById(R.id.search_course);
+        mCourse = findViewById(R.id.course);
         mTvOnlineTutor = findViewById(R.id.Online_Tutoring);
         mTvOfflineTutor = findViewById(R.id.Offline_Tutoring);
         mTvThirtenMin = findViewById(R.id.thirtyMinutes);
@@ -83,13 +87,31 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mEtComment = findViewById(R.id.comment);
         mBtnSubmit = findViewById(R.id.submit);
 
+        //courses spinner
+        ArrayAdapter<CharSequence> adapter_course = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_spinner_dropdown_item);
+        adapter_course.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCourse.setAdapter(adapter_course);
+        mCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                course = adapterView.getItemAtPosition(i).toString();
+                mCourse.setPrompt("Change Marked");
+                System.out.println("it works...   ");
+                System.out.println("the selected course is: " + course);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
 
 
         mImArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent preIntent = getIntent();
-//                            //after submit ticket sucessful, return to the student_mainPage
+                 //after submit ticket sucessful, return to the student_mainPage
                 Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
                 intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
                 startActivity(intent);
@@ -101,70 +123,38 @@ public class SubmitTicketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Initially, set the button to unclicked condition
-                if(play){
-                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_green);
-                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
-                    tutorPre = mTvOnlineTutor.getText().toString();
-                }
-                else {
-                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
+                mTvOnlineTutor.setBackgroundResource(R.drawable.shape_green);
+                mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
+                tutorPre = mTvOnlineTutor.getText().toString();
             }
         });
 
         mTvOfflineTutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_green);
-                    mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
-                    tutorPre = mTvOfflineTutor.getText().toString();
-                }
-                else {
-                    mTvOfflineTutor.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
+                mTvOnlineTutor.setBackgroundResource(R.drawable.shape_grey);
+                mTvOfflineTutor.setBackgroundResource(R.drawable.shape_green);
+                tutorPre = mTvOfflineTutor.getText().toString();
             }
         });
 
         mTvThirtenMin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_green);
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
-
-                    timePre = mTvThirtenMin.getText().toString();
-                }
-                else {
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
-
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_green);
+                mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvThirtenMin.getText().toString();
             }
         });
 
         mTvOneHr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_green);
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
-
-                    timePre = mTvOneHr.getText().toString();
-                }
-                else {
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
-
-
+                mTvOneHr.setBackgroundResource(R.drawable.shape_green);
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvOneHr.getText().toString();
             }
         });
 
@@ -173,17 +163,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvTwoHrs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play){
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_green);
-                    mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
-                    mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
-
-                    timePre = mTvTwoHrs.getText().toString();
-                }
-                else {
-                    mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
-                }
-                play = !play;
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_green);
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvTwoHrs.getText().toString();
             }
         });
 
@@ -194,14 +177,14 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String courseCode = mEtCourseCode.getText().toString();
+//                String courseCode = mEtCourseCode.getText().toString();
                 //set status to be finished later. Once submit ticket sucessfully, set status to be
                 //"submitted"
 
                 String comment = mEtComment.getText().toString();
 
-                if(TextUtils.isEmpty(courseCode)){
-                    mEtCourseCode.setError("Please enter course code");
+                if(TextUtils.isEmpty(course)){
+                    mBtnSubmit.setError("Please enter course code");
                 }else if(TextUtils.isEmpty(tutorPre)){
                     mTvOnlineTutor.setError("Please choose your preferred tutor way");
                 }else if(TextUtils.isEmpty(timePre)){
@@ -233,7 +216,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     Map<String, Object> student_ticket = new HashMap<>();
                     //save the current userId
                     student_ticket.put(StudentRegisterActivity.USER_ID_KEY,userId);
-                    student_ticket.put(COURSE_CODE_KEY, courseCode);
+                    student_ticket.put(COURSE_CODE_KEY, course);
                     student_ticket.put(TUTOR_PREFERENCE_KEY, tutorPre);
                     student_ticket.put(TIME_PREFERENCE_KEY, timePre);
                     student_ticket.put(COMMENT_KEY, comment);

@@ -105,6 +105,7 @@ public class TutorPageActivity extends AppCompatActivity implements TextWatcher 
                             offcampus = false;
                         }
                         switchB.setChecked(!offcampus);
+
                         fStore.collection("student_ticket").whereEqualTo("status", "submitted").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
