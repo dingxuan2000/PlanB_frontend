@@ -2,6 +2,7 @@ package com.example.planb_frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class TutorConnectionActivity extends AppCompatActivity {
 
@@ -30,6 +32,7 @@ public class TutorConnectionActivity extends AppCompatActivity {
     private ImageView profileB;
     private LinearLayout meet;
     private LinearLayout upcoming;
+
 
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
