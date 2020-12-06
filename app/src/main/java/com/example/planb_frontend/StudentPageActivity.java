@@ -72,7 +72,7 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
         //1.check if the userId has already in student_collection
         user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
         String userId = user.getId();
-        System.out.println("once we entered homepage, the userId: "+ userId);
+//        System.out.println("once we entered homepage, the userId: "+ userId);
 
         // Search Function
         search = (EditText) findViewById(R.id.student_search_bar);
@@ -83,7 +83,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
         //studentCustomListView StudentcustomListView=new studentCustomListView(this, tutor_name, tutor_major, tutor_grade);
         myListview = new StudentCustomListView(this, tutorList);
 
-//        Log.d("DEBUG", userId);
         /**
          * Subscribe to current user's message channel
          * */
@@ -109,12 +108,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                         course_2 = docCourse.getString("course_2");
                         course_3 = docCourse.getString("course_3");
                         course_4 = docCourse.getString("course_4");
-                        //course_5 = docCourse.getString("course_5");
-//                        Log.d("GETUID",uid);
-//                        Log.d("GETCOURSE1",course_1);
-//                        Log.d("GETCOURSE2",course_2);
-//                        Log.d("GETCOURSE3",course_3);
-//                        Log.d("GETCOURSE4",course_4);
                         tC = new tutorCourse(uid,course_1,course_2,course_3,course_4);
                         tutorCourses.add(tC);
 
@@ -123,17 +116,9 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                     Log.e("tag", task.getException().toString());
                     Toast.makeText(getApplicationContext(), "Failing", Toast.LENGTH_SHORT).show();
                 }
-//                Log.d("DEBUG COURSE1","begin");
-//                for(int i=0;i<tutorCourses.size();i++){
-//                    Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
-//                }
             }
          });
 
-//        Log.d("DEBUG COURSE2","begin");
-//        for(int i=0;i<tutorCourses.size();i++){
-//            Log.d("COURSES", tutorCourses.get(i).getUid()+tutorCourses.get(i).getCourse_1());
-//        }
 
 
 
@@ -146,11 +131,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot doc : task.getResult()){
-//                        tutor_name.add(doc.getString("preferred_name"));
-//                        tutor_major.add(doc.getString("major"));
-//                        //tutor_grade.add(doc.get("course_code").toString());
-//                        tutor_grade.add(doc.getString("class_standing"));
-//                        tutor_rank.setAdapter(StudentcustomListView);
                         name = doc.getString("preferred_name");
                         major = doc.getString("major");
                         grade = doc.getString("class_standing");
@@ -167,11 +147,6 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
                             }
                         }
 
-//                        course_1 = doc.getString("course_1");
-//                        course_2 = doc.getString("course_2");
-//                        course_3 = doc.getString("course_3");
-//                        course_4 = doc.getString("course_4");
-//                        course_5 = doc.getString("course_5");
 
                         tutorInfo ti = new tutorInfo(name, major,grade,course_1,course_2
                                 ,course_3,course_4);
@@ -216,60 +191,260 @@ public class StudentPageActivity extends AppCompatActivity implements TextWatche
             }
         });
 
+
+        //if the user already has a ticket in firebase, then stop jump to the SubmitTicket page.
+        //1.check if the userId has already in student_collection
         submit_ticketB = findViewById(R.id.student_submit_ticket);
-//        Boolean[] flag = { false };//initialize a boolean flag, if the user can submit ticket, then reset the flag to be true!
+        Boolean[] flag = {false};//initialize a boolean flag, if the user can submit ticket, then reset the flag to be true!
         submit_ticketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent lastIntent = getIntent();
-                user = (User) lastIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+                user = (User)lastIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
                 System.out.println("Once we loginned in again, userId:" + userId);
-                fStore.collection("student_ticket")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    boolean invalidSubmission = false;
-                                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                        if (document.getString("user id") != null && userId.equals(document.getString("user id"))) {
-                                            Log.e(TAG, document.getString("user id"));
-                                            Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
-                                            invalidSubmission = true;
-                                            break;
-                                        }
+
+                fStore.collection("student_ticket").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            int sizeDoc = 0;
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                sizeDoc++;
+                            }
+
+                            int count = 0;
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                count++;
+                                System.out.println("sizeDoc: "+ sizeDoc);
+                                System.out.println("count: " + count);
+                                System.out.println("document.get(user id): " + document.get("user id"));
+                                //if document.get("user is") is null, then allows the user to submit ticket!
+
+                                /** case 1: we only have one empty field in the collection,
+                                 so the user id we get is null and it's an empty field, then reset the flag to be true
+                                 means may be it can submit ticket. But we also need to check the meeting collection!
+                                 **/
+                                // count=1, so we only have the initial empty meeting!
+                                Map<String, Object> map = document.getData();
+                                if(document.get("user id") == null && map.size() != 0){
+                                    System.out.println("the user doesn't have a ticket2.0!");
+                                    flag[0] = true;
+                                    System.out.println("case1, only have one empty field: " + flag[0]);
+                                    break;
+                                }
+                                //case2: if the empty document is at the last one, then we need to allow the user
+                                // to submit ticket!
+                                if(map.size() == 0){
+                                    if(count == sizeDoc){
+                                        flag[0] = true;
+                                        System.out.println("case2, empty field is the last one: " + flag[0]);
+                                        break;
                                     }
-                                    if (!invalidSubmission) {
-                                        fStore.collection("meetings")
-                                                .get()
-                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                        if (task.isSuccessful()) {
-                                                            boolean invalidSubmission = false;
-                                                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                                                if (userId.equals(document.getString("student_id"))) {
-                                                                    Toast.makeText(getApplicationContext(), "Sorry, you are currently in a meeting and can not submit a ticket", Toast.LENGTH_SHORT).show();
-                                                                    invalidSubmission = true;
-                                                                    break;
-                                                                }
-                                                            }
-                                                            if (!invalidSubmission) {
-                                                                Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
-                                                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
-                                                                startActivity(intent);
-                                                            }
-                                                        } else {
-                                                            Log.d(TAG, "Error getting documents: ", task.getException());
-                                                        }
-                                                    }
-                                                });
+                                    //skip the null field
+                                    Log.d(TAG, "Initial documnet is empty! Skip it");
+                                    continue;
+                                }
+
+                                if(count == sizeDoc){
+                                    System.out.println("we have reached the end!");
+                                    //then check the last document's user id
+                                    if(!(document.get("user id").equals(userId))){
+                                        flag[0] = true;
+                                        System.out.println("case3, reached to the last one, still not find this userId: " + flag[0]);
+                                        break;
+                                    }else{
+                                        flag[0] = false;
+                                        break;
+
                                     }
                                 }
+                                Log.d(TAG,document.get("user id") + "=>" + document.getData());
+                                if(!(document.get("user id").equals(userId))){
+                                    System.out.println(document.get("user id"));
+                                    System.out.println(userId);
+                                    continue;
+                                }
+                                if(document.get("user id").equals(userId)) {
+                                    flag[0] = false;
+                                    break;
+                                }
+
+
                             }
-                        });
+                            //then check the meeting collections!!
+                            System.out.println("after traversing the tickets collection, the current flag is: "+flag[0]);
+                            //test meeting collection!
+                            fStore.collection("meetings").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        int sizeDoc = 0;
+                                        //first, get the size of meetings collection
+                                        for(QueryDocumentSnapshot document: task.getResult()){
+                                            sizeDoc++;
+                                        }
+
+                                        int count = 0;
+                                        //traverse the meeting collection
+                                        for(QueryDocumentSnapshot document: task.getResult()){
+                                            count++;
+                                            System.out.println("sizeDoc: "+ sizeDoc);
+                                            System.out.println("count: " + count);
+                                            System.out.println("document.get(student_id): " + document.get("student_id"));
+                                            //if document.get("user is") is null, then allows the user to submit ticket!
+
+                                            /** case 1: we only have one empty field in the collection,
+                                             so the student_id we get is null and it's an empty field, then reset the flag to be true
+                                             means may be it can submit ticket. But we also need to check the meeting collection!
+                                             **/
+                                            Map<String, Object> map = document.getData();
+                                            if(document.get("student_id") == null && map.size() != 0){
+                                                System.out.println("the user doesn't have a meeting2.0!");
+                                                System.out.println("compare ids: " + document.get("student_id"));
+                                                System.out.println(userId);
+                                                //if previous flag is true, then also set flag to be true; else, it should still be false!
+                                                if(flag[0] == true){
+                                                    flag[0] = true;
+                                                }else {
+                                                    flag[0] = false;
+                                                }
+                                                System.out.println("meeting case1, only have one empty field: " + flag[0]);
+                                                break;
+                                            }
+                                            //case2: if the empty document is at the last one, then we need to allow the user
+                                            // to submit ticket!
+                                            if(map.size() == 0){
+                                                if(count == sizeDoc){
+                                                    System.out.println("the user doesn't have a meeting!");
+                                                    System.out.println("compare ids: " + document.get("student_id"));//null
+                                                    System.out.println(userId);
+                                                    //if previous flag is true, then also set flag to be true; else, it should still be false!
+                                                    if(flag[0] == true){
+                                                        flag[0] = true;
+                                                    }else {
+                                                        flag[0] = false;
+                                                    }
+                                                    System.out.println("meeting case2, empty field is the last one: " + flag[0]);
+                                                    break;
+                                                }
+                                                //skip the null field
+                                                Log.d(TAG, "Initial documnet is empty! Skip it");
+                                                continue;
+                                            }
+
+                                            //case3: when reach to the last document!
+                                            if(count == sizeDoc){
+                                                System.out.println("we have reached the end!");
+                                                System.out.println("Passed in: " + userId);
+                                                //then check the last document's user id
+                                                if(!(document.get("student_id").equals(userId))){
+                                                    System.out.println("the user doesn't have a meeting!");
+                                                    System.out.println("compare ids: " + document.get("student_id"));
+                                                    System.out.println(userId);
+                                                    //if previous flag is true, then also set flag to be true; else, it should still be false!
+                                                    if(flag[0] == true){
+                                                        flag[0] = true;
+                                                    }else {
+                                                        flag[0] = false;
+                                                    }
+                                                    break;
+                                                }else{
+                                                    flag[0] = false;
+                                                    System.out.println("the user has already had a meeting: " + document.get("student_id"));
+                                                    break;
+
+                                                }
+                                            }
+                                            Log.d(TAG,document.get("student_id") + "=>" + document.getData());
+                                            if(!(document.get("student_id").equals(userId))){
+                                                System.out.println(document.get("student_id"));
+                                                System.out.println(userId);
+                                                continue;
+                                            }
+                                            if(document.get("student_id").equals(userId)) {
+                                                flag[0] = false;
+                                                break;
+                                            }
+
+
+                                        }
+                                        //After traversing both two collections:
+                                        System.out.println("after traversing both two collections, flag is: "+ flag[0]);
+                                        if(flag[0] == true){
+                                            Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+                                            intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+                                            startActivity(intent);
+                                        }else {
+                                            Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }else {
+                                        Log.d(TAG, "Error getting documents: ", task.getException());
+                                    }
+                                }
+                            });
+                        }else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
             }
         });
+
+//        submit_ticketB = findViewById(R.id.student_submit_ticket);
+////        Boolean[] flag = { false };//initialize a boolean flag, if the user can submit ticket, then reset the flag to be true!
+//        submit_ticketB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent lastIntent = getIntent();
+//                user = (User) lastIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+//                System.out.println("Once we loginned in again, userId:" + userId);
+//                fStore.collection("student_ticket")
+//                        .get()
+//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                if (task.isSuccessful()) {
+//                                    boolean invalidSubmission = false;
+//                                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+//                                        if (document.getString("user id") != null && userId.equals(document.getString("user id"))) {
+//                                            Log.e(TAG, document.getString("user id"));
+//                                            Toast.makeText(getApplicationContext(), "Sorry, you can't submit ticket again!", Toast.LENGTH_SHORT).show();
+//                                            invalidSubmission = true;
+//                                            break;
+//                                        }
+//                                    }
+//                                    if (!invalidSubmission) {
+//                                        fStore.collection("meetings")
+//                                                .get()
+//                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                                    @Override
+//                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                                        if (task.isSuccessful()) {
+//                                                            boolean invalidSubmission = false;
+//                                                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+//                                                                if (userId.equals(document.getString("student_id"))) {
+//                                                                    Toast.makeText(getApplicationContext(), "Sorry, you are currently in a meeting and can not submit a ticket", Toast.LENGTH_SHORT).show();
+//                                                                    invalidSubmission = true;
+//                                                                    break;
+//                                                                }
+//                                                            }
+//                                                            if (!invalidSubmission) {
+//                                                                Intent intent = new Intent(getApplicationContext(), SubmitTicketActivity.class);
+//                                                                intent.putExtra(StudentRegisterActivity.GET_USER_KEY, preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY));
+//                                                                startActivity(intent);
+//                                                            }
+//                                                        } else {
+//                                                            Log.d(TAG, "Error getting documents: ", task.getException());
+//                                                        }
+//                                                    }
+//                                                });
+//                                    }
+//                                }
+//                            }
+//                        });
+//            }
+//        });
 
     }
 

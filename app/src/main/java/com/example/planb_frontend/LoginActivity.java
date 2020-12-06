@@ -84,14 +84,14 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
                             startActivity(intent);
                             Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                         }
                         else {
                             Intent intent = new Intent(getApplicationContext(), StudentPageActivity.class);
                             intent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
                             startActivity(intent);
                             Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         startActivity(intent);
                                                         Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                                                     }
-                                                    Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+//                                                    Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
                                                 } else {
                                                     Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
                                                 }
