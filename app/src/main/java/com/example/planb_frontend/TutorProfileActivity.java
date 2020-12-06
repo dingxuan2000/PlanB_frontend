@@ -182,7 +182,7 @@ public class TutorProfileActivity extends AppCompatActivity {
         tutorRating.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
+                if (documentSnapshot.exists() && documentSnapshot.getLong(RATING_KEY) != null) {
                     rating.setText("Rating: " + documentSnapshot.getLong(RATING_KEY).toString());
                 } else {
                     Toast.makeText(getApplicationContext(), "Document does not exists.", Toast.LENGTH_LONG).show();
