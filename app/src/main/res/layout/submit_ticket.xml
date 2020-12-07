@@ -83,8 +83,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
+
         <TextView
-            android:id="@+id/Online_Tutoring"
+            android:id="@+id/Offline_Tutoring"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -92,14 +93,13 @@
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Online Tutoring"
+            android:text="OnCampus Tutoring"
             android:textColor="#555555"
             android:textSize="16sp"
             android:clickable="true"/>
 
-
         <TextView
-            android:id="@+id/Offline_Tutoring"
+            android:id="@+id/Online_Tutoring"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -109,10 +109,12 @@
             android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
-            android:text="Offline Tutoring"
+            android:text="Online Tutoring"
             android:textColor="#555555"
             android:textSize="16sp"
             android:clickable="true"/>
+
+
 
     </LinearLayout>
 
@@ -165,12 +167,51 @@
             android:clickable="true"/>
 
         <TextView
+            android:id="@+id/oneHourAndThirty"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/shape_grey"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="1.5 Hours"
+            android:textColor="#555555"
+            android:textSize="16sp"
+            android:clickable="true"/>
+
+<!--        <TextView-->
+<!--            android:id="@+id/twoHours"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/shape_grey"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:gravity="center"-->
+<!--            android:maxLines="1"-->
+<!--            android:padding="5dp"-->
+<!--            android:text="2 Hours"-->
+<!--            android:textColor="#555555"-->
+<!--            android:textSize="16sp"-->
+<!--            android:clickable="true"/>-->
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
             android:id="@+id/twoHours"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@drawable/shape_grey"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="41dp"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
             android:maxLines="1"
@@ -180,33 +221,75 @@
             android:textSize="16sp"
             android:clickable="true"/>
 
+        <TextView
+            android:id="@+id/twoHoursAndThirty"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_grey"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="2.5 Hours"
+            android:textColor="#555555"
+            android:textSize="16sp"
+            android:clickable="true"/>
+
+        <TextView
+            android:id="@+id/threeHours"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_grey"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="3 Hours"
+            android:textColor="#555555"
+            android:textSize="16sp"
+            android:clickable="true"/>
+
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/Desciption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="         Desciption"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/comment"
         android:layout_width="331dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape1"
         android:backgroundTint="#EFEFEF"
         android:fontFamily="@font/poppins_bold"
-        android:gravity="left|center_vertical"
-        android:hint="Want to leave comments to your tutor?"
         android:inputType="textEmailAddress"
+        android:hint="Please describe your questions in detail, \nso the tutor is better prepared to assist you."
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="13sp" />
+<!--    android:gravity="left|center_vertical"-->
+
 
 
 
     <Button
         android:id="@+id/submit"
         android:layout_width="331dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/shape1"
         android:fontFamily="@font/poppins_bold"
         android:hint="Submit Ticket"
