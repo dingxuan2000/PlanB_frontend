@@ -29,6 +29,7 @@
         <activity android:name=".AcceptTicketActivity" />
         <activity android:name=".AddCourses"></activity>
         <activity android:name=".WelcomePageActivity" />
+        <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
