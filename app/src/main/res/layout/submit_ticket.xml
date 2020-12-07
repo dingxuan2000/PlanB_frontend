@@ -256,30 +256,40 @@
     </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/Desciption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="         Desciption"
+        android:textSize="15sp" />
+
     <EditText
         android:id="@+id/comment"
         android:layout_width="331dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape1"
         android:backgroundTint="#EFEFEF"
         android:fontFamily="@font/poppins_bold"
-        android:gravity="left|center_vertical"
-        android:hint="Please describe your questions in detail, \nso the tutor is better prepared to assist you."
         android:inputType="textEmailAddress"
+        android:hint="Please describe your questions in detail, \nso the tutor is better prepared to assist you."
         android:maxLines="1"
         android:padding="5dp"
         android:textSize="13sp" />
+<!--    android:gravity="left|center_vertical"-->
+
 
 
 
     <Button
         android:id="@+id/submit"
         android:layout_width="331dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/shape1"
         android:fontFamily="@font/poppins_bold"
         android:hint="Submit Ticket"

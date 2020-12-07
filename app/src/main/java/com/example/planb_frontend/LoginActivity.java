@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button mBtnLogin;
     private EditText mEtUser;
     private EditText mEtPassword;
+    private TextView resetPassword;
     private String email, password;
     private TextView create;
     FirebaseAuth fAuth;
@@ -59,6 +60,15 @@ public class LoginActivity extends AppCompatActivity {
         mEtPassword = findViewById(R.id.password_textInput);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+
+        resetPassword = findViewById(R.id.reset_password);
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         create = findViewById(R.id.create);
         create.setOnClickListener(new View.OnClickListener() {
