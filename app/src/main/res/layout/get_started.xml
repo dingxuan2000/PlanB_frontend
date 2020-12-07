@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center_horizontal"
-        android:text="Can’t find a tutor on campus?"
+        android:text="Want to find a tutor at UCSD?"
         android:textSize="18dp" />
 
     <TextView
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Can’t be a tutor on campus? "
+        android:text="Want to be a tutor for UCSD students? "
         android:textSize="18dp" />
 
     <TextView
