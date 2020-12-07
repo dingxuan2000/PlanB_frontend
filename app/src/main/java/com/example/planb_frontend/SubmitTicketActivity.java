@@ -49,7 +49,12 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
     //声明控件
     private ImageView mImArrow;
-//    private EditText mEtCourseCode;
+    private TextView choice1;
+    private TextView choice2;
+    private TextView choice3;
+    private TextView choice4;
+
+    //    private EditText mEtCourseCode;
     private TextView mTvOnlineTutor;
     private TextView mTvOfflineTutor;
 
@@ -79,6 +84,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
         setContentView(R.layout.submit_ticket);
 
         //找到控件
+        choice1 = findViewById(R.id.illustarte2);
+        choice2 = findViewById(R.id.tutorPreferences);
+        choice3 = findViewById(R.id.Time_Preference);
+        choice4 = findViewById(R.id.Desciption);
         mImArrow = findViewById(R.id.backarrow);
 //        mEtCourseCode = findViewById(R.id.search_course);
         mCourse = findViewById(R.id.course);
@@ -110,7 +119,13 @@ public class SubmitTicketActivity extends AppCompatActivity {
             }
         });
 
-
+        //Apply onFocus on Comment
+        mEtComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                mEtComment.setHint("");
+            }
+        });
 
 
         mImArrow.setOnClickListener(new View.OnClickListener() {
@@ -237,14 +252,28 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
                 String comment = mEtComment.getText().toString();
 
+                if(!TextUtils.isEmpty(course)){
+                    choice1.setError(null);
+                }if(!TextUtils.isEmpty(tutorPre)){
+                    choice2.setError(null);
+                }if(!TextUtils.isEmpty(timePre)){
+                    choice3.setError(null);
+                }if(!TextUtils.isEmpty(comment)){
+                    choice4.setError(null);
+                }
+
                 if(TextUtils.isEmpty(course)){
-                    mBtnSubmit.setError("Please enter course code");
+                    choice1.setError("Please select one course code");
+                    Toast.makeText(getApplicationContext(), "Please select one course code", Toast.LENGTH_SHORT).show();
                 }else if(TextUtils.isEmpty(tutorPre)){
-                    mTvOnlineTutor.setError("Please choose your preferred tutor way");
+                    choice2.setError("Please choose one of Tutor Preferences");
+                    Toast.makeText(getApplicationContext(), "Please choose one of Tutor Preferences", Toast.LENGTH_SHORT).show();
                 }else if(TextUtils.isEmpty(timePre)){
-                    mTvThirtenMin.setError("Please choose your preferred time");
+                    choice3.setError("Please choose one of Time Preferences");
+                    Toast.makeText(getApplicationContext(), "Please choose one of Time Preferences", Toast.LENGTH_SHORT).show();
                 }else if(TextUtils.isEmpty(comment)){
-                    mEtComment.setError("Please enter the description of your questions");
+                    choice4.setError("Please describe your questions");
+                    Toast.makeText(getApplicationContext(), "Please describe your questions", Toast.LENGTH_SHORT).show();
                 }else{
                     //TODO update to firebase
                     //get user id from the previous intent
