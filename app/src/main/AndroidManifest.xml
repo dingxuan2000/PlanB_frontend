@@ -17,7 +17,6 @@
         <activity android:name=".StudentProfileActivity" />
         <activity android:name=".TutorConnectionActivity" />
         <activity android:name=".TutorHistoryActivity" />
-        <activity android:name=".TutorPageActivity" />
         <activity android:name=".TutorProfileActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".StudentPageActivity" />
