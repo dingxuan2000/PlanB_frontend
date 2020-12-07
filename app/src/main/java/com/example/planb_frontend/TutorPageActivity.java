@@ -79,7 +79,6 @@ public class TutorPageActivity extends AppCompatActivity implements TextWatcher 
         offcampus = true;
         Intent intent = getIntent();
         User passUser = (User) intent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-        Toast.makeText(getApplicationContext(), passUser.getId(), Toast.LENGTH_SHORT).show();
 
         search = (EditText) findViewById(R.id.tutor_search_bar);
         lst=(ListView)findViewById(R.id.listview);
