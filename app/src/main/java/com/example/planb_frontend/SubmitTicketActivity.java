@@ -309,7 +309,7 @@ public class SubmitTicketActivity extends AppCompatActivity {
                     fStore.collection(TICKET_TABLE_KEY).document(ticketId).set(student_ticket).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(), "Submitted Ticket Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Ticket Submitted.", Toast.LENGTH_SHORT).show();
                             //needs to set status to be "submitted"
                             student_ticket.put(STATUS_KEY, "submitted");
                             fStore.collection(TICKET_TABLE_KEY).document(ticketId).update(student_ticket).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -163,7 +163,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                             fourCourses.add(courseSelected);
                             courseCount++;
                             resetText();
-                            Toast.makeText(getApplicationContext(), courseSelected + " added" + courseCount + " list size: "+ fourCourses.size(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), courseSelected + " added.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
