@@ -204,8 +204,8 @@ public class StudentConnectionActivity extends AppCompatActivity {
         Intent preIntent = getIntent();
         //if the user already has a ticket in firebase, then stop jump to the SubmitTicket page.
         //1.check if the userId has already in student_collection
-        user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
-        String userId = user.getId();
+//        user = (User)preIntent.getSerializableExtra(StudentRegisterActivity.GET_USER_KEY);
+        String userId = student_id;
         submit_ticket = findViewById(R.id.submit_ticket);
         Boolean[] flag = {false};//initialize a boolean flag, if the user can submit ticket, then reset the flag to be true!
         submit_ticket.setOnClickListener(new View.OnClickListener() {

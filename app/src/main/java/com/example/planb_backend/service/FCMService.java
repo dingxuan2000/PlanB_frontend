@@ -27,6 +27,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONObject;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class FCMService extends FirebaseMessagingService {
 
@@ -72,7 +73,7 @@ public class FCMService extends FirebaseMessagingService {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null || data.get("uid") == null) return;
-
+        if (!Objects.requireNonNull(data.get("uid")).equals(user.getUid())) return;
         Intent resultIntent = new Intent(getApplicationContext(), StudentConnectionActivity.class);
         resultIntent.putExtra(StudentRegisterActivity.USER_ID_KEY, user.getUid());
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
