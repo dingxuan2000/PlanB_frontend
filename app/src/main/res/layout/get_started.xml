@@ -8,69 +8,81 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="match_parent"
-        android:layout_height="141dp"
-        android:ems="10"
-        android:includeFontPadding="false"
-        android:inputType="textPersonName" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="379dp"
-        android:layout_height="212dp"
-        android:layout_gravity="center"
-        android:src="@drawable/getstarted" />
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/getstarted123" />
 
     <TextView
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/textView6"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:text="Welcome to Plan B!"
+        android:textColor="#000000"
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
         android:text="Need Help ASAP？"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
         android:textColor="#000000"
-        android:textSize="25sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center_horizontal"
-        android:text="Can’t find a tutor on campus?"
-        android:textSize="18dp" />
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginLeft="40dp"
+        android:text="Want to find a tutor at UCSD?"
+        android:textSize="17dp" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Can’t be a tutor on campus? "
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="65dp" />
-
-    <Button
-        android:id="@+id/Get_Started"
-        android:layout_width="355dp"
-        android:layout_height="77dp"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#A8C6A0"
         android:fontFamily="@font/poppins_bold"
-        android:text="Get Started"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp" />
+        android:layout_marginLeft="40dp"
+        android:text="Want to tutor UCSD students? "
+        android:textSize="17dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="254dp"
+        android:layout_marginTop="66dp"
+        android:orientation="vertical"
+        android:background="@drawable/startbackground">
+
+        <ImageView
+            android:id="@+id/background1"
+            android:layout_width="400dp"
+            android:layout_height="249dp"
+            android:src="@drawable/startbackground" />
+
+        <Button
+            android:id="@+id/Get_Started"
+            android:layout_width="333dp"
+            android:layout_height="77dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="135dp"
+            android:backgroundTint="#303030"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Get Started"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+
+
 </LinearLayout>
