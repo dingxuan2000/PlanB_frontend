@@ -11,15 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.planb_backend.User;
 import com.example.planb_backend.utils.NotificationID;
 import com.example.planb_frontend.R;
 import com.example.planb_frontend.StudentConnectionActivity;
 import com.example.planb_frontend.StudentPageActivity;
 import com.example.planb_frontend.StudentRegisterActivity;
+import com.example.planb_frontend.TutorPageActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -27,6 +33,9 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONObject;
 
 import java.util.Map;
+import java.util.Objects;
+
+import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
 
 public class FCMService extends FirebaseMessagingService {
 
@@ -72,24 +81,45 @@ public class FCMService extends FirebaseMessagingService {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null || data.get("uid") == null) return;
+        if (!Objects.requireNonNull(data.get("uid")).equals(user.getUid())) return;
 
-        Intent resultIntent = new Intent(getApplicationContext(), StudentConnectionActivity.class);
-        resultIntent.putExtra(StudentRegisterActivity.USER_ID_KEY, user.getUid());
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntentWithParentStack(resultIntent);
-        // Get the PendingIntent containing the entire back stack
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        String userId = user.getUid();
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "plan-b-fcm")
-                .setSmallIcon(R.drawable.logo)
-                .setContentTitle("Ticket accepted")
-                .setContentText("Your ticket has been accepted by: " + data.get("name"))
-                .setContentIntent(resultPendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        DocumentReference documentReference = fStore.collection(USERS_TABLE_KEY).document(userId);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user;
+                if (documentSnapshot.exists()) {
+                    user = documentSnapshot.toObject(User.class);
+                    assert user != null;
+                    user.setEmail(fAuth.getCurrentUser().getEmail());
+                    user.setId(userId);
+                    Intent resultIntent = new Intent(getApplicationContext(), StudentConnectionActivity.class);
+                    resultIntent.putExtra(StudentRegisterActivity.GET_USER_KEY, user);
+                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+                    stackBuilder.addNextIntentWithParentStack(resultIntent);
+                    // Get the PendingIntent containing the entire back stack
+                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "plan-b-fcm")
+                            .setSmallIcon(R.drawable.logo)
+                            .setContentTitle("Ticket accepted")
+                            .setContentText("Your ticket has been accepted by: " + data.get("name"))
+                            .setContentIntent(resultPendingIntent)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(NotificationID.getID(), builder.build());
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                    // notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(NotificationID.getID(), builder.build());
+                } else {
+//                    Toast.makeText(getApplicationContext(), "error occurred", Toast.LENGTH_LONG).show();
+                    Log.e(FCM_TAG, "Unexpected error occurred.");
+                }
+            }
+        });
     }
 }

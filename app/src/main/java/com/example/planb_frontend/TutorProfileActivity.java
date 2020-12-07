@@ -363,22 +363,22 @@ public class TutorProfileActivity extends AppCompatActivity {
         deleteIconFour.setVisibility(View.INVISIBLE);
 
         for(int i = 0; i < fourCourses.size(); i++){
-            if(i == 0 && !fourCourses.get(i).isEmpty()){
+            if(i % 4 == 0 && !fourCourses.get(i).isEmpty()){
                 courseOne.setText(fourCourses.get(i));
                 courseOne.setVisibility(View.VISIBLE);
                 deleteIconOne.setVisibility(View.VISIBLE);
             }
-            else if(i == 1 && !fourCourses.get(i).isEmpty()){
+            else if(i % 4 == 1 && !fourCourses.get(i).isEmpty()){
                 courseTwo.setText(fourCourses.get(i));
                 courseTwo.setVisibility(View.VISIBLE);
                 deleteIconTwo.setVisibility(View.VISIBLE);
             }
-            else if(i == 2 && !fourCourses.get(i).isEmpty()){
+            else if(i % 4 == 2 && !fourCourses.get(i).isEmpty()){
                 courseThree.setText(fourCourses.get(i));
                 courseThree.setVisibility(View.VISIBLE);
                 deleteIconThree.setVisibility(View.VISIBLE);
             }
-            else if(i == 3 && !fourCourses.get(i).isEmpty()){
+            else if(i % 4 == 3 && !fourCourses.get(i).isEmpty()){
                 courseFour.setText(fourCourses.get(i));
                 courseFour.setVisibility(View.VISIBLE);
                 deleteIconFour.setVisibility(View.VISIBLE);

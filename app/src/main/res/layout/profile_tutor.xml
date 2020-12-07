@@ -32,7 +32,7 @@
         android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginTop="23dp"
-        android:src="@drawable/student3" />
+        android:src="@drawable/jerry" />
 
 
     <TextView
@@ -45,35 +45,13 @@
         android:textColor="#000000"
         android:textSize="30sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/certifiedphoto" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/Certified"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Certified Tutor"
-        android:textSize="12sp"
-        android:textStyle="bold" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_weight="0"
         android:orientation="horizontal">
 
@@ -91,12 +69,12 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/major" />
 
-        <ImageView
-            android:id="@+id/star1"
-            android:layout_width="150px"
-            android:layout_height="150px"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/star" />
+<!--        <ImageView-->
+<!--            android:id="@+id/star1"-->
+<!--            android:layout_width="150px"-->
+<!--            android:layout_height="150px"-->
+<!--            android:layout_weight="1"-->
+<!--            app:srcCompat="@drawable/star" />-->
 
     </LinearLayout>
 
@@ -108,7 +86,7 @@
 
         <TextView
             android:id="@+id/grade_standing"
-            android:layout_width="131dp"
+            android:layout_width="205dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:gravity="center"
@@ -117,20 +95,20 @@
 
         <TextView
             android:id="@+id/major"
-            android:layout_width="131dp"
+            android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
             android:textColor="#000000" />
 
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="131dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/poppins_semibold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="#000000" />
+<!--        <TextView-->
+<!--            android:id="@+id/rating"-->
+<!--            android:layout_width="131dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:textAppearance="@style/TextAppearance.AppCompat.Body2"-->
+<!--            android:textColor="#000000" />-->
 
     </LinearLayout>
 
@@ -308,7 +286,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="119dp"
         android:gravity="center|bottom">
 
 
