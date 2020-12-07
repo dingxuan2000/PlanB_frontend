@@ -55,7 +55,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
 
     private TextView mTvThirtenMin;
     private TextView mTvOneHr;
+    private TextView mTvOneAndHalf;
     private TextView mTvTwoHrs;
+    private TextView mTvTwoHrsAndHalf;
+    private TextView mTvThreeHrs;
 
     private EditText mEtComment;
     private Button mBtnSubmit;
@@ -83,7 +86,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
         mTvOfflineTutor = findViewById(R.id.Offline_Tutoring);
         mTvThirtenMin = findViewById(R.id.thirtyMinutes);
         mTvOneHr = findViewById(R.id.oneHour);
+        mTvOneAndHalf = findViewById(R.id.oneHourAndThirty);
         mTvTwoHrs = findViewById(R.id.twoHours);
+        mTvTwoHrsAndHalf = findViewById(R.id.twoHoursAndThirty);
+        mTvThreeHrs = findViewById(R.id.threeHours);
         mEtComment = findViewById(R.id.comment);
         mBtnSubmit = findViewById(R.id.submit);
 
@@ -143,7 +149,10 @@ public class SubmitTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mTvThirtenMin.setBackgroundResource(R.drawable.shape_green);
                 mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneAndHalf.setBackgroundResource(R.drawable.shape_grey);
                 mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrsAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                mTvThreeHrs.setBackgroundResource(R.drawable.shape_grey);
                 timePre = mTvThirtenMin.getText().toString();
             }
         });
@@ -153,8 +162,24 @@ public class SubmitTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mTvOneHr.setBackgroundResource(R.drawable.shape_green);
                 mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneAndHalf.setBackgroundResource(R.drawable.shape_grey);
                 mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrsAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                mTvThreeHrs.setBackgroundResource(R.drawable.shape_grey);
                 timePre = mTvOneHr.getText().toString();
+            }
+        });
+
+        mTvOneAndHalf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTvOneAndHalf.setBackgroundResource(R.drawable.shape_green);
+                mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrsAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                mTvThreeHrs.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvOneAndHalf.getText().toString();
             }
         });
 
@@ -166,7 +191,36 @@ public class SubmitTicketActivity extends AppCompatActivity {
                 mTvTwoHrs.setBackgroundResource(R.drawable.shape_green);
                 mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
                 mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrsAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                mTvThreeHrs.setBackgroundResource(R.drawable.shape_grey);
                 timePre = mTvTwoHrs.getText().toString();
+            }
+        });
+
+        mTvTwoHrsAndHalf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTvTwoHrsAndHalf.setBackgroundResource(R.drawable.shape_green);
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                mTvThreeHrs.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvTwoHrsAndHalf.getText().toString();
+            }
+        });
+
+        mTvThreeHrs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTvThreeHrs.setBackgroundResource(R.drawable.shape_green);
+                mTvTwoHrsAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                mTvTwoHrs.setBackgroundResource(R.drawable.shape_grey);
+                mTvThirtenMin.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneHr.setBackgroundResource(R.drawable.shape_grey);
+                mTvOneAndHalf.setBackgroundResource(R.drawable.shape_grey);
+                timePre = mTvThreeHrs.getText().toString();
             }
         });
 
