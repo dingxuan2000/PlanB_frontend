@@ -37,7 +37,7 @@
         android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginTop="23dp"
-        android:src="@drawable/student1" />
+        android:src="@drawable/tom" />
 
     <TextView
         android:id="@+id/student_name"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="#000000"
         android:textSize="30sp" />
 
@@ -139,6 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#000000"
+            android:layout_marginLeft="5dp"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -163,23 +164,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#000000"
+            android:layout_marginLeft="5dp"
             android:textSize="18sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/recent_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="20dp"
-        android:text="Recent contect:"
-        android:textColor="#000000"
-        android:textSize="18sp" />
 
     <LinearLayout
         android:id="@+id/recent_tutor_pic"
         android:layout_width="match_parent"
-        android:layout_height="173dp"
+        android:layout_height="227dp"
         android:orientation="horizontal"></LinearLayout>
 
 

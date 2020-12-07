@@ -16,7 +16,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/shape1"
         android:drawableLeft="@drawable/searchicon"
-        android:hint="Search the course"
+        android:hint="Search the course (ex. cse 110)"
         app:iconifiedByDefault="false"
         app:queryBackground="@color/green">
 
