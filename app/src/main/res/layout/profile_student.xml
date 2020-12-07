@@ -173,7 +173,7 @@
     <LinearLayout
         android:id="@+id/recent_tutor_pic"
         android:layout_width="match_parent"
-        android:layout_height="227dp"
+        android:layout_height="210dp"
         android:orientation="horizontal"></LinearLayout>
 
 
