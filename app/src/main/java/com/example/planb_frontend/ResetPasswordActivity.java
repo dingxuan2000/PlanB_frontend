@@ -15,6 +15,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private EditText emailEditText;
     private Button resetPasswordButton;
     private ProgressBar progressBar;
+    private ImageView backArrow;
 
     FirebaseAuth auth;
 
@@ -53,8 +55,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email);
         resetPasswordButton = findViewById(R.id.resetPassword);
         progressBar = findViewById(R.id.progressBar);
+        backArrow = findViewById(R.id.backarrow);
 
         auth = FirebaseAuth.getInstance();
+
+
+        backArrow.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         resetPasswordButton.setOnClickListener(new View.OnClickListener(){
            @Override
