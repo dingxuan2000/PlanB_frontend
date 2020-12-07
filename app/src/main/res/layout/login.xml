@@ -81,7 +81,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Forgot Password?"
-        android:textColor="#7C7C7C"
+        android:textColor="#D2587E59"
         android:textSize="12sp"
         android:gravity="center_horizontal|center_vertical"/>
 
