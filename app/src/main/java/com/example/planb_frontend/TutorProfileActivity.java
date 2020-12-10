@@ -123,7 +123,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                         courseCount++;
                     }
                     if(!documentSnapshot.getString(COURSE_4_KEY).isEmpty()){
-                        fourCourses.add(documentSnapshot.getString(COURSE_1_KEY));
+                        fourCourses.add(documentSnapshot.getString(COURSE_4_KEY));
                         courseFour.setText(fourCourses.get(3));
                         courseFour.setVisibility(View.VISIBLE);
                         deleteIconFour.setVisibility(View.VISIBLE);
@@ -145,16 +145,14 @@ public class TutorProfileActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please enter course code", Toast.LENGTH_SHORT).show();
                 } else {
                     if (courseCount >= 4) {
-                        //todo:set reminder
                         TextView errorText = (TextView)spinner.getSelectedView();
                         errorText.setError("");
                         errorText.setTextColor(Color.RED);
                         errorText.setText("Pick at most four courses");
                         Toast.makeText(getApplicationContext(), "  course count: " + courseCount, Toast.LENGTH_SHORT).show();
                     } else {
-                        String courseSelected = adapterView.getItemAtPosition(i).toString().trim();
+                        String courseSelected = adapterView.getItemAtPosition(i).toString();
                         if (fourCourses.contains(courseSelected)) {
-                            //todo:set reminder, already picked xxx course
                             TextView errorText = (TextView)spinner.getSelectedView();
                             errorText.setError("");
                             errorText.setTextColor(Color.RED);
@@ -175,18 +173,6 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
-//        rating = findViewById(R.id.rating);
-//        DocumentReference tutorRating = fStore.collection(USERS_TABLE_KEY).document(passUser.getId());
-//        tutorRating.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                if (documentSnapshot.exists()) {
-////                    rating.setText("Rating: " + documentSnapshot.getLong(RATING_KEY).toString());
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Document does not exists.", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
 
         studentName = findViewById(R.id.tutor_name);
         studentName.setText(passUser.getPreferred_name());
@@ -247,7 +233,6 @@ public class TutorProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 findAndRemoveCourse((String) courseOne.getText());
                 resetText();
-                courseCount--;
             }
         });
         deleteIconTwo.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +240,6 @@ public class TutorProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 findAndRemoveCourse((String) courseTwo.getText());
                 resetText();
-                courseCount--;
             }
         });
         deleteIconThree.setOnClickListener(new View.OnClickListener() {
@@ -263,7 +247,6 @@ public class TutorProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 findAndRemoveCourse((String) courseThree.getText());
                 resetText();
-                courseCount--;
             }
         });
         deleteIconFour.setOnClickListener(new View.OnClickListener() {
@@ -271,20 +254,29 @@ public class TutorProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 findAndRemoveCourse((String) courseFour.getText());
                 resetText();
-                courseCount--;
             }
         });
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fillEmpty();
+//                fillEmpty();
                 String userId = fAuth.getCurrentUser().getUid();
                 DocumentReference documentReference = fStore.collection(PREFERRED_COURSES_KEY).document(userId);
+                //get rid of duplicates
+                ArrayList<String> newList = new ArrayList<String>();
+                for (String element : fourCourses) {
+                    if (!newList.contains(element)) {
+                        newList.add(element);
+                    }
+                }
+                for(int i = 0; i < 4; i++){
+                    newList.add("");
+                }
                 Map<String, Object> courses = new HashMap<>();
-                courses.put(COURSE_1_KEY, fourCourses.get(0));
-                courses.put(COURSE_2_KEY, fourCourses.get(1));
-                courses.put(COURSE_3_KEY, fourCourses.get(2));
-                courses.put(COURSE_4_KEY, fourCourses.get(3));
+                courses.put(COURSE_1_KEY, newList.get(0));
+                courses.put(COURSE_2_KEY, newList.get(1));
+                courses.put(COURSE_3_KEY, newList.get(2));
+                courses.put(COURSE_4_KEY, newList.get(3));
                 documentReference.set(courses).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -327,21 +319,11 @@ public class TutorProfileActivity extends AppCompatActivity {
         });
     }
 
-//    private String isRepeated(String courseName) {
-//        for (String s : fourCourses) {
-//            if (courseName.equals(s)) {
-//                return s;
-//            } else {
-//                return "";
-//            }
-//        }
-//        return "";
-//    }
-
     private void findAndRemoveCourse(String courseName){
         for (int i = 0; i < fourCourses.size(); i++) {
             if (courseName.equals(fourCourses.get(i))) {
                 fourCourses.remove(i);
+                courseCount--;
             }
         }
     }
@@ -385,30 +367,6 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         }
     }
-//    private void addText(String courseToDisplay){
-//        if(fourCourses.size() == 1){
-//            courseOne.setText(fourCourses.get(0));
-//            courseOne.setVisibility(View.VISIBLE);
-//            deleteIconOne.setVisibility(View.VISIBLE);
-//        }
-//        else if(fourCourses.size() == 2){
-//            courseTwo.setText(fourCourses.get(1));
-//            courseTwo.setVisibility(View.VISIBLE);
-//            deleteIconTwo.setVisibility(View.VISIBLE);
-//            Toast.makeText(getApplicationContext(),"SIZE IS TWO",Toast.LENGTH_SHORT);
-//        }
-//        else if(fourCourses.size() == 3){
-//            courseThree.setText(fourCourses.get(2));
-//            courseThree.setVisibility(View.VISIBLE);
-//            deleteIconThree.setVisibility(View.VISIBLE);
-//            Toast.makeText(getApplicationContext(),"SIZE IS THREE",Toast.LENGTH_SHORT);
-//        }
-//        else if(fourCourses.size() == 4){
-//            courseFour.setText(fourCourses.get(3));
-//            courseFour.setVisibility(View.VISIBLE);
-//            deleteIconFour.setVisibility(View.VISIBLE);
-//        }
-//    }
 }
 
 
