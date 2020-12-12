@@ -1,10 +1,9 @@
 package com.example.planb_backend.task;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.planb_backend.request.HttpRequest;
-import com.example.planb_frontend.BuildConfig;
+import com.example.Controller.BuildConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;

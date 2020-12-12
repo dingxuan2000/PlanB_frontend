@@ -3,39 +3,29 @@ package com.example.planb_backend.service;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.planb_backend.User;
+import Model.User;
 import com.example.planb_backend.utils.NotificationID;
-import com.example.planb_frontend.R;
-import com.example.planb_frontend.StudentConnectionActivity;
-import com.example.planb_frontend.StudentPageActivity;
-import com.example.planb_frontend.StudentRegisterActivity;
-import com.example.planb_frontend.TutorPageActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.Controller.R;
+import com.example.Controller.StudentConnectionActivity;
+import com.example.Controller.StudentRegisterActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import org.json.JSONObject;
 
 import java.util.Map;
 import java.util.Objects;
 
-import static com.example.planb_frontend.StudentRegisterActivity.USERS_TABLE_KEY;
+import static com.example.Controller.StudentRegisterActivity.USERS_TABLE_KEY;
 
 public class FCMService extends FirebaseMessagingService {
 

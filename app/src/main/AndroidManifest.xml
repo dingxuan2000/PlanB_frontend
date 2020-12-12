@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.planb_frontend">
+    package="com.example.Controller">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="com.example.Controller"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".StudentConnectionActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".StudentHistoryActivity" />
-        <activity android:name=".StudentProfileActivity" />
-        <activity android:name=".TutorConnectionActivity" />
-        <activity android:name=".TutorHistoryActivity" />
-        <activity android:name=".TutorPageActivity" />
-        <activity android:name=".TutorProfileActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".StudentPageActivity" />
-        <activity android:name=".ChooseActivity" />
-        <activity android:name=".getStartedActivity" />
-        <activity android:name=".StudentRegisterActivity" />
-        <activity android:name=".TutorRegisterActivity" />
-        <activity android:name=".SubmitTicketActivity" />
-        <activity android:name=".AcceptTicketActivity" />
-        <activity android:name=".AddCourses"></activity>
-        <activity android:name=".WelcomePageActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.Controller.StudentConnectionActivity" android:parentActivityName="com.example.Controller.MainActivity"/>
+        <activity android:name="com.example.Controller.StudentHistoryActivity" />
+        <activity android:name="com.example.Controller.StudentProfileActivity" />
+        <activity android:name="com.example.Controller.TutorConnectionActivity" />
+        <activity android:name="com.example.Controller.TutorHistoryActivity" />
+        <activity android:name="com.example.Controller.TutorPageActivity" />
+        <activity android:name="com.example.Controller.TutorProfileActivity" />
+        <activity android:name="com.example.Controller.LoginActivity" />
+        <activity android:name="com.example.Controller.StudentPageActivity" />
+        <activity android:name="com.example.Controller.ChooseActivity" />
+        <activity android:name="com.example.Controller.getStartedActivity" />
+        <activity android:name="com.example.Controller.StudentRegisterActivity" />
+        <activity android:name="com.example.Controller.TutorRegisterActivity" />
+        <activity android:name="com.example.Controller.SubmitTicketActivity" />
+        <activity android:name="com.example.Controller.AcceptTicketActivity" />
+        <activity android:name="com.example.Controller.AddCourses"></activity>
+        <activity android:name="com.example.Controller.WelcomePageActivity" />
+        <activity android:name="com.example.Controller.ResetPasswordActivity" />
+        <activity android:name="com.example.Controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
