@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.planb_frontend">
+    package="com.example.controller">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,25 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".StudentConnectionActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".StudentHistoryActivity" />
-        <activity android:name=".StudentProfileActivity" />
-        <activity android:name=".TutorConnectionActivity" />
-        <activity android:name=".TutorHistoryActivity" />
-        <activity android:name=".TutorPageActivity" />
-        <activity android:name=".TutorProfileActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".StudentPageActivity" />
-        <activity android:name=".ChooseActivity" />
-        <activity android:name=".getStartedActivity" />
-        <activity android:name=".StudentRegisterActivity" />
-        <activity android:name=".TutorRegisterActivity" />
-        <activity android:name=".SubmitTicketActivity" />
-        <activity android:name=".AcceptTicketActivity" />
-        <activity android:name=".AddCourses"></activity>
-        <activity android:name=".WelcomePageActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.controller.StudentConnectionActivity" android:parentActivityName="com.example.controller.MainActivity"/>
+        <activity android:name="com.example.controller.StudentHistoryActivity" />
+        <activity android:name="com.example.controller.StudentProfileActivity" />
+        <activity android:name="com.example.controller.TutorConnectionActivity" />
+        <activity android:name="com.example.controller.TutorHistoryActivity" />
+        <activity android:name="com.example.controller.TutorPageActivity" />
+        <activity android:name="com.example.controller.TutorProfileActivity" />
+        <activity android:name="com.example.controller.LoginActivity" />
+        <activity android:name="com.example.controller.StudentPageActivity" />
+        <activity android:name="com.example.controller.ChooseActivity" />
+        <activity android:name="com.example.controller.getStartedActivity" />
+        <activity android:name="com.example.controller.StudentRegisterActivity" />
+        <activity android:name="com.example.controller.TutorRegisterActivity" />
+        <activity android:name="com.example.controller.SubmitTicketActivity" />
+        <activity android:name="com.example.controller.AcceptTicketActivity" />
+        <activity android:name="com.example.controller.AddCourses"></activity>
+        <activity android:name="com.example.controller.WelcomePageActivity" />
+        <activity android:name="com.example.controller.ResetPasswordActivity" />
+        <activity android:name="com.example.controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,7 @@
         </activity>
 
         <service
-            android:name="com.example.planb_backend.service.FCMService"
+            android:name="com.example.services.FCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
